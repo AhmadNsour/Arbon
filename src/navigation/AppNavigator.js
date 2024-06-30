@@ -24,6 +24,7 @@ import AboutUsScreen from '../screens/AboutUsScreen';
 import ConnectionsScreen from '../screens/ConnectionsScreen';
 import TransactionDetailsScreen from '../screens/TransactionDetailsScreen';
 import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
+import OTPScreen from '../screens/OTPScreen';
 
 //components
 import CloseButton from '../components/CloseButton';
@@ -54,9 +55,9 @@ const HomeTabNavigator = () => {
         tabBarInactiveTintColor: theme.colors.text,
         tabBarStyle: {
           backgroundColor: theme.colors.background,
-          borderTopWidth: 0, // Remove the top border
-          elevation: 0, // Remove shadow on Android
-          shadowOpacity: 0, // Remove shadow on iOS
+          borderTopWidth: 0,
+          elevation: 0,
+          shadowOpacity: 0,
         },
         headerStyle: {
           backgroundColor: theme.colors.background,
@@ -127,7 +128,7 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Home"
         screenOptions={{
           gestureEnabled: Platform.OS === 'ios',
           headerStyle: {
@@ -207,6 +208,11 @@ const AppNavigator = () => {
           name="ForgetPassword"
           component={ForgetPasswordScreen}
           options={({navigation}) => getForgetPassword(navigation)}
+        />
+        <Stack.Screen
+          name="OTP"
+          component={OTPScreen}
+          options={({navigation}) => commonScreenOptions(navigation)}
         />
       </Stack.Navigator>
     </NavigationContainer>

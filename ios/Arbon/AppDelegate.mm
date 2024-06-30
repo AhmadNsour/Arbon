@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
-
 #import <React/RCTBundleURLProvider.h>
+#import <UserNotifications/UserNotifications.h>
 
 @implementation AppDelegate
 
@@ -11,7 +11,24 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
+  // Request notification permissions
+  [self requestNotificationAuthorization];
+
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
+}
+
+// Request notification authorization
+- (void)requestNotificationAuthorization {
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+  [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge)
+                        completionHandler:^(BOOL granted, NSError * _Nullable error) {
+    if (!error) {
+      NSLog(@"Notification authorization granted!");
+    } else {
+      NSLog(@"Notification authorization error: %@", error);
+    }
+  }];
+  [[UIApplication sharedApplication] registerForRemoteNotifications];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

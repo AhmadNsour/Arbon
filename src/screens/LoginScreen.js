@@ -1,31 +1,104 @@
 // src/screens/LoginScreen.js
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
   Image,
 } from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import TopShape from '../components/TopShape';
-
-const {height} = Dimensions.get('window');
+import {regexPatterns} from '../utils/regex';
+import {SCREEN_HEIGHT} from '../utils/helpers';
+import Icon from 'react-native-vector-icons/Ionicons';
+import PopupComponent from '../components/PopupComponent';
 
 const LoginScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const insets = useSafeAreaInsets();
   const [faceIDEnabled, setFaceIDEnabled] = useState(true);
+  const [nationalId, setNationalId] = useState('');
+  const [NationalIdErrorMessage, setNationalIdErrorMessage] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const inputRefs = useRef([]);
+  const [popupVisible, setPopupVisible] = useState(false);
 
-  const dynamicMarginTop =
-    height > 800 ? (faceIDEnabled ? 100 : 0) : faceIDEnabled ? 50 : 0;
-  const handleFaceIDLogin = () => {
-    alert('Face ID login initiated');
+  const handleCancel = () => {
+    setPopupVisible(false);
   };
+
+  const handleConfirm = () => {
+    setPopupVisible(false);
+  };
+  const dynamicMarginTop =
+    SCREEN_HEIGHT > 800 ? (faceIDEnabled ? 100 : 0) : faceIDEnabled ? 50 : 0;
+
+  const handleFaceIDLogin = () => {
+    setPopupVisible(true);
+    //alert('Face ID login initiated');
+  };
+
+  const handleNationalIdOnChange = value => {
+    if (regexPatterns.digits.test(value) || value === '') {
+      setNationalId(value);
+      setNationalIdErrorMessage('');
+    } else {
+      setNationalIdErrorMessage('National ID can only contain digits.');
+    }
+  };
+
+  const handleNationalIdBlur = () => {
+    if (nationalId.length === 0) {
+      return;
+    }
+    if (!regexPatterns.phoneNumber.test(nationalId)) {
+      setNationalIdErrorMessage('National ID must be 10 digits long.');
+    } else {
+      setNationalIdErrorMessage('');
+    }
+  };
+
+  const handlePasswordOnChange = value => {
+    setPasswordErrorMessage('');
+    setPassword(value);
+  };
+
+  const handlePasswordBlur = () => {
+    if (password.length === 0) {
+      return;
+    }
+    if (password.length < 8) {
+      setPasswordErrorMessage('Password must be at least 8 digits long.');
+    } else {
+      setPasswordErrorMessage('');
+    }
+  };
+
+  const handlePasswordKeyPress = event => {
+    if (event.nativeEvent.key === 'v' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+    }
+  };
+
+  const clearValuesAndNavigate = route => {
+    setNationalId('');
+    setPassword('');
+    setPasswordErrorMessage('');
+    setNationalIdErrorMessage('');
+    navigation.navigate(route);
+  };
+
+  useEffect(() => {
+    if (inputRefs.current) {
+      inputRefs.current.focus();
+    }
+  }, []);
   return (
     <View
       style={[
@@ -38,38 +111,83 @@ const LoginScreen = ({navigation}) => {
         <Text style={styles.subtitle}>Please sign in to continue.</Text>
 
         <View style={styles.inputWrapper}>
-          <Text style={styles.inputLabel}>Mobile Number</Text>
+          <Text style={styles.inputLabel}>National ID</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter your mobile number"
-            keyboardType="phone-pad"
+            placeholder="Enter your national Identity"
+            keyboardType="numeric"
+            maxLength={10}
+            ref={ref => (inputRefs.current = ref)}
+            value={nationalId}
+            onChangeText={value => {
+              handleNationalIdOnChange(value);
+            }}
+            onBlur={handleNationalIdBlur}
           />
+
+          {NationalIdErrorMessage && (
+            <Text style={styles.errorText}>{NationalIdErrorMessage}</Text>
+          )}
         </View>
 
         <View style={styles.inputWrapper}>
           <Text style={styles.inputLabel}>Password</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your password"
-            secureTextEntry
-          />
+          <View style={styles.passwordContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your password"
+              secureTextEntry={!passwordVisible}
+              value={password}
+              autoComplete="password"
+              contextMenuHidden={true}
+              onChangeText={value => {
+                handlePasswordOnChange(value);
+              }}
+              onBlur={handlePasswordBlur}
+              onKeyPress={handlePasswordKeyPress}
+            />
+            <TouchableOpacity
+              style={styles.eyeIconWrapper}
+              onPress={() => setPasswordVisible(!passwordVisible)}>
+              <Icon
+                name={passwordVisible ? 'eye-off' : 'eye'}
+                size={25}
+                color={theme.colors.primary}
+              />
+            </TouchableOpacity>
+          </View>
+          {passwordErrorMessage && (
+            <Text style={styles.errorText}>{passwordErrorMessage}</Text>
+          )}
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('ForgetPassword')}>
+        <TouchableOpacity
+          onPress={() => {
+            clearValuesAndNavigate('ForgetPassword');
+          }}>
           <Text style={styles.forgotPassword}>Forgot password?</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => alert('Login')}>
+          style={
+            nationalId === '' ||
+            nationalId.length < 10 ||
+            password === '' ||
+            password.length < 8
+              ? styles.loginButtonDisabled
+              : styles.loginButtonEnabled
+          }
+          onPress={() => setPopupVisible(true)}>
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.footer}
-          onPress={() => navigation.navigate('SignUp')}>
+          onPress={() => {
+            clearValuesAndNavigate('SignUp');
+          }}>
           <Text style={styles.footerText}>Don't have an account?</Text>
-          <Text style={styles.signUpText}>Sign up</Text>
+          <Text style={styles.signUpText}>Sign Up</Text>
         </TouchableOpacity>
 
         {faceIDEnabled && (
@@ -79,7 +197,7 @@ const LoginScreen = ({navigation}) => {
               style={styles.faceIDWrapper}
               onPress={handleFaceIDLogin}>
               <Image
-                source={require('../assets/images/faceId.png')} // Ensure this path is correct and the icon is available
+                source={require('../assets/images/faceId.png')}
                 style={styles.faceIDIcon}
               />
               <Text style={styles.faceIDTitle}>Sign-in with Biometric</Text>
@@ -87,6 +205,19 @@ const LoginScreen = ({navigation}) => {
           </>
         )}
       </View>
+      <PopupComponent
+        title="Dear Customer"
+        subTitle="Please confirm your choice"
+        textToShow="Are you sure you want to delete this device?"
+        visible={popupVisible}
+        cancelButtonText="Cancel"
+        confirmButtonText="Confirm"
+        onCancel={handleCancel}
+        onConfirm={handleConfirm}
+        showCancelButton={true}
+        dismissible={true}
+        showCloseIcon={false}
+      />
     </View>
   );
 };
@@ -134,16 +265,42 @@ const createStyles = theme =>
       shadowOffset: {width: 0, height: 2},
       shadowRadius: 4,
     },
+    hintText: {
+      marginTop: 5,
+      fontSize: 12,
+      color: theme.colors.text,
+    },
+    eyeIconWrapper: {
+      position: 'absolute',
+      right: 15,
+    },
+    errorText: {
+      color: theme.colors.danger,
+      marginTop: 5,
+      fontSize: 12,
+    },
+    passwordContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
     forgotPassword: {
       marginVertical: 10,
       color: theme.colors.primary,
       fontWeight: 'bold',
       textAlign: 'right',
     },
-    loginButton: {
+    loginButtonEnabled: {
       width: '100%',
       padding: 15,
       backgroundColor: theme.colors.primary,
+      borderRadius: 10,
+      alignItems: 'center',
+      marginVertical: 20,
+    },
+    loginButtonDisabled: {
+      width: '100%',
+      padding: 15,
+      backgroundColor: theme.colors.darkGrayishViolet,
       borderRadius: 10,
       alignItems: 'center',
       marginVertical: 20,
@@ -194,3 +351,5 @@ const createStyles = theme =>
   });
 
 export default LoginScreen;
+
+//Must contain a mix of letters, numbers, and/or special characters.

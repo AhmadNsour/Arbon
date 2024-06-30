@@ -6,15 +6,13 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Dimensions,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import EmptyState from '../components/EmptyState';
-
-const {width} = Dimensions.get('window');
+import {SCREEN_WIDTH} from '../utils/helpers';
 
 const HomeScreen = ({navigation}) => {
   const user = useSelector(state => state.user);
@@ -249,8 +247,8 @@ const createStyles = theme =>
     actionItem: {
       marginTop: 10,
       alignItems: 'center',
-      width: width / 2 - 20,
-      height: width / 4 - 20,
+      width: SCREEN_WIDTH / 2 - 20,
+      height: SCREEN_WIDTH / 4 - 20,
       justifyContent: 'center',
     },
     actionIconContainer: {

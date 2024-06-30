@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {Text, StyleSheet, ScrollView} from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
 
 const PrivacyPolicyScreen = () => {

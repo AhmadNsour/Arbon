@@ -51,21 +51,21 @@ const UpdateProfileScreen = ({navigation}) => {
         placeholder="Mobile Number"
         value={mobileNumber}
         onChangeText={setMobileNumber}
-        placeholderTextColor={theme.colors.darkGrayishViolet} // Use theme color for placeholder
+        placeholderTextColor={theme.colors.darkGrayishViolet}
       />
       <TextInput
         style={styles.input}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
-        placeholderTextColor={theme.colors.darkGrayishViolet} // Use theme color for placeholder
+        placeholderTextColor={theme.colors.darkGrayishViolet}
       />
       <TextInput
         style={styles.input}
         placeholder="Date of Birth"
         value={dateOfBirth}
         onChangeText={setDateOfBirth}
-        placeholderTextColor={theme.colors.darkGrayishViolet} // Use theme color for placeholder
+        placeholderTextColor={theme.colors.darkGrayishViolet}
       />
       <TouchableOpacity style={styles.saveButton} onPress={saveProfile}>
         <Text style={styles.saveButtonText}>Save</Text>
