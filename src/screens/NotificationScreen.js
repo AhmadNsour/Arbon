@@ -156,7 +156,7 @@ const createStyles = theme =>
       color: theme.colors.text,
     },
     selectedTagText: {
-      color: theme.colors.text,
+      color: theme.colors.white,
     },
     notificationItem: {
       padding: 15,

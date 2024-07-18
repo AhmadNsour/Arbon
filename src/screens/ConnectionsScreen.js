@@ -1,5 +1,13 @@
 import React, {useState, useRef} from 'react';
-import {View, Text, Image, StyleSheet, FlatList, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  FlatList,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActionSheet from 'react-native-actionsheet';
@@ -43,8 +51,11 @@ const CustomerScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const insets = useSafeAreaInsets();
 
-  const handleAddConnection = () => {
-    Alert.alert('Add Connection', 'Functionality to add a new connection');
+  const handleAddConnection = method => {
+    Alert.alert(
+      'Add Connection',
+      `Functionality to add a new connection using ${method}`,
+    );
   };
 
   const handleDeleteCustomer = () => {
@@ -89,8 +100,24 @@ const CustomerScreen = () => {
     OptionActionSheet.current.show();
   };
 
+  const noConnectionAddButton = () => {
+    Alert.alert(
+      'Add Connection',
+      'Choose an option',
+      [
+        {text: 'Using QR Code', onPress: () => alert('Using QR Code...')},
+        {text: 'Manual', onPress: () => alert('Manual...')},
+
+        {text: 'Cancel', style: 'cancel'},
+      ],
+      {cancelable: true},
+    );
+  };
+
   const renderItem = ({item}) => (
-    <View style={styles.customerCard}>
+    <TouchableOpacity
+      style={styles.customerCard}
+      onPress={() => handleItemsSelection(item.id)}>
       <Image source={{uri: item.pic}} style={styles.customerPic} />
       <View style={styles.customerInfo}>
         <Text style={styles.customerName}>{item.name}</Text>
@@ -102,7 +129,7 @@ const CustomerScreen = () => {
         color={theme.colors.primary}
         onPress={() => handleItemsSelection(item.id)}
       />
-    </View>
+    </TouchableOpacity>
   );
 
   const renderPlaceholderItem = () => (
@@ -116,7 +143,6 @@ const CustomerScreen = () => {
   );
 
   const loadMoreCustomers = () => {
-    // change the loading condition later once call the api
     if (!isLoading) {
       return;
     }
@@ -124,7 +150,7 @@ const CustomerScreen = () => {
 
     // Simulate loading more customers with a delay
     setTimeout(() => {
-      const moreCustomers = Array.from({length: 3}, (_, index) => ({
+      const moreCustomers = Array.from({length: 1}, (_, index) => ({
         id: `${customers.length + index + 1}`,
         name: `New Customer ${customers.length + index + 1}`,
         NationalId: `991239201${customers.length + index + 1}`,
@@ -135,6 +161,25 @@ const CustomerScreen = () => {
       setIsLoading(false);
     }, 1500);
   };
+
+  const actions = [
+    {
+      text: 'Using QR Code',
+      icon: (
+        <Icon name="qr-code-outline" size={25} color={theme.colors.white} />
+      ),
+      name: 'qr_code',
+      position: 1,
+      color: theme.colors.primary,
+    },
+    {
+      text: 'Manual',
+      icon: <Icon name="create-outline" size={25} color={theme.colors.white} />,
+      name: 'manual',
+      position: 2,
+      color: theme.colors.primary,
+    },
+  ];
 
   return (
     <View
@@ -157,17 +202,27 @@ const CustomerScreen = () => {
         <EmptyState
           title="No Connections Yet"
           subtitle="After your first connection you will be able to view it here."
-          buttonLabel={'Connect'}
-          onButtonPress={handleAddConnection}
+          buttonLabel="Connect"
+          onButtonPress={() => noConnectionAddButton()}
         />
       )}
       {customers.length > 0 && (
         <FloatingAction
           position="right"
-          onPressMain={handleAddConnection}
-          floatingIcon={<Icon name="add" size={24} color="#fff" />}
+          actions={actions}
+          onPressItem={name => {
+            if (name === 'qr_code') {
+              handleAddConnection('QR Code');
+            } else if (name === 'manual') {
+              handleAddConnection('Manual');
+            }
+          }}
+          floatingIcon={
+            <Icon name="add" size={30} color={theme.colors.white} />
+          }
           color={theme.colors.primary}
           showBackground={false}
+          actionsPaddingTopBottom={10}
         />
       )}
       <ActionSheet

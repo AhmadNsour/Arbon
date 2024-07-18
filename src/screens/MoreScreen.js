@@ -48,7 +48,7 @@ const MoreScreen = ({navigation}) => {
       <ScrollView style={styles.ScrollView}>
         <TouchableOpacity
           style={styles.item}
-          onPress={() => handleNavigation('About Us')}>
+          onPress={() => handleNavigation('AboutUs')}>
           <View style={styles.itemContent}>
             <Ionicons
               name="information-circle-outline"
@@ -67,7 +67,7 @@ const MoreScreen = ({navigation}) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.item}
-          onPress={() => handleNavigation('Contact Us')}>
+          onPress={() => handleNavigation('ContactUs')}>
           <View style={styles.itemContent}>
             <Ionicons
               name="call-outline"
@@ -86,7 +86,7 @@ const MoreScreen = ({navigation}) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.item}
-          onPress={() => handleNavigation('Privacy Policy')}>
+          onPress={() => handleNavigation('PrivacyPolicy')}>
           <View style={styles.itemContent}>
             <Ionicons
               name="shield-checkmark-outline"
@@ -105,7 +105,7 @@ const MoreScreen = ({navigation}) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.item}
-          onPress={() => handleNavigation('Terms and Conditions')}>
+          onPress={() => handleNavigation('TermsAndConditions')}>
           <View style={styles.itemContent}>
             <Ionicons
               name="document-text-outline"
@@ -126,7 +126,9 @@ const MoreScreen = ({navigation}) => {
       <FloatingAction
         position="right"
         onPressMain={showHelpOptions}
-        floatingIcon={<Icon name="headset" size={24} color="#fff" />}
+        floatingIcon={
+          <Icon name="headset" size={24} color={theme.colors.white} />
+        }
         color={theme.colors.primary}
         showBackground={false}
       />

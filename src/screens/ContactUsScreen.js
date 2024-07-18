@@ -25,7 +25,7 @@ const ContactUsScreen = () => {
 
   const contactOptions = [
     {
-      icon: 'mail-outline',
+      icon: 'mail-open-outline',
       label: 'Email',
       value: 'info@arbon.com',
       action: () => Linking.openURL('mailto:info@arbon.com'),

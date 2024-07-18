@@ -57,7 +57,7 @@ const LoginScreen = ({navigation}) => {
     if (nationalId.length === 0) {
       return;
     }
-    if (!regexPatterns.phoneNumber.test(nationalId)) {
+    if (nationalId.length < 10) {
       setNationalIdErrorMessage('National ID must be 10 digits long.');
     } else {
       setNationalIdErrorMessage('');
@@ -94,6 +94,20 @@ const LoginScreen = ({navigation}) => {
     navigation.navigate(route);
   };
 
+  const handleLogin = () => {
+    if (
+      nationalId === '' ||
+      nationalId.length < 10 ||
+      password === '' ||
+      password.length < 8
+    ) {
+      alert('Please fill all required fields.');
+      return;
+    } else {
+      navigation.navigate('Home');
+      alert('Login success!');
+    }
+  };
   useEffect(() => {
     if (inputRefs.current) {
       inputRefs.current.focus();
@@ -169,6 +183,12 @@ const LoginScreen = ({navigation}) => {
         </TouchableOpacity>
 
         <TouchableOpacity
+          disabled={
+            nationalId === '' ||
+            nationalId.length < 10 ||
+            password === '' ||
+            password.length < 8
+          }
           style={
             nationalId === '' ||
             nationalId.length < 10 ||
@@ -177,7 +197,7 @@ const LoginScreen = ({navigation}) => {
               ? styles.loginButtonDisabled
               : styles.loginButtonEnabled
           }
-          onPress={() => setPopupVisible(true)}>
+          onPress={() => handleLogin()}>
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
 
@@ -327,7 +347,7 @@ const createStyles = theme =>
     orText: {
       textAlign: 'center',
       color: theme.colors.text,
-      marginVertical: 20,
+      marginVertical: 30,
     },
     faceIDWrapper: {
       alignItems: 'center',

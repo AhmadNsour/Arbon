@@ -6,7 +6,6 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
 } from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -16,6 +15,7 @@ import {regexPatterns} from '../utils/regex';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PasswordCriteria from '../components/PasswordCriteria';
 import PopupComponent from '../components/PopupComponent';
+import {getDeviceDetails} from '../utils/deviceInfo';
 
 const SignUpScreen = ({navigation}) => {
   const {theme} = useTheme();
@@ -109,8 +109,12 @@ const SignUpScreen = ({navigation}) => {
       event.preventDefault();
     }
   };
-
+  const getDeviceInfo = async () => {
+    var globalDeviceDetails = await getDeviceDetails();
+    console.log('Device Details:', globalDeviceDetails);
+  };
   useEffect(() => {
+    getDeviceInfo();
     if (inputRefs.current) {
       inputRefs.current.focus();
     }

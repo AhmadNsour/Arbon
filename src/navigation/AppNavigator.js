@@ -180,29 +180,44 @@ const AppNavigator = () => {
           options={({navigation}) => commonScreenOptions(navigation)}
         />
         <Stack.Screen
-          name="Contact Us"
+          name="ContactUs"
           component={ContactUsScreen}
-          options={({navigation}) => commonScreenOptions(navigation)}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Contact Us',
+          })}
         />
         <Stack.Screen
-          name="About Us"
+          name="AboutUs"
           component={AboutUsScreen}
-          options={({navigation}) => commonScreenOptions(navigation)}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'About Us',
+          })}
         />
         <Stack.Screen
-          name="Privacy Policy"
+          name="PrivacyPolicy"
           component={PrivacyPolicyScreen}
-          options={({navigation}) => commonScreenOptions(navigation)}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Privacy Policy',
+          })}
         />
         <Stack.Screen
-          name="Terms and Conditions"
+          name="TermsAndConditions"
           component={TermsAndConditionsScreen}
-          options={({navigation}) => commonScreenOptions(navigation)}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Terms and Conditions',
+          })}
         />
         <Stack.Screen
-          name="Transaction Details"
+          name="TransactionDetails"
           component={TransactionDetailsScreen}
-          options={({navigation}) => commonScreenOptions(navigation)}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Transaction Details',
+          })}
         />
         <Stack.Screen
           name="ForgetPassword"

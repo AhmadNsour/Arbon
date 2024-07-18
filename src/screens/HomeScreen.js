@@ -140,7 +140,7 @@ const HomeScreen = ({navigation}) => {
               <TouchableOpacity
                 key={transaction.id}
                 onPress={() => {
-                  navigation.navigate('Transaction Details', {
+                  navigation.navigate('TransactionDetails', {
                     data: transaction,
                   });
                 }}>
