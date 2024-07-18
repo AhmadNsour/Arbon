@@ -4,7 +4,6 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
@@ -21,8 +20,8 @@ class MainApplication : Application(), ReactApplication {
       object : DefaultReactNativeHost(this) {
         override fun getPackages(): List<ReactPackage> =
             PackageList(this).packages.apply {
-              // Add ReactNativePushNotificationPackage manually if not auto-linked
-              add(ReactNativePushNotificationPackage())
+              // Comment out the manual addition if it's causing duplicates
+              // add(ReactNativePushNotificationPackage())
             }
 
         override fun getJSMainModuleName(): String = "index"

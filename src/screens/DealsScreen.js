@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import EmptyState from '../components/EmptyState';
-import ChartView from '../components/ChatView';
+import ChartView from '../components/ChartView';
 
 const DealsScreen = ({navigation}) => {
   const {theme} = useTheme();
