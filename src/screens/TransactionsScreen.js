@@ -74,7 +74,7 @@ const TransactionsScreen = ({navigation}) => {
                     ]}>
                     {transaction.amount > 0
                       ? `+ ${transaction.amount.toFixed(2)} JOD`
-                      : `- ${Math.abs(transaction.amount).toFixed(2)} SAR`}
+                      : `- ${Math.abs(transaction.amount).toFixed(2)} JOD`}
                   </Text>
                 </View>
               </TouchableOpacity>

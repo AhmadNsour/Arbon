@@ -55,7 +55,7 @@ const IncomeExpensesChart = ({income, expenses}) => {
       <View style={styles.textContainer}>
         <View style={styles.textItem}>
           <Text
-            style={styles.amountText}>{`${income.toLocaleString()} SAR`}</Text>
+            style={styles.amountText}>{`${income.toLocaleString()} JOD`}</Text>
           <View style={styles.labelContainer}>
             <View
               style={[styles.circle, {backgroundColor: theme.colors.primary}]}
@@ -67,7 +67,7 @@ const IncomeExpensesChart = ({income, expenses}) => {
           <Text
             style={
               styles.amountText
-            }>{`${expenses.toLocaleString()} SAR`}</Text>
+            }>{`${expenses.toLocaleString()} JOD`}</Text>
           <View style={styles.labelContainer}>
             <View
               style={[styles.circle, {backgroundColor: theme.colors.danger}]}
