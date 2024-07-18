@@ -1,58 +1,90 @@
-// src/components/ChartView.js
+// src/components/IncomeExpensesChart.js
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
 import {SCREEN_WIDTH} from '../utils/helpers';
+import {PieChart} from 'react-native-svg-charts';
+import {G, Text as SvgText} from 'react-native-svg';
 
-const ChartView = ({income, expenses}) => {
+const IncomeExpensesChart = ({income, expenses}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
 
   const total = income + expenses;
-  const incomePercentage = (income / total) * 100;
-  const expensesPercentage = (expenses / total) * 100;
+  const data = [
+    {
+      key: 1,
+      value: income,
+      svg: {fill: theme.colors.primary},
+      arc: {cornerRadius: 10},
+    },
+    {
+      key: 2,
+      value: expenses,
+      svg: {fill: theme.colors.danger},
+      arc: {cornerRadius: 10},
+    },
+  ];
 
-  const greenArcRotation = (incomePercentage / 100) * 360;
-  const redArcRotation = (expensesPercentage / 100) * 360;
+  const Labels = ({slices}) => {
+    return slices.map((slice, index) => {
+      const {data: sliceData} = slice;
+      const percentage = Math.round((sliceData.value / total) * 100);
+      if (index === 0) {
+        return (
+          <G key={index}>
+            <SvgText
+              x={0}
+              y={0}
+              fill={theme.colors.primary}
+              textAnchor="middle"
+              alignmentBaseline="middle"
+              fontSize={24}
+              fontWeight="bold">
+              {`${percentage}%`}
+            </SvgText>
+          </G>
+        );
+      }
+      return null;
+    });
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
         <View style={styles.textItem}>
-          <Text style={styles.amountText}>{`${income} SAR`}</Text>
+          <Text
+            style={styles.amountText}>{`${income.toLocaleString()} SAR`}</Text>
           <View style={styles.labelContainer}>
-            <View style={[styles.circle, {backgroundColor: 'green'}]} />
+            <View
+              style={[styles.circle, {backgroundColor: theme.colors.primary}]}
+            />
             <Text style={styles.labelText}>Income</Text>
           </View>
         </View>
         <View style={styles.textItem}>
-          <Text style={styles.amountText}>{`${expenses} SAR`}</Text>
+          <Text
+            style={
+              styles.amountText
+            }>{`${expenses.toLocaleString()} SAR`}</Text>
           <View style={styles.labelContainer}>
-            <View style={[styles.circle, {backgroundColor: 'red'}]} />
+            <View
+              style={[styles.circle, {backgroundColor: theme.colors.danger}]}
+            />
             <Text style={styles.labelText}>Expenses</Text>
           </View>
         </View>
       </View>
       <View style={styles.chartContainer}>
-        <View style={styles.chart}>
-          <View
-            style={[
-              styles.greenArc,
-              {transform: [{rotate: `${greenArcRotation}deg`}]},
-            ]}
-          />
-          <View
-            style={[
-              styles.redArc,
-              {transform: [{rotate: `${redArcRotation}deg`}]},
-            ]}
-          />
-          <View style={styles.percentageContainer}>
-            <Text style={styles.percentageText}>
-              {`${incomePercentage.toFixed(0)}%`}
-            </Text>
-          </View>
-        </View>
+        <PieChart
+          style={styles.PieChartStyle}
+          data={data}
+          innerRadius={45}
+          outerRadius={60}
+          labelRadius={80}>
+          <Labels />
+        </PieChart>
       </View>
     </View>
   );
@@ -107,43 +139,21 @@ const createStyles = theme =>
       width: 120,
       height: 120,
     },
-    chart: {
-      position: 'relative',
-      width: 120,
-      height: 120,
-    },
-    greenArc: {
-      position: 'absolute',
-      width: 120,
-      height: 120,
-      borderRadius: 60,
-      borderWidth: 12,
-      borderColor: 'green',
-      borderTopColor: 'transparent',
-      borderRightColor: 'transparent',
-    },
-    redArc: {
-      position: 'absolute',
-      width: 120,
-      height: 120,
-      borderRadius: 60,
-      borderWidth: 12,
-      borderColor: 'red',
-      borderBottomColor: 'transparent',
-      borderLeftColor: 'transparent',
-    },
     percentageContainer: {
-      position: 'absolute',
-      top: '40%',
-      left: '25%',
-      alignItems: 'center',
       justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      height: '100%',
     },
     percentageText: {
       fontSize: 24,
       fontWeight: 'bold',
-      color: 'green',
+      color: theme.colors.primary,
+    },
+    PieChartStyle: {
+      height: 120,
+      width: 120,
     },
   });
 
-export default ChartView;
+export default IncomeExpensesChart;

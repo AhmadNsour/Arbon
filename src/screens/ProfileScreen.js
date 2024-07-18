@@ -160,7 +160,7 @@ const ProfileScreen = ({navigation}) => {
           <Image source={profileImage} style={styles.profileImage} />
         </TouchableOpacity>
         <View style={styles.profileInfo}>
-          <Text style={styles.name}>{user?.name || 'John Doe'}</Text>
+          <Text style={styles.name}>{user?.name || 'Ahmad Al Nsour'}</Text>
           <Text style={styles.lastLogin}>
             Last login: {user?.lastLogin || 'N/A'}
           </Text>
@@ -187,7 +187,7 @@ const ProfileScreen = ({navigation}) => {
           <View style={styles.detailItem}>
             <Text style={styles.detailText}>Full Name</Text>
             <Text style={styles.detailValue}>
-              {user?.fullName || 'John Doe'}
+              {user?.fullName || 'Ahmad Al Nsour'}
             </Text>
           </View>
           <View style={styles.detailItem}>
@@ -199,18 +199,18 @@ const ProfileScreen = ({navigation}) => {
           <View style={styles.detailItem}>
             <Text style={styles.detailText}>Mobile Number</Text>
             <Text style={styles.detailValue}>
-              {user?.mobile || '1234567890'}
+              {user?.mobile || '0797433919'}
             </Text>
           </View>
           <View style={styles.detailItem}>
             <Text style={styles.detailText}>Email</Text>
             <Text style={styles.detailValue}>
-              {user?.email || 'john.doe@example.com'}
+              {user?.email || 'ahmadmhnsour@gmail.com'}
             </Text>
           </View>
           <View style={styles.detailItem}>
             <Text style={styles.detailText}>Date of Birth</Text>
-            <Text style={styles.detailValue}>{user?.dob || '01/01/1980'}</Text>
+            <Text style={styles.detailValue}>{user?.dob || '12/08/1993'}</Text>
           </View>
           <View style={styles.detailItem}>
             <Text style={styles.detailText}>Gender</Text>
@@ -238,7 +238,9 @@ const ProfileScreen = ({navigation}) => {
               {isDarkMode ? 'Dark Mode' : 'Light Mode'}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.settingItem}>
+          <TouchableOpacity
+            style={styles.settingItem}
+            onPress={() => navigation.navigate('ForgetPassword')}>
             <Text style={styles.settingText}>Reset Password</Text>
           </TouchableOpacity>
           <View style={styles.settingItem}>

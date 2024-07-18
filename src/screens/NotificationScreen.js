@@ -22,7 +22,7 @@ const NotificationScreen = ({navigation}) => {
     {id: '3', name: 'Offers'},
   ];
 
-  const notifications = [
+  const [notifications, setNotifications] = useState([
     {
       id: '1',
       title: 'New Update Available',
@@ -30,6 +30,8 @@ const NotificationScreen = ({navigation}) => {
       category: '1',
       type: 'link',
       url: 'https://example.com/update',
+      read: false,
+      date: new Date('2024-07-19T10:00:00Z'),
     },
     {
       id: '2',
@@ -37,6 +39,8 @@ const NotificationScreen = ({navigation}) => {
       description: 'Thank you for joining us!',
       category: '1',
       type: 'none',
+      read: true,
+      date: new Date('2024-07-18T21:00:00Z'),
     },
     {
       id: '3',
@@ -45,30 +49,63 @@ const NotificationScreen = ({navigation}) => {
       category: '2',
       type: 'page',
       page: 'Transactions',
+      read: false,
+      date: new Date('2024-07-16T14:00:00Z'),
     },
     {
       id: '4',
       title: 'Transaction Failed',
-      description: 'The transaction of $1000 failed',
+      description: 'The transaction of $659 failed',
       category: '2',
       type: 'pageWithData',
-      page: 'Transactions',
+      page: 'TransactionDetails',
       data: {id: 1},
+      read: true,
+      date: new Date('2024-07-15T16:00:00Z'),
     },
     {
-      id: '4',
+      id: '5',
+      title: 'Transaction Successful',
+      description: 'Your transaction of $234 was successful.',
+      category: '2',
+      type: 'page',
+      page: 'Transactions',
+      read: false,
+      date: new Date('2024-07-14T18:00:00Z'),
+    },
+    {
+      id: '6',
       title: 'Special Offer!',
       description: 'Get 20% off on your next purchase.',
       category: '3',
       type: 'none',
+      read: false,
+      date: new Date('2024-07-13T20:00:00Z'),
     },
-  ];
+    {
+      id: '7',
+      title: 'Special Offer!',
+      description: 'Get 10% off on your next purchase.',
+      category: '3',
+      type: 'none',
+      read: true,
+      date: new Date('2024-07-12T22:00:00Z'),
+    },
+  ]);
 
-  const filteredNotifications = notifications.filter(
-    notification => notification.category === selectedCategory,
-  );
+  const filteredNotifications = notifications
+    .filter(notification => notification.category === selectedCategory)
+    .sort((a, b) => b.date - a.date);
 
   const handleNotificationPress = notification => {
+    // Mark the notification as read
+    setNotifications(prevNotifications =>
+      prevNotifications.map(notif =>
+        notif.id === notification.id ? {...notif, read: true} : notif,
+      ),
+    );
+
+    // Handle the notification action
     switch (notification.type) {
       case 'link':
         Linking.openURL(notification.url).catch(err =>
@@ -86,6 +123,24 @@ const NotificationScreen = ({navigation}) => {
         break;
       default:
         console.warn('Unknown notification type:', notification.type);
+    }
+  };
+
+  const getTimeAgo = date => {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+
+    if (diffInSeconds < 60) {
+      return 'Just now';
+    } else if (diffInSeconds < 3600) {
+      const minutes = Math.floor(diffInSeconds / 60);
+      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    } else if (diffInSeconds < 86400) {
+      const hours = Math.floor(diffInSeconds / 3600);
+      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    } else {
+      const days = Math.floor(diffInSeconds / 86400);
+      return `${days} day${days > 1 ? 's' : ''} ago`;
     }
   };
 
@@ -115,13 +170,22 @@ const NotificationScreen = ({navigation}) => {
         keyExtractor={item => item.id}
         renderItem={({item}) => (
           <TouchableOpacity
-            style={styles.notificationItem}
-            onPress={() => handleNotificationPress(item)}
-            disabled={item.type === 'none'}>
-            <Text style={styles.notificationTitle}>{item.title}</Text>
-            <Text style={styles.notificationDescription}>
-              {item.description}
-            </Text>
+            style={[
+              styles.notificationItem,
+              item.read ? styles.readNotification : styles.unreadNotification,
+            ]}
+            onPress={() => handleNotificationPress(item)}>
+            <View style={styles.notificationContent}>
+              <View style={styles.notificationTextContainer}>
+                <Text style={styles.notificationTitle}>{item.title}</Text>
+                <Text style={styles.notificationDescription}>
+                  {item.description}
+                </Text>
+              </View>
+              <Text style={styles.notificationDate}>
+                {getTimeAgo(new Date(item.date))}
+              </Text>
+            </View>
           </TouchableOpacity>
         )}
       />
@@ -166,6 +230,21 @@ const createStyles = theme =>
       borderWidth: 1,
       borderColor: theme.colors.border,
     },
+    readNotification: {
+      backgroundColor: theme.colors.lightGray,
+    },
+    unreadNotification: {
+      backgroundColor: theme.colors.white,
+    },
+    notificationContent: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    notificationTextContainer: {
+      flex: 1,
+      marginRight: 10,
+    },
     notificationTitle: {
       fontSize: 16,
       fontWeight: 'bold',
@@ -173,6 +252,10 @@ const createStyles = theme =>
     },
     notificationDescription: {
       fontSize: 14,
+      color: theme.colors.text,
+    },
+    notificationDate: {
+      fontSize: 12,
       color: theme.colors.text,
     },
   });

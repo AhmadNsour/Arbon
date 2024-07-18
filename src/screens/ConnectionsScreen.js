@@ -18,7 +18,7 @@ import EmptyState from '../components/EmptyState';
 const initialCustomers = [
   {
     id: '1',
-    name: 'John Doe',
+    name: 'Ahmad Al Nsour',
     NationalId: '9912392010',
     pic: 'https://via.placeholder.com/100',
   },

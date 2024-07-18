@@ -10,6 +10,7 @@ export const lightTheme = {
     success: '#4CAF50',
     white: '#fff',
     lighterBackground: '#F7F7F7',
+    lightGray: '#f0f0f0',
     // Add other light theme colors as needed
   },
 };
@@ -25,6 +26,7 @@ export const darkTheme = {
     success: '#4CAF50',
     white: '#fff',
     lighterBackground: '#F7F7F7',
+    lightGray: '#303030',
 
     // Add other dark theme colors as needed
   },

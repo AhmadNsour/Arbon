@@ -56,7 +56,7 @@ const DealsScreen = ({navigation}) => {
         styles.container,
         {paddingTop: insets.top, paddingBottom: insets.bottom},
       ]}>
-      <ChartView income={1570} expenses={10} />
+      <ChartView income={1500} expenses={10000} />
       <View style={styles.tabs}>
         <TouchableOpacity
           onPress={() => setSelectedTab('sent')}
@@ -85,20 +85,6 @@ const DealsScreen = ({navigation}) => {
                     });
                   }}>
                   <View key={deal.id} style={styles.dealItem}>
-                    <Icon
-                      name={
-                        deal.amount > 0
-                          ? 'arrow-down-outline'
-                          : 'arrow-up-outline'
-                      }
-                      size={24}
-                      color={
-                        deal.amount > 0
-                          ? theme.colors.success
-                          : theme.colors.danger
-                      }
-                      style={styles.dealIcon}
-                    />
                     <View style={styles.dealDetails}>
                       <Text style={styles.dealTitle}>{deal.title}</Text>
                       <Text style={styles.dealDate}>{deal.date}</Text>
@@ -138,20 +124,6 @@ const DealsScreen = ({navigation}) => {
                     });
                   }}>
                   <View key={deal.id} style={styles.dealItem}>
-                    <Icon
-                      name={
-                        deal.amount > 0
-                          ? 'arrow-down-outline'
-                          : 'arrow-up-outline'
-                      }
-                      size={24}
-                      color={
-                        deal.amount > 0
-                          ? theme.colors.success
-                          : theme.colors.danger
-                      }
-                      style={styles.dealIcon}
-                    />
                     <View style={styles.dealDetails}>
                       <Text style={styles.dealTitle}>{deal.title}</Text>
                       <Text style={styles.dealDate}>{deal.date}</Text>
