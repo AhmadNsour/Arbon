@@ -1,42 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
   View,
-  Alert,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {FloatingAction} from 'react-native-floating-action';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Modal from 'react-native-modal';
+import {FloatingAction} from 'react-native-floating-action';
+import {useTranslation} from 'react-i18next';
 
 const MoreScreen = ({navigation}) => {
   const {theme} = useTheme();
   const insets = useSafeAreaInsets();
   const styles = createStyles(theme);
+  const {t} = useTranslation();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleNavigation = route => {
     navigation.navigate(route);
   };
 
-  const showHelpOptions = () => {
-    Alert.alert(
-      'Help',
-      'Choose an option',
-      [
-        {text: 'Call us', onPress: () => alert('Calling support...')},
-        {text: 'Message us', onPress: () => alert('Messaging support...')},
-        {
-          text: 'Report an issue',
-          onPress: () => alert('Reporting an issue...'),
-        },
-        {text: 'Cancel', style: 'cancel'},
-      ],
-      {cancelable: true},
-    );
+  const toggleModalVisibility = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
+  const handleHelpOptionPress = option => {
+    setIsModalVisible(false);
+    switch (option) {
+      case 'Call us':
+        alert('Calling support...');
+        break;
+      case 'Message us':
+        alert('Messaging support...');
+        break;
+      case 'Report an issue':
+        alert('Reporting an issue...');
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -45,19 +52,19 @@ const MoreScreen = ({navigation}) => {
         styles.container,
         {paddingTop: insets.top, paddingBottom: insets.bottom},
       ]}>
-      <ScrollView style={styles.ScrollView}>
+      <ScrollView style={styles.scrollView}>
         <TouchableOpacity
           style={styles.item}
           onPress={() => handleNavigation('AboutUs')}>
           <View style={styles.itemContent}>
-            <Ionicons
+            <Icon
               name="information-circle-outline"
               size={24}
               color={theme.colors.primary}
               style={styles.leftIcon}
             />
-            <Text style={styles.itemText}>About Us</Text>
-            <Ionicons
+            <Text style={styles.itemText}>{t('about_us')}</Text>
+            <Icon
               name="chevron-forward-outline"
               size={24}
               color={theme.colors.primary}
@@ -69,14 +76,14 @@ const MoreScreen = ({navigation}) => {
           style={styles.item}
           onPress={() => handleNavigation('ContactUs')}>
           <View style={styles.itemContent}>
-            <Ionicons
+            <Icon
               name="call-outline"
               size={24}
               color={theme.colors.primary}
               style={styles.leftIcon}
             />
             <Text style={styles.itemText}>Contact Us</Text>
-            <Ionicons
+            <Icon
               name="chevron-forward-outline"
               size={24}
               color={theme.colors.primary}
@@ -88,14 +95,14 @@ const MoreScreen = ({navigation}) => {
           style={styles.item}
           onPress={() => handleNavigation('PrivacyPolicy')}>
           <View style={styles.itemContent}>
-            <Ionicons
+            <Icon
               name="shield-checkmark-outline"
               size={24}
               color={theme.colors.primary}
               style={styles.leftIcon}
             />
             <Text style={styles.itemText}>Privacy Policy</Text>
-            <Ionicons
+            <Icon
               name="chevron-forward-outline"
               size={24}
               color={theme.colors.primary}
@@ -107,14 +114,14 @@ const MoreScreen = ({navigation}) => {
           style={styles.item}
           onPress={() => handleNavigation('TermsAndConditions')}>
           <View style={styles.itemContent}>
-            <Ionicons
+            <Icon
               name="document-text-outline"
               size={24}
               color={theme.colors.primary}
               style={styles.leftIcon}
             />
             <Text style={styles.itemText}>Terms and Conditions</Text>
-            <Ionicons
+            <Icon
               name="chevron-forward-outline"
               size={24}
               color={theme.colors.primary}
@@ -125,13 +132,42 @@ const MoreScreen = ({navigation}) => {
       </ScrollView>
       <FloatingAction
         position="right"
-        onPressMain={showHelpOptions}
+        onPressMain={toggleModalVisibility}
         floatingIcon={
           <Icon name="headset" size={24} color={theme.colors.white} />
         }
         color={theme.colors.primary}
         showBackground={false}
       />
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={toggleModalVisibility}
+        style={styles.modal}>
+        <View style={styles.ModalContent}>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={() => handleHelpOptionPress('Call us')}>
+            <Text style={styles.modalItemText}>Call us</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={() => handleHelpOptionPress('Message us')}>
+            <Text style={styles.modalItemText}>Message us</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={() => handleHelpOptionPress('Report an issue')}>
+            <Text style={styles.modalItemText}>Report an issue</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={toggleModalVisibility}>
+            <Text style={[styles.modalItemText, {color: theme.colors.danger}]}>
+              Cancel
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -143,7 +179,7 @@ const createStyles = theme =>
       padding: 20,
       backgroundColor: theme.colors.background,
     },
-    ScrollView: {
+    scrollView: {
       paddingBottom: 20,
       paddingTop: 20,
     },
@@ -173,6 +209,26 @@ const createStyles = theme =>
     },
     rightIcon: {
       marginLeft: 10,
+    },
+    modal: {
+      justifyContent: 'flex-end',
+      margin: 0,
+    },
+    ModalContent: {
+      backgroundColor: theme.colors.background,
+      padding: 20,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      alignItems: 'center',
+    },
+    modalItem: {
+      padding: 15,
+      width: '100%',
+      alignItems: 'center',
+    },
+    modalItemText: {
+      fontSize: 18,
+      color: theme.colors.primary,
     },
   });
 

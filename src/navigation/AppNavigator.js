@@ -1,6 +1,6 @@
 // src/navigation/AppNavigator.js
 import React from 'react';
-import {Platform, Text} from 'react-native';
+import {Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -25,6 +25,7 @@ import ConnectionsScreen from '../screens/ConnectionsScreen';
 import TransactionDetailsScreen from '../screens/TransactionDetailsScreen';
 import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
 import OTPScreen from '../screens/OTPScreen';
+import AddConnectionScreen from '../screens/AddConnectionScreen';
 
 //components
 import CloseButton from '../components/CloseButton';
@@ -185,6 +186,14 @@ const AppNavigator = () => {
           options={({navigation}) => ({
             ...commonScreenOptions(navigation),
             title: 'Contact Us',
+          })}
+        />
+        <Stack.Screen
+          name="AddConnectionScreen"
+          component={AddConnectionScreen}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Add Connection',
           })}
         />
         <Stack.Screen

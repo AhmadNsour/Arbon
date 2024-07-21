@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  StatusBar,
 } from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -40,8 +41,7 @@ const LoginScreen = ({navigation}) => {
     SCREEN_HEIGHT > 800 ? (faceIDEnabled ? 100 : 0) : faceIDEnabled ? 50 : 0;
 
   const handleFaceIDLogin = () => {
-    setPopupVisible(true);
-    //alert('Face ID login initiated');
+    alert('Face ID login initiated');
   };
 
   const handleNationalIdOnChange = value => {
@@ -119,6 +119,7 @@ const LoginScreen = ({navigation}) => {
         styles.container,
         {paddingTop: insets.top, paddingBottom: insets.bottom},
       ]}>
+      <StatusBar barStyle={'light-content'} />
       <TopShape color1={theme.colors.primary} />
       <View style={[styles.content, {marginTop: dynamicMarginTop}]}>
         <Text style={styles.title}>Login</Text>

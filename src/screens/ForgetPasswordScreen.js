@@ -174,7 +174,7 @@ const createStyles = theme =>
       marginVertical: 20,
     },
     resetButtonText: {
-      color: '#fff',
+      color: theme.colors.white,
       fontWeight: 'bold',
       fontSize: 16,
     },

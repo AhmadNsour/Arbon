@@ -132,9 +132,11 @@ const createStyles = theme =>
       marginTop: 20,
     },
     saveButtonText: {
-      color: theme.colors.text,
+      color: theme.colors.white,
       fontSize: 16,
     },
   });
 
 export default UpdateProfileScreen;
+
+//only update the email address

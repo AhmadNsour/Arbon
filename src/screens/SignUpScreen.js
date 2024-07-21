@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  StatusBar,
 } from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -125,6 +126,7 @@ const SignUpScreen = ({navigation}) => {
         styles.container,
         {paddingTop: insets.top, paddingBottom: insets.bottom},
       ]}>
+      <StatusBar barStyle={'light-content'} />
       <TopShape color1={theme.colors.primary} />
       <View style={[styles.content, {marginTop: dynamicMarginTop}]}>
         <Text style={styles.title}>Sign Up</Text>

@@ -23,15 +23,17 @@ import {
 } from 'react-native-permissions';
 import AvatarPicker from '../components/AvatarPicker';
 import ActionSheet from 'react-native-actionsheet';
+import {useTranslation} from 'react-i18next';
+import Layout from '../components/Layout';
 
 const ProfileScreen = ({navigation}) => {
+  const {i18n} = useTranslation();
   const [selectedTab, setSelectedTab] = useState('details');
   const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(false);
   const [isPushNotificationsEnabled, setIsPushNotificationsEnabled] =
     useState(false);
   const {theme, setIsDarkMode, isDarkMode} = useTheme();
   const user = useSelector(state => state.user);
-  const currentLanguage = useSelector(state => state.language);
   const [profileImage, setProfileImage] = useState(
     user?.profileImage ? {uri: user?.profileImage} : defaultImage,
   );
@@ -39,7 +41,6 @@ const ProfileScreen = ({navigation}) => {
   const themeActionSheet = useRef();
   const languageActionSheet = useRef();
   const styles = createStyles(theme);
-
   const toggleFaceID = () =>
     setIsFaceIDEnabled(previousState => !previousState);
   const togglePushNotifications = () =>
@@ -150,7 +151,11 @@ const ProfileScreen = ({navigation}) => {
   };
 
   const handleLanguageSelection = index => {
-    console.log('Language Selected;', index);
+    if (index === 0) {
+      i18n.changeLanguage('en');
+    } else if (index === 1) {
+      i18n.changeLanguage('ar');
+    }
   };
 
   return (
@@ -223,7 +228,9 @@ const ProfileScreen = ({navigation}) => {
             style={styles.settingItem}
             onPress={() => languageActionSheet.current.show()}>
             <Text style={styles.settingText}>Language</Text>
-            <Text style={styles.settingText}>{currentLanguage}</Text>
+            <Text style={styles.settingText}>
+              {i18n.language === 'en' ? 'English' : 'عربي'}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.settingItem}
@@ -406,9 +413,11 @@ const createStyles = theme =>
       marginTop: 20,
     },
     logoutText: {
-      color: theme.colors.text,
+      color: theme.colors.white,
       fontSize: 16,
     },
   });
 
 export default ProfileScreen;
+
+//rate for the user

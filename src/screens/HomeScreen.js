@@ -1,4 +1,3 @@
-// src/screens/HomeScreen.js
 import React, {useState} from 'react';
 import {
   View,
@@ -6,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -13,10 +13,11 @@ import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import EmptyState from '../components/EmptyState';
 import {SCREEN_WIDTH} from '../utils/helpers';
+import Modal from 'react-native-modal';
 
 const HomeScreen = ({navigation}) => {
   const user = useSelector(state => state.user);
-  const [isBalanceVisible, setIsBalanceVisible] = useState(true);
+  const [isBalanceVisible, setIsBalanceVisible] = useState(false);
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const insets = useSafeAreaInsets();
@@ -35,18 +36,35 @@ const HomeScreen = ({navigation}) => {
     {id: 6, title: 'Incoming Transfer', amount: 129.0, date: '13 AUGUST'},
   ]);
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const toggleBalanceVisibility = () => {
     setIsBalanceVisible(!isBalanceVisible);
   };
 
+  const showMoreOptions = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOptionPress = option => {
+    setIsModalVisible(false);
+    switch (option) {
+      case 'New deal':
+        alert('New deal...');
+        break;
+      case 'Release a deal':
+        alert('Release a deal...');
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
-    <View
-      style={[
-        styles.container,
-        {paddingTop: insets.top, paddingBottom: insets.bottom},
-      ]}>
+    <View style={[styles.container, {paddingBottom: insets.bottom}]}>
+      <StatusBar />
       {/* Top Section */}
-      <View style={styles.topSection}>
+      <View style={[styles.topSection, {paddingTop: insets.top}]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
             <Icon
@@ -112,7 +130,7 @@ const HomeScreen = ({navigation}) => {
           <View style={styles.actionItem}>
             <TouchableOpacity
               style={styles.actionIconContainer}
-              onPress={() => alert('More')}>
+              onPress={showMoreOptions}>
               <Icon
                 name="ellipsis-horizontal-outline"
                 size={30}
@@ -189,6 +207,30 @@ const HomeScreen = ({navigation}) => {
           )}
         </View>
       </ScrollView>
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={() => setIsModalVisible(false)}
+        style={styles.modal}>
+        <View style={styles.ModalContent}>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={() => handleOptionPress('New deal')}>
+            <Text style={styles.modalItemText}>New deal</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={() => handleOptionPress('Release a deal')}>
+            <Text style={styles.modalItemText}>Release a deal</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={() => setIsModalVisible(false)}>
+            <Text style={[styles.modalItemText, {color: theme.colors.danger}]}>
+              Cancel
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -320,6 +362,26 @@ const createStyles = theme =>
     },
     negativeAmount: {
       color: theme.colors.danger,
+    },
+    modal: {
+      justifyContent: 'flex-end',
+      margin: 0,
+    },
+    ModalContent: {
+      backgroundColor: theme.colors.background,
+      padding: 20,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      alignItems: 'center',
+    },
+    modalItem: {
+      padding: 15,
+      width: '100%',
+      alignItems: 'center',
+    },
+    modalItemText: {
+      fontSize: 18,
+      color: theme.colors.primary,
     },
   });
 

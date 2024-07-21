@@ -5,7 +5,7 @@ export const lightTheme = {
     background: '#ffffff',
     text: '#000000',
     darkGrayishViolet: '#767577',
-    border: '#008467',
+    border: '#acacac',
     danger: '#f44336',
     success: '#4CAF50',
     white: '#fff',

@@ -7,30 +7,18 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '../theme/ThemeProvider';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import EmptyState from '../components/EmptyState';
 import ChartView from '../components/ChartView';
+import {FloatingAction} from 'react-native-floating-action';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Layout from '../components/Layout';
 
 const DealsScreen = ({navigation}) => {
   const {theme} = useTheme();
-  const insets = useSafeAreaInsets();
   const styles = createStyles(theme);
   const [selectedTab, setSelectedTab] = useState('sent');
-  const [receivedDeals] = useState([
-    {id: 1, title: 'Incoming Deal', amount: 60.0, date: 'Today, 12:49'},
-    {
-      id: 2,
-      title: 'Incoming Deal',
-      amount: 60.0,
-      date: 'Yesterday, 10:33',
-    },
-    {id: 3, title: 'Incoming Deal', amount: 14000.0, date: '13 March'},
-    {id: 4, title: 'Incoming Deal', amount: 1002.0, date: '29 July'},
-    {id: 5, title: 'Incoming Deal', amount: 901.0, date: '17 May'},
-    {id: 6, title: 'Incoming Deal', amount: 129.0, date: '13 AUGUST'},
-  ]);
+  const [receivedDeals] = useState([]);
 
   const [sentDeals] = useState([
     {id: 1, title: 'Sent Deal', amount: -60.0, date: 'Today, 12:49'},
@@ -51,12 +39,8 @@ const DealsScreen = ({navigation}) => {
   };
 
   return (
-    <View
-      style={[
-        styles.container,
-        {paddingTop: insets.top, paddingBottom: insets.bottom},
-      ]}>
-      <ChartView income={1500} expenses={10000} />
+    <Layout>
+      <ChartView income={4500} expenses={100} />
       <View style={styles.tabs}>
         <TouchableOpacity
           onPress={() => setSelectedTab('sent')}
@@ -80,7 +64,7 @@ const DealsScreen = ({navigation}) => {
                 <TouchableOpacity
                   key={deal.id}
                   onPress={() => {
-                    navigation.navigate('deal Details', {
+                    navigation.navigate('dealDetails', {
                       data: deal,
                     });
                   }}>
@@ -107,7 +91,7 @@ const DealsScreen = ({navigation}) => {
               <EmptyState
                 title="No Sent Deals Yet"
                 subtitle="After your first deal you will be able to view it here."
-                buttonLabel="Create"
+                buttonLabel="New deal"
                 onButtonPress={() => createNewDeal()}
               />
             )}
@@ -119,7 +103,7 @@ const DealsScreen = ({navigation}) => {
                 <TouchableOpacity
                   key={deal.id}
                   onPress={() => {
-                    navigation.navigate('deal Details', {
+                    navigation.navigate('dealDetails', {
                       data: deal,
                     });
                   }}>
@@ -145,15 +129,36 @@ const DealsScreen = ({navigation}) => {
             ) : (
               <EmptyState
                 title="No Received Deals Yet"
-                subtitle="After your first deal you will be able to view it here."
-                buttonLabel="Create"
-                onButtonPress={() => createNewDeal()}
+                subtitle="After you receive your first deal you will be able to view it here."
               />
             )}
           </View>
         )}
       </ScrollView>
-    </View>
+      {selectedTab === 'sent'
+        ? sentDeals.length > 0 && (
+            <FloatingAction
+              position="right"
+              onPressMain={createNewDeal}
+              floatingIcon={
+                <Icon name="add" size={24} color={theme.colors.white} />
+              }
+              color={theme.colors.primary}
+              showBackground={false}
+            />
+          )
+        : receivedDeals.length > 0 && (
+            <FloatingAction
+              position="right"
+              onPressMain={createNewDeal}
+              floatingIcon={
+                <Icon name="add" size={24} color={theme.colors.white} />
+              }
+              color={theme.colors.primary}
+              showBackground={false}
+            />
+          )}
+    </Layout>
   );
 };
 
@@ -194,6 +199,7 @@ const createStyles = theme =>
       flexDirection: 'row',
       justifyContent: 'center',
       marginBottom: 20,
+      marginTop: 20,
     },
     tab: {
       flex: 1,
@@ -248,3 +254,6 @@ const createStyles = theme =>
   });
 
 export default DealsScreen;
+
+// add to contacts list if needed
+// partial payment for each contact

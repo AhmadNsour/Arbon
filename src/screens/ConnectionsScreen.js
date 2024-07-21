@@ -5,15 +5,15 @@ import {
   Image,
   StyleSheet,
   FlatList,
-  Alert,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ActionSheet from 'react-native-actionsheet';
 import {FloatingAction} from 'react-native-floating-action';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import Layout from '../components/Layout';
 import EmptyState from '../components/EmptyState';
+import Modal from 'react-native-modal';
 
 const initialCustomers = [
   {
@@ -42,76 +42,38 @@ const initialCustomers = [
   },
 ];
 
-const CustomerScreen = () => {
+const CustomerScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
-  const OptionActionSheet = useRef();
   const selectedCustomerId = useRef(null);
   const [customers, setCustomers] = useState(initialCustomers);
   const [isLoading, setIsLoading] = useState(false);
-  const insets = useSafeAreaInsets();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleAddConnection = method => {
-    Alert.alert(
-      'Add Connection',
-      `Functionality to add a new connection using ${method}`,
-    );
+    setIsModalVisible(false);
+    navigation.navigate('AddConnectionScreen');
   };
 
   const handleDeleteCustomer = () => {
-    Alert.alert(
-      'Delete Customer',
-      'Are you sure you want to delete this customer?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: () => {
-            setCustomers(prev =>
-              prev.filter(c => c.id !== selectedCustomerId.current),
-            );
-          },
-        },
-      ],
-      {cancelable: true},
-    );
+    setCustomers(prev => prev.filter(c => c.id !== selectedCustomerId.current));
+    setIsModalVisible(false);
   };
 
   const handleSendArbon = () => {
     console.log(
       `Customer with id ${selectedCustomerId.current} will receive a request`,
     );
-  };
-
-  const handleOptionsSelection = index => {
-    if (index === 0) {
-      handleSendArbon();
-    } else if (index === 1) {
-      handleDeleteCustomer();
-    }
+    setIsModalVisible(false);
   };
 
   const handleItemsSelection = id => {
     selectedCustomerId.current = id;
-    OptionActionSheet.current.show();
+    setIsModalVisible(true);
   };
 
   const noConnectionAddButton = () => {
-    Alert.alert(
-      'Add Connection',
-      'Choose an option',
-      [
-        {text: 'Using QR Code', onPress: () => alert('Using QR Code...')},
-        {text: 'Manual', onPress: () => alert('Manual...')},
-
-        {text: 'Cancel', style: 'cancel'},
-      ],
-      {cancelable: true},
-    );
+    setIsModalVisible(true);
   };
 
   const renderItem = ({item}) => (
@@ -182,11 +144,7 @@ const CustomerScreen = () => {
   ];
 
   return (
-    <View
-      style={[
-        styles.container,
-        {paddingTop: insets.top, paddingBottom: insets.bottom},
-      ]}>
+    <Layout>
       {customers.length > 0 ? (
         <FlatList
           data={isLoading ? [...customers, {}, {}] : customers}
@@ -218,22 +176,41 @@ const CustomerScreen = () => {
             }
           }}
           floatingIcon={
-            <Icon name="add" size={30} color={theme.colors.white} />
+            <Icon name="add" size={24} color={theme.colors.white} />
           }
           color={theme.colors.primary}
           showBackground={false}
           actionsPaddingTopBottom={10}
         />
       )}
-      <ActionSheet
-        ref={OptionActionSheet}
-        title="Select Option"
-        options={['Send Arbon', 'Delete', 'Cancel']}
-        cancelButtonIndex={2}
-        destructiveButtonIndex={1}
-        onPress={handleOptionsSelection}
-      />
-    </View>
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={() => setIsModalVisible(false)}
+        style={styles.modal}>
+        <View
+          style={
+            Platform.OS === 'ios'
+              ? styles.iosModalContent
+              : styles.androidModalContent
+          }>
+          <TouchableOpacity style={styles.modalItem} onPress={handleSendArbon}>
+            <Text style={styles.modalItemText}>Send Arbon</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={handleDeleteCustomer}>
+            <Text style={[styles.modalItemText, {color: theme.colors.danger}]}>
+              Delete
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={() => setIsModalVisible(false)}>
+            <Text style={styles.modalItemText}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+    </Layout>
   );
 };
 
@@ -285,6 +262,34 @@ const createStyles = theme =>
     customerNationalId: {
       fontSize: 14,
       color: theme.colors.text,
+    },
+    modal: {
+      justifyContent: 'flex-end',
+      margin: 0,
+    },
+    iosModalContent: {
+      backgroundColor: theme.colors.background,
+      padding: 20,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      alignItems: 'center',
+    },
+    androidModalContent: {
+      backgroundColor: theme.colors.background,
+      padding: 20,
+      borderRadius: 10,
+      alignItems: 'center',
+      width: '80%',
+      alignSelf: 'center',
+    },
+    modalItem: {
+      padding: 15,
+      width: '100%',
+      alignItems: 'center',
+    },
+    modalItemText: {
+      fontSize: 18,
+      color: theme.colors.primary,
     },
   });
 

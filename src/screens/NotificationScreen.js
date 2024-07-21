@@ -234,7 +234,7 @@ const createStyles = theme =>
       backgroundColor: theme.colors.lightGray,
     },
     unreadNotification: {
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.colors.background,
     },
     notificationContent: {
       flexDirection: 'row',

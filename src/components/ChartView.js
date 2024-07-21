@@ -29,7 +29,10 @@ const IncomeExpensesChart = ({income, expenses}) => {
   const Labels = ({slices}) => {
     return slices.map((slice, index) => {
       const {data: sliceData} = slice;
-      const percentage = Math.round((sliceData.value / total) * 100);
+      const percentage =
+        Math.round((sliceData.value / total) * 100) > 0
+          ? Math.round((sliceData.value / total) * 100)
+          : 0;
       if (index === 0) {
         return (
           <G key={index}>
