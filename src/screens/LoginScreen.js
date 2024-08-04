@@ -372,5 +372,3 @@ const createStyles = theme =>
   });
 
 export default LoginScreen;
-
-//Must contain a mix of letters, numbers, and/or special characters.

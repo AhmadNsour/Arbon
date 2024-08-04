@@ -19,24 +19,28 @@ const initialCustomers = [
   {
     id: '1',
     name: 'Ahmad Al Nsour',
+    nickName: 'Al Nsour',
     NationalId: '9912392010',
     pic: 'https://via.placeholder.com/100',
   },
   {
     id: '2',
     name: 'Jane Smith',
+    nickName: 'Smith',
     NationalId: '9912392010',
     pic: 'https://via.placeholder.com/100',
   },
   {
     id: '3',
     name: 'Sam Wilson',
+    nickName: 'Wilson',
     NationalId: '9912392010',
     pic: 'https://via.placeholder.com/100',
   },
   {
     id: '4',
     name: 'Sam Wilson',
+    nickName: 'Wilson',
     NationalId: '9912392010',
     pic: 'https://via.placeholder.com/100',
   },
@@ -47,12 +51,16 @@ const CustomerScreen = ({navigation}) => {
   const styles = createStyles(theme);
   const selectedCustomerId = useRef(null);
   const [customers, setCustomers] = useState(initialCustomers);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isCustomerLazyLoading, setIsCustomerLazyLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleAddConnection = method => {
     setIsModalVisible(false);
-    navigation.navigate('AddConnectionScreen');
+    if (method === 'qr_code') {
+      navigation.navigate('QRCodeScannerScreen');
+    } else if (method === 'manual') {
+      navigation.navigate('AddConnectionScreen');
+    }
   };
 
   const handleDeleteCustomer = () => {
@@ -63,6 +71,13 @@ const CustomerScreen = ({navigation}) => {
   const handleSendArbon = () => {
     console.log(
       `Customer with id ${selectedCustomerId.current} will receive a request`,
+    );
+    setIsModalVisible(false);
+  };
+
+  const handleEditCustomer = () => {
+    console.log(
+      `Customer with id ${selectedCustomerId.current} edited successfully`,
     );
     setIsModalVisible(false);
   };
@@ -82,7 +97,7 @@ const CustomerScreen = ({navigation}) => {
       onPress={() => handleItemsSelection(item.id)}>
       <Image source={{uri: item.pic}} style={styles.customerPic} />
       <View style={styles.customerInfo}>
-        <Text style={styles.customerName}>{item.name}</Text>
+        <Text style={styles.customerName}>{item.nickName}</Text>
         <Text style={styles.customerNationalId}>{item.NationalId}</Text>
       </View>
       <Icon
@@ -105,22 +120,23 @@ const CustomerScreen = ({navigation}) => {
   );
 
   const loadMoreCustomers = () => {
-    if (!isLoading) {
+    if (!isCustomerLazyLoading) {
       return;
     }
-    setIsLoading(true);
+    setIsCustomerLazyLoading(true);
 
     // Simulate loading more customers with a delay
     setTimeout(() => {
       const moreCustomers = Array.from({length: 1}, (_, index) => ({
         id: `${customers.length + index + 1}`,
         name: `New Customer ${customers.length + index + 1}`,
+        nickName: `New Customer ${customers.length + index + 1}`,
         NationalId: `991239201${customers.length + index + 1}`,
         pic: 'https://via.placeholder.com/100',
       }));
 
       setCustomers(prevCustomers => [...prevCustomers, ...moreCustomers]);
-      setIsLoading(false);
+      setIsCustomerLazyLoading(false);
     }, 1500);
   };
 
@@ -147,7 +163,7 @@ const CustomerScreen = ({navigation}) => {
     <Layout>
       {customers.length > 0 ? (
         <FlatList
-          data={isLoading ? [...customers, {}, {}] : customers}
+          data={isCustomerLazyLoading ? [...customers, {}, {}] : customers}
           renderItem={({item}) =>
             item.id ? renderItem({item}) : renderPlaceholderItem()
           }
@@ -162,6 +178,7 @@ const CustomerScreen = ({navigation}) => {
           subtitle="After your first connection you will be able to view it here."
           buttonLabel="Connect"
           onButtonPress={() => noConnectionAddButton()}
+          iconName="person-outlinee"
         />
       )}
       {customers.length > 0 && (
@@ -170,9 +187,9 @@ const CustomerScreen = ({navigation}) => {
           actions={actions}
           onPressItem={name => {
             if (name === 'qr_code') {
-              handleAddConnection('QR Code');
+              handleAddConnection('qr_code');
             } else if (name === 'manual') {
-              handleAddConnection('Manual');
+              handleAddConnection('manual');
             }
           }}
           floatingIcon={
@@ -198,15 +215,15 @@ const CustomerScreen = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.modalItem}
+            onPress={handleEditCustomer}>
+            <Text style={styles.modalItemText}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalItem}
             onPress={handleDeleteCustomer}>
             <Text style={[styles.modalItemText, {color: theme.colors.danger}]}>
               Delete
             </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.modalItem}
-            onPress={() => setIsModalVisible(false)}>
-            <Text style={styles.modalItemText}>Cancel</Text>
           </TouchableOpacity>
         </View>
       </Modal>

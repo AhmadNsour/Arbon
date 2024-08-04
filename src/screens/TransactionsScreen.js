@@ -83,6 +83,7 @@ const TransactionsScreen = ({navigation}) => {
             <EmptyState
               title="No Transactions Yet"
               subtitle="After your first transaction, you will be able to view it here."
+              iconName="folder-open"
             />
           )}
         </View>

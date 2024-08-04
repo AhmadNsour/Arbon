@@ -7,10 +7,10 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  Dimensions,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '../theme/ThemeProvider';
+import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../utils/helpers';
 
 const AvatarPicker = ({
   visible,
@@ -90,7 +90,7 @@ const createStyles = theme =>
       borderTopRightRadius: 15,
       width: '100%',
       alignItems: 'center',
-      maxHeight: Dimensions.get('window').height * 0.5,
+      maxHeight: SCREEN_HEIGHT * 0.5,
     },
     header: {
       flexDirection: 'row',
@@ -120,8 +120,8 @@ const createStyles = theme =>
       justifyContent: 'center',
       padding: 10,
       margin: 5,
-      width: Dimensions.get('window').width / 3 - 30,
-      height: Dimensions.get('window').width / 3 - 30,
+      width: SCREEN_WIDTH / 3 - 30,
+      height: SCREEN_WIDTH / 3 - 30,
       borderRadius: 10,
       backgroundColor: theme.colors.background,
     },
@@ -135,8 +135,8 @@ const createStyles = theme =>
       justifyContent: 'center',
       padding: 10,
       margin: 5,
-      width: Dimensions.get('window').width / 3 - 30,
-      height: Dimensions.get('window').width / 3 - 30,
+      width: SCREEN_WIDTH / 3 - 30,
+      height: SCREEN_WIDTH / 3 - 30,
       borderRadius: 10,
       backgroundColor: theme.colors.background,
     },

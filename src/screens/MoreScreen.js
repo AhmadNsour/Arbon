@@ -159,13 +159,6 @@ const MoreScreen = ({navigation}) => {
             onPress={() => handleHelpOptionPress('Report an issue')}>
             <Text style={styles.modalItemText}>Report an issue</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.modalItem}
-            onPress={toggleModalVisibility}>
-            <Text style={[styles.modalItemText, {color: theme.colors.danger}]}>
-              Cancel
-            </Text>
-          </TouchableOpacity>
         </View>
       </Modal>
     </View>

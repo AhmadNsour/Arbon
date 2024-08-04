@@ -93,6 +93,7 @@ const DealsScreen = ({navigation}) => {
                 subtitle="After your first deal you will be able to view it here."
                 buttonLabel="New deal"
                 onButtonPress={() => createNewDeal()}
+                iconName="pricetags-outline"
               />
             )}
           </View>
@@ -130,6 +131,7 @@ const DealsScreen = ({navigation}) => {
               <EmptyState
                 title="No Received Deals Yet"
                 subtitle="After you receive your first deal you will be able to view it here."
+                iconName="pricetags-outline"
               />
             )}
           </View>

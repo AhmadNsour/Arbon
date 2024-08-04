@@ -24,7 +24,6 @@ import {
 import AvatarPicker from '../components/AvatarPicker';
 import ActionSheet from 'react-native-actionsheet';
 import {useTranslation} from 'react-i18next';
-import Layout from '../components/Layout';
 
 const ProfileScreen = ({navigation}) => {
   const {i18n} = useTranslation();

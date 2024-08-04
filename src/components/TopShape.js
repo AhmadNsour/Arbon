@@ -1,8 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, Dimensions, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import logo from '../assets/images/logoWhite.png';
-
-const {width, height} = Dimensions.get('window');
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helpers';
 
 const TopShape = ({color1}) => {
   return (
@@ -20,8 +19,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
-    width: width,
-    height: height / 4.5,
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT / 4.5,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -29,8 +28,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
-    width: width,
-    height: height / 4.5,
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT / 4.5,
     borderBottomLeftRadius: 100,
     zIndex: -1,
   },

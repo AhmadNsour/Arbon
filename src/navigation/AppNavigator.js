@@ -26,6 +26,8 @@ import TransactionDetailsScreen from '../screens/TransactionDetailsScreen';
 import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
 import OTPScreen from '../screens/OTPScreen';
 import AddConnectionScreen from '../screens/AddConnectionScreen';
+import AddConnectionConfirmScreen from '../screens/AddConnectionConfirmScreen';
+import QRCodeScannerScreen from '../screens/QRCodeScannerScreen';
 
 //components
 import CloseButton from '../components/CloseButton';
@@ -238,9 +240,27 @@ const AppNavigator = () => {
           component={OTPScreen}
           options={({navigation}) => commonScreenOptions(navigation)}
         />
+        <Stack.Screen
+          name="AddConnectionConfirmScreen"
+          component={AddConnectionConfirmScreen}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Confirm Connection',
+          })}
+        />
+        <Stack.Screen
+          name="QRCodeScannerScreen"
+          component={QRCodeScannerScreen}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'QRCode Scanner',
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 export default AppNavigator;
+
+//AddConnectionConfirmScreen

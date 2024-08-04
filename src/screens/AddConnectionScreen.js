@@ -1,40 +1,39 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Alert,
   ScrollView,
 } from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Layout from '../components/Layout';
 
 const AddConnectionScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
-  const insets = useSafeAreaInsets();
   const [nationalId, setNationalId] = useState('');
   const [nickname, setNickname] = useState('');
   const [nationalIdErrorMessage, setNationalIdErrorMessage] = useState('');
   const [nicknameErrorMessage, setNicknameErrorMessage] = useState('');
-  const [debounceTimeout, setDebounceTimeout] = useState(null);
   const inputRefs = useRef([]);
 
-  const handleAddConnection = () => {
-    if (nationalId.trim() && nickname.trim()) {
-      Alert.alert(
-        'Success',
-        `Connection with National ID ${nationalId} and Nickname ${nickname} added.`,
-      );
-      setNationalId('');
-      setNickname('');
-      navigation.goBack();
-    } else {
-      Alert.alert('Error', 'Please enter a valid National ID and Nickname.');
+  useEffect(() => {
+    if (inputRefs.current) {
+      inputRefs.current.focus();
     }
+  }, []);
+
+  const handleAddConnection = () => {
+    //call api
+    navigation.navigate('AddConnectionConfirmScreen', {
+      firstName: 'John',
+      lastName: 'Doe',
+      mobileNumber: '1234567890',
+      gender: 'Male',
+      email: 'john.doe@example.com',
+      dateOfBirth: '01/01/1990',
+    });
   };
 
   const handleNationalIdOnChange = value => {
@@ -77,14 +76,6 @@ const AddConnectionScreen = ({navigation}) => {
       setNicknameErrorMessage('');
     }
   };
-
-  useEffect(() => {
-    return () => {
-      if (debounceTimeout) {
-        clearTimeout(debounceTimeout);
-      }
-    };
-  }, [debounceTimeout]);
 
   return (
     <View style={styles.container}>

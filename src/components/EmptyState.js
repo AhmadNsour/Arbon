@@ -1,26 +1,23 @@
 // src/components/EmptyState.js
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
-const {width} = Dimensions.get('window');
-const EmptyState = ({title, subtitle, buttonLabel, onButtonPress}) => {
+import Icon from 'react-native-vector-icons/Ionicons';
+import {SCREEN_WIDTH} from '../utils/helpers';
+
+const EmptyState = ({
+  title,
+  subtitle,
+  buttonLabel,
+  onButtonPress,
+  iconName,
+}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../assets/images/empty.png')}
-        style={styles.image}
-        resizeMode="contain"
-      />
+      <Icon name={iconName} size={150} color={theme.colors.primary} />
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.subtitle}>{subtitle}</Text>
       {buttonLabel && onButtonPress && (
@@ -60,8 +57,8 @@ const createStyles = theme =>
       marginBottom: 10,
     },
     button: {
-      width: width - 40, // Full width minus margins
-      marginHorizontal: 20, // Left and right margins
+      width: SCREEN_WIDTH - 40,
+      marginHorizontal: 20,
       backgroundColor: theme.colors.primary,
       paddingVertical: 15,
       borderRadius: 5,

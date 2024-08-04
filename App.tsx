@@ -8,6 +8,8 @@ import PushNotification from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {I18nextProvider} from 'react-i18next';
 import i18n from './src/locales/i18n';
+import {LoadingProvider} from './src/context/LoadingContext'; // Adjust the path accordingly
+import LoadingOverlay from './src/components/LoadingOverlay';
 
 const App = () => {
   const [isRTL, setIsRTL] = useState(I18nManager.isRTL);
@@ -61,15 +63,18 @@ const App = () => {
   };
 
   return (
-    <ThemeProvider>
-      <I18nextProvider i18n={i18n}>
-        <Provider store={store}>
-          <View style={isRTL ? styles.containerRTL : styles.container}>
-            <AppNavigator />
-          </View>
-        </Provider>
-      </I18nextProvider>
-    </ThemeProvider>
+    <LoadingProvider>
+      <ThemeProvider>
+        <I18nextProvider i18n={i18n}>
+          <Provider store={store}>
+            <View style={isRTL ? styles.containerRTL : styles.container}>
+              <AppNavigator />
+              <LoadingOverlay />
+            </View>
+          </Provider>
+        </I18nextProvider>
+      </ThemeProvider>
+    </LoadingProvider>
   );
 };
 
