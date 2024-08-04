@@ -63,24 +63,23 @@ const HomeScreen = ({navigation}) => {
   return (
     <View style={[styles.container, {paddingBottom: insets.bottom}]}>
       <StatusBar />
-      {/* Top Section */}
       <View style={[styles.topSection, {paddingTop: insets.top}]}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Notifications')}>
             <Icon
-              name="person-outline"
+              name="notifications-outline"
               size={30}
               color={theme.colors.white}
               style={styles.icon}
             />
           </TouchableOpacity>
           <Text style={styles.welcome}>
-            Welcome, {user ? user.name : 'Ahmad'}
+            Welcome, {user.username ? user.username : 'Ahmad'}
           </Text>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Notifications')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
             <Icon
-              name="notifications-outline"
+              name="person-outline"
               size={30}
               color={theme.colors.white}
               style={styles.icon}
@@ -141,8 +140,6 @@ const HomeScreen = ({navigation}) => {
           </View>
         </View>
       </View>
-
-      {/* Bottom Section */}
       <View style={styles.lastTransactions}>
         <Text style={styles.sectionTitle}>Transactions</Text>
         {transactions.length > 4 && (
@@ -222,13 +219,6 @@ const HomeScreen = ({navigation}) => {
             style={styles.modalItem}
             onPress={() => handleOptionPress('Release a deal')}>
             <Text style={styles.modalItemText}>Release a deal</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.modalItem}
-            onPress={() => setIsModalVisible(false)}>
-            <Text style={[styles.modalItemText, {color: theme.colors.danger}]}>
-              Cancel
-            </Text>
           </TouchableOpacity>
         </View>
       </Modal>

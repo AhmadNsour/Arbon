@@ -1,4 +1,3 @@
-// themes.js
 export const lightTheme = {
   colors: {
     primary: '#008467',

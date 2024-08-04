@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Alert,
 } from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
 import {useLoading} from '../context/LoadingContext';

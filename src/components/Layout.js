@@ -39,7 +39,7 @@ const createStyles = theme =>
       bottom: 0,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.3)', // Semi-transparent background
+      backgroundColor: 'rgba(0, 0, 0, 0.3)',
     },
   });
 

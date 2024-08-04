@@ -1,16 +1,29 @@
-// ThemeProvider.js
-import React, {createContext, useContext, useState} from 'react';
+import React, {createContext, useContext} from 'react';
 import {ThemeProvider as StyledThemeProvider} from 'styled-components/native';
 import {lightTheme, darkTheme} from './themes';
+import {useSelector, useDispatch} from 'react-redux';
+import {toggleTheme} from '../redux/actions/settingsActions';
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({children}) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const theme = isDarkMode ? darkTheme : lightTheme;
+  const settings = useSelector(state => state.settings);
+  const dispatch = useDispatch();
+  const theme = settings.isDarkMode ? darkTheme : lightTheme;
+  const isDarkMode = settings.isDarkMode;
+
+  const toggleThemeMode = () => {
+    dispatch(toggleTheme());
+  };
 
   return (
-    <ThemeContext.Provider value={{theme, setIsDarkMode, isDarkMode}}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        settings,
+        toggleThemeMode,
+        isDarkMode,
+      }}>
       <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   );

@@ -1,4 +1,3 @@
-// src/screens/OTPScreen.js
 import React, {useState} from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';

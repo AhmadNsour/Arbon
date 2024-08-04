@@ -79,7 +79,6 @@ const ContactUsScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-      {/* FAQ Section */}
       <TouchableOpacity
         style={styles.faqContainer}
         onPress={() => Linking.openURL('https://www.arbon.com/faq')}>
@@ -90,7 +89,6 @@ const ContactUsScreen = () => {
         <Icon name="chevron-forward" size={24} color={theme.colors.primary} />
       </TouchableOpacity>
 
-      {/* Contact Methods Section */}
       <View style={styles.contactContainer}>
         {contactOptions.map((option, index) => (
           <TouchableOpacity
@@ -108,7 +106,6 @@ const ContactUsScreen = () => {
         ))}
       </View>
 
-      {/* Social Media Section */}
       <View style={styles.socialMediaContainer}>
         <Text style={styles.socialMediaTitle}>Social Media Account</Text>
         <View style={styles.socialMediaRow}>

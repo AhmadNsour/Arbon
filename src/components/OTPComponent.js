@@ -1,4 +1,3 @@
-// src/screens/OTPComponent.js
 import React, {useState, useRef, useEffect} from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 import {useTheme} from '../theme/ThemeProvider';
@@ -23,25 +22,20 @@ const OTPComponent = ({
 
   const handleOTPChange = (text, index) => {
     setErrorMessage('');
-    // Allow only numeric input and check if text is a single digit
     if (regexPatterns.otpDigits.test(text)) {
       const newOtp = [...otp];
       newOtp[index] = text;
       setOtp(newOtp);
 
-      // Move focus to the next input
       if (text && index < 3) {
         inputRefs.current[index + 1]?.focus();
       }
 
-      // Check if the last input field is filled
       if (index === 3 && text) {
         const otpValue = newOtp.join('');
 
-        // Validate that the OTP is not "0000"
         if (otpValue === '0000') {
           setErrorMessage('OTP cannot be 0000. Please enter a valid OTP.');
-          // clear the OTP fields and reset focus
           setOtp(['', '', '', '']);
           inputRefs.current[0].focus();
         } else {
@@ -51,7 +45,6 @@ const OTPComponent = ({
         }
       }
     } else if (text === '') {
-      // Handle clearing the input
       const newOtp = [...otp];
       newOtp[index] = text;
       setOtp(newOtp);
@@ -86,15 +79,15 @@ const OTPComponent = ({
             onKeyPress={event => handleKeyPress(event, index)}
             ref={ref => (inputRefs.current[index] = ref)}
             autoFocus={index === 0}
-            textContentType="oneTimeCode" // iOS auto-fill hint
-            autoComplete="sms-otp" // Android auto-fill hint
-            importantForAutofill="yes" // Ensure the field is ready for auto-fill
+            textContentType="oneTimeCode"
+            autoComplete="sms-otp"
+            importantForAutofill="yes"
             returnKeyType={index === 3 ? 'done' : 'next'}
             onSubmitEditing={() => {
               if (index < 3) {
                 inputRefs.current[index + 1]?.focus();
               } else {
-                inputRefs.current[3]?.blur(); // Dismiss keyboard
+                inputRefs.current[3]?.blur();
               }
             }}
           />

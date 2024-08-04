@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {Provider} from 'react-redux';
 import AppNavigator from './src/navigation/AppNavigator';
-import store from './src/redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
 import {ThemeProvider} from './src/theme/ThemeProvider';
 import {Platform, I18nManager, StyleSheet, View} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {I18nextProvider} from 'react-i18next';
 import i18n from './src/locales/i18n';
-import {LoadingProvider} from './src/context/LoadingContext'; // Adjust the path accordingly
+import {LoadingProvider} from './src/context/LoadingContext';
 import LoadingOverlay from './src/components/LoadingOverlay';
+import {store, persistor} from './src/redux/store';
 
 const App = () => {
   const [isRTL, setIsRTL] = useState(I18nManager.isRTL);
@@ -23,7 +24,6 @@ const App = () => {
 
     i18n.on('languageChanged', handleLanguageChange);
 
-    // Initial configuration
     handleLanguageChange(i18n.language);
 
     return () => {
@@ -32,7 +32,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // Configure PushNotification
     PushNotification.configure({
       onRegister: function (token) {
         console.log('TOKEN:', token);
@@ -64,16 +63,18 @@ const App = () => {
 
   return (
     <LoadingProvider>
-      <ThemeProvider>
-        <I18nextProvider i18n={i18n}>
-          <Provider store={store}>
-            <View style={isRTL ? styles.containerRTL : styles.container}>
-              <AppNavigator />
-              <LoadingOverlay />
-            </View>
-          </Provider>
-        </I18nextProvider>
-      </ThemeProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider>
+            <I18nextProvider i18n={i18n}>
+              <View style={isRTL ? styles.containerRTL : styles.container}>
+                <AppNavigator />
+                <LoadingOverlay />
+              </View>
+            </I18nextProvider>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
     </LoadingProvider>
   );
 };
@@ -81,12 +82,10 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // additional styles
   },
   containerRTL: {
     flex: 1,
     direction: 'rtl',
-    // additional styles for RTL
   },
 });
 

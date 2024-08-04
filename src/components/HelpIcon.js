@@ -1,4 +1,3 @@
-// src/components/HelpIcon.js
 import React from 'react';
 import {TouchableOpacity, Alert, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';

@@ -1,6 +1,5 @@
 import DeviceInfo from 'react-native-device-info';
 
-// Function to fetch device details
 export const getDeviceDetails = async () => {
   const deviceDetails = {
     DeviceIsVirtual: await DeviceInfo.isEmulator(),

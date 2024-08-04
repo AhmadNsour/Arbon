@@ -48,7 +48,7 @@ export const encodeBase64 = input => {
 
   while (i < str.length) {
     const char1 = str.charCodeAt(i++);
-    const char2 = i < str.length ? str.charCodeAt(i++) : Number.NaN; // Not a number if not present
+    const char2 = i < str.length ? str.charCodeAt(i++) : Number.NaN;
     const char3 = i < str.length ? str.charCodeAt(i++) : Number.NaN;
 
     const enc1 = Math.floor(char1 / 4);
@@ -98,7 +98,6 @@ export const convertArabicNumberToEnglish = number => {
 };
 
 export const formatNumber = (numb, fixedDecimals = true) => {
-  // Convert to number first to remove leading zeros, then back to string for formatting
   let num = Number(numb);
   let formattedAmount = fixedDecimals ? num.toFixed(2) : num.toString();
   formattedAmount = formattedAmount.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');

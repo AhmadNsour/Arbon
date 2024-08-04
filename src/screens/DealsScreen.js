@@ -1,4 +1,3 @@
-// src/screens/DealsScreen.js
 import React, {useState} from 'react';
 import {
   View,

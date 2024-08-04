@@ -1,4 +1,3 @@
-// src/screens/TransactionsScreen.js
 import React, {useState} from 'react';
 import {
   View,

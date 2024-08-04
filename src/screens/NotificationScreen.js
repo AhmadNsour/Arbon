@@ -98,14 +98,12 @@ const NotificationScreen = ({navigation}) => {
     .sort((a, b) => b.date - a.date);
 
   const handleNotificationPress = notification => {
-    // Mark the notification as read
     setNotifications(prevNotifications =>
       prevNotifications.map(notif =>
         notif.id === notification.id ? {...notif, read: true} : notif,
       ),
     );
 
-    // Handle the notification action
     switch (notification.type) {
       case 'link':
         Linking.openURL(notification.url).catch(err =>

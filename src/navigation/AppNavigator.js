@@ -1,4 +1,3 @@
-// src/navigation/AppNavigator.js
 import React from 'react';
 import {Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -15,7 +14,7 @@ import MoreScreen from '../screens/MoreScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
-import UpdateProfileScreen from '../screens/UpdateProfileScreen';
+import UpdateProfileScreen from '../screens/UpdateEmailScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
 import ContactUsScreen from '../screens/ContactUsScreen';
@@ -113,9 +112,9 @@ const getForgetPassword = navigation => ({
   headerRight: () => <CloseButton onPress={() => navigation.goBack()} />,
 });
 
-const getUpdateProfileOptions = navigation => ({
+const getUpdateEmailOptions = navigation => ({
   presentation: 'modal',
-  headerTitle: 'Update Profile',
+  headerTitle: 'Update Email',
   headerLeft: () => null,
   headerRight: () => <CloseButton onPress={() => navigation.goBack()} />,
 });
@@ -168,9 +167,9 @@ const AppNavigator = () => {
           options={({navigation}) => getProfileOptions(navigation)}
         />
         <Stack.Screen
-          name="UpdateProfile"
+          name="UpdateEmail"
           component={UpdateProfileScreen}
-          options={({navigation}) => getUpdateProfileOptions(navigation, theme)}
+          options={({navigation}) => getUpdateEmailOptions(navigation, theme)}
         />
         <Stack.Screen
           name="Transactions"
@@ -253,7 +252,7 @@ const AppNavigator = () => {
           component={QRCodeScannerScreen}
           options={({navigation}) => ({
             ...commonScreenOptions(navigation),
-            title: 'QRCode Scanner',
+            title: 'QR Scanner',
           })}
         />
       </Stack.Navigator>
@@ -262,5 +261,3 @@ const AppNavigator = () => {
 };
 
 export default AppNavigator;
-
-//AddConnectionConfirmScreen

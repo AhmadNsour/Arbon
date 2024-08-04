@@ -1,4 +1,3 @@
-// src/screens/ForgetPasswordScreen.js
 import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
@@ -61,7 +60,7 @@ const ForgetPasswordScreen = ({navigation}) => {
   };
 
   useEffect(() => {
-    //inputRefs.current.focus();
+    inputRefs.current.focus();
     return () => {
       if (debounceTimeout) {
         clearTimeout(debounceTimeout);

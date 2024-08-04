@@ -82,6 +82,12 @@ const CustomerScreen = ({navigation}) => {
     setIsModalVisible(false);
   };
 
+  const handleAddToContactList = () => {
+    console.log(
+      `Customer with id ${selectedCustomerId.current} added successfully`,
+    );
+    setIsModalVisible(false);
+  };
   const handleItemsSelection = id => {
     selectedCustomerId.current = id;
     setIsModalVisible(true);
@@ -124,8 +130,6 @@ const CustomerScreen = ({navigation}) => {
       return;
     }
     setIsCustomerLazyLoading(true);
-
-    // Simulate loading more customers with a delay
     setTimeout(() => {
       const moreCustomers = Array.from({length: 1}, (_, index) => ({
         id: `${customers.length + index + 1}`,
@@ -212,6 +216,11 @@ const CustomerScreen = ({navigation}) => {
           }>
           <TouchableOpacity style={styles.modalItem} onPress={handleSendArbon}>
             <Text style={styles.modalItemText}>Send Arbon</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={handleAddToContactList}>
+            <Text style={styles.modalItemText}>Add to Contact List</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.modalItem}

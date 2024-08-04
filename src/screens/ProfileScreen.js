@@ -9,11 +9,12 @@ import {
   Switch,
   Alert,
   Platform,
+  Modal,
 } from 'react-native';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import {useTheme} from '../theme/ThemeProvider';
 import defaultImage from '../assets/images/defaultProfile.png';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {
   check,
   request,
@@ -24,27 +25,36 @@ import {
 import AvatarPicker from '../components/AvatarPicker';
 import ActionSheet from 'react-native-actionsheet';
 import {useTranslation} from 'react-i18next';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {
+  setLanguage,
+  toggleFaceId,
+  togglePushNotification,
+} from '../redux/actions/settingsActions';
 
 const ProfileScreen = ({navigation}) => {
   const {i18n} = useTranslation();
   const [selectedTab, setSelectedTab] = useState('details');
-  const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(false);
-  const [isPushNotificationsEnabled, setIsPushNotificationsEnabled] =
-    useState(false);
-  const {theme, setIsDarkMode, isDarkMode} = useTheme();
+
+  const {theme, isDarkMode, toggleThemeMode} = useTheme();
   const user = useSelector(state => state.user);
+  const settings = useSelector(state => state.settings);
   const [profileImage, setProfileImage] = useState(
     user?.profileImage ? {uri: user?.profileImage} : defaultImage,
   );
   const [isAvatarPickerVisible, setIsAvatarPickerVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const themeActionSheet = useRef();
   const languageActionSheet = useRef();
   const styles = createStyles(theme);
-  const toggleFaceID = () =>
-    setIsFaceIDEnabled(previousState => !previousState);
-  const togglePushNotifications = () =>
-    setIsPushNotificationsEnabled(previousState => !previousState);
+  const toggleFaceID = () => {
+    dispatch(toggleFaceId(previousState => !previousState));
+  };
+  const togglePushNotifications = () => {
+    dispatch(togglePushNotification(previousState => !previousState));
+  };
 
+  const dispatch = useDispatch();
   const requestPermission = async type => {
     const permission = Platform.select({
       ios:
@@ -116,7 +126,7 @@ const ProfileScreen = ({navigation}) => {
       cameraType: 'front',
       saveToPhotos: true,
       includeBase64: false,
-      cropping: true, // Enable cropping
+      cropping: true,
     };
 
     launchCamera(options, response => {
@@ -143,18 +153,50 @@ const ProfileScreen = ({navigation}) => {
 
   const handleThemeSelection = index => {
     if (index === 0) {
-      setIsDarkMode(false);
+      toggleThemeMode();
     } else if (index === 1) {
-      setIsDarkMode(true);
+      toggleThemeMode();
     }
   };
 
   const handleLanguageSelection = index => {
     if (index === 0) {
       i18n.changeLanguage('en');
+      //dispatch(setLanguage('en'));
     } else if (index === 1) {
       i18n.changeLanguage('ar');
+      //dispatch(setLanguage('ar'));
     }
+  };
+
+  const renderStars = rate => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i <= Math.floor(rate)) {
+        stars.push(
+          <Icon key={i} name="star" size={16} color={theme.colors.primary} />,
+        );
+      } else if (i === Math.ceil(rate) && rate % 1 !== 0) {
+        stars.push(
+          <Icon
+            key={i}
+            name="star-half"
+            size={16}
+            color={theme.colors.primary}
+          />,
+        );
+      } else {
+        stars.push(
+          <Icon
+            key={i}
+            name="star-outline"
+            size={16}
+            color={theme.colors.primary}
+          />,
+        );
+      }
+    }
+    return stars;
   };
 
   return (
@@ -165,6 +207,12 @@ const ProfileScreen = ({navigation}) => {
         </TouchableOpacity>
         <View style={styles.profileInfo}>
           <Text style={styles.name}>{user?.name || 'Ahmad Al Nsour'}</Text>
+          <TouchableOpacity
+            style={styles.rateContainer}
+            onPress={() => setIsModalVisible(true)}>
+            <Text style={styles.rateText}>Rate: </Text>
+            {renderStars(user?.rate || 4.5)}
+          </TouchableOpacity>
           <Text style={styles.lastLogin}>
             Last login: {user?.lastLogin || 'N/A'}
           </Text>
@@ -233,16 +281,16 @@ const ProfileScreen = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.settingItem}
-            onPress={() => navigation.navigate('UpdateProfile')}>
-            <Text style={styles.settingText}>Update Profile</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.settingItem}
             onPress={() => themeActionSheet.current.show()}>
             <Text style={styles.settingText}>Theme</Text>
             <Text style={styles.settingText}>
               {isDarkMode ? 'Dark Mode' : 'Light Mode'}
             </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.settingItem}
+            onPress={() => navigation.navigate('UpdateEmail')}>
+            <Text style={styles.settingText}>Update Email</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.settingItem}
@@ -252,7 +300,7 @@ const ProfileScreen = ({navigation}) => {
           <View style={styles.settingItem}>
             <Text style={styles.settingText}>Face ID</Text>
             <Switch
-              value={isFaceIDEnabled}
+              value={settings.faceIdEnabled}
               onValueChange={toggleFaceID}
               trackColor={{
                 false: theme.colors.darkGrayishViolet,
@@ -263,7 +311,7 @@ const ProfileScreen = ({navigation}) => {
           <View style={styles.settingItem}>
             <Text style={styles.settingText}>Push Notifications</Text>
             <Switch
-              value={isPushNotificationsEnabled}
+              value={settings.pushNotificationEnabled}
               onValueChange={togglePushNotifications}
               trackColor={{
                 false: theme.colors.darkGrayishViolet,
@@ -306,6 +354,27 @@ const ProfileScreen = ({navigation}) => {
         destructiveButtonIndex={2}
         onPress={handleLanguageSelection}
       />
+
+      <Modal
+        visible={isModalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setIsModalVisible(false)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Rate Information</Text>
+            <Text style={styles.modalText}>
+              Your rating is based on several factors including transaction
+              history, reliability, and feedback from other users.
+            </Text>
+            <TouchableOpacity
+              style={styles.modalCloseButton}
+              onPress={() => setIsModalVisible(false)}>
+              <Text style={styles.modalCloseButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -341,6 +410,21 @@ const createStyles = theme =>
     lastLogin: {
       fontSize: 16,
       color: theme.colors.text,
+    },
+    rateContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 5,
+    },
+    rateText: {
+      fontSize: 16,
+      color: theme.colors.text,
+    },
+    rateValue: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: theme.colors.primary,
+      marginRight: 5,
     },
     tabs: {
       flexDirection: 'row',
@@ -415,8 +499,41 @@ const createStyles = theme =>
       color: theme.colors.white,
       fontSize: 16,
     },
+    modalContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    modalContent: {
+      width: '80%',
+      padding: 20,
+      backgroundColor: theme.colors.background,
+      borderRadius: 10,
+      alignItems: 'center',
+    },
+    modalTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: theme.colors.text,
+      marginBottom: 10,
+    },
+    modalText: {
+      fontSize: 16,
+      color: theme.colors.text,
+      textAlign: 'center',
+      marginBottom: 20,
+    },
+    modalCloseButton: {
+      padding: 10,
+      backgroundColor: theme.colors.primary,
+      borderRadius: 10,
+    },
+    modalCloseButtonText: {
+      color: theme.colors.white,
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
   });
 
 export default ProfileScreen;
-
-//rate for the user
