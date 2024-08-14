@@ -6,10 +6,10 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import OTPComponent from '../components/OTPComponent';
-import {regexPatterns} from '../utils/regex';
+import OTPComponent from '@components/OTPComponent';
+import {useTheme} from '@theme/ThemeProvider';
+import {regexPatterns} from '@utils/regex';
 
 const ForgetPasswordScreen = ({navigation}) => {
   const {theme} = useTheme();

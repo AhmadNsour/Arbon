@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
-import logo from '../assets/images/logoWhite.png';
-import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helpers';
+import logo from '@assets/images/logoWhite.png';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from '@utils/helpers';
 
 const TopShape = ({color1}) => {
   return (

@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
+import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {FloatingAction} from 'react-native-floating-action';
-import Layout from '../components/Layout';
-import EmptyState from '../components/EmptyState';
-import Modal from 'react-native-modal';
+import {useTheme} from '@theme/ThemeProvider';
+import Layout from '@components/Layout';
+import EmptyState from '@components/EmptyState';
 
 const initialCustomers = [
   {

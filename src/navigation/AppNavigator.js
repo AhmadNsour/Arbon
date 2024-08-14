@@ -6,32 +6,33 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //screens
-import HomeScreen from '../screens/HomeScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import TransactionsScreen from '../screens/TransactionsScreen';
-import DealsScreen from '../screens/DealsScreen';
-import MoreScreen from '../screens/MoreScreen';
-import LoginScreen from '../screens/LoginScreen';
-import SignUpScreen from '../screens/SignUpScreen';
-import OnboardingScreen from '../screens/OnboardingScreen';
-import UpdateProfileScreen from '../screens/UpdateEmailScreen';
-import NotificationScreen from '../screens/NotificationScreen';
-import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
-import ContactUsScreen from '../screens/ContactUsScreen';
-import TermsAndConditionsScreen from '../screens/TermsAndConditionsScreen';
-import AboutUsScreen from '../screens/AboutUsScreen';
-import ConnectionsScreen from '../screens/ConnectionsScreen';
-import TransactionDetailsScreen from '../screens/TransactionDetailsScreen';
-import ForgetPasswordScreen from '../screens/ForgetPasswordScreen';
-import OTPScreen from '../screens/OTPScreen';
-import AddConnectionScreen from '../screens/AddConnectionScreen';
-import AddConnectionConfirmScreen from '../screens/AddConnectionConfirmScreen';
-import QRCodeScannerScreen from '../screens/QRCodeScannerScreen';
+import HomeScreen from '@screens/HomeScreen';
+import ProfileScreen from '@screens/ProfileScreen';
+import TransactionsScreen from '@screens/TransactionsScreen';
+import DealsScreen from '@screens/DealsScreen';
+import MoreScreen from '@screens/MoreScreen';
+import LoginScreen from '@screens/LoginScreen';
+import SignUpScreen from '@screens/SignUpScreen';
+import OnboardingScreen from '@screens/OnboardingScreen';
+import UpdateProfileScreen from '@screens/UpdateEmailScreen';
+import NotificationScreen from '@screens/NotificationScreen';
+import PrivacyPolicyScreen from '@screens/PrivacyPolicyScreen';
+import ContactUsScreen from '@screens/ContactUsScreen';
+import TermsAndConditionsScreen from '@screens/TermsAndConditionsScreen';
+import AboutUsScreen from '@screens/AboutUsScreen';
+import ConnectionsScreen from '@screens/ConnectionsScreen';
+import TransactionDetailsScreen from '@screens/TransactionDetailsScreen';
+import ForgetPasswordScreen from '@screens/ForgetPasswordScreen';
+import OTPScreen from '@screens/OTPScreen';
+import AddConnectionScreen from '@screens/AddConnectionScreen';
+import AddConnectionConfirmScreen from '@screens/AddConnectionConfirmScreen';
+import QRCodeScannerScreen from '@screens/QRCodeScannerScreen';
+import MyQrCode from '@screens/MyQrCode';
 
 //components
-import CloseButton from '../components/CloseButton';
-import BackArrow from '../components/BackArrow';
-import {useTheme} from '../theme/ThemeProvider';
+import CloseButton from '@components/CloseButton';
+import BackArrow from '@components/BackArrow';
+import {useTheme} from '@theme/ThemeProvider';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -119,6 +120,13 @@ const getUpdateEmailOptions = navigation => ({
   headerRight: () => <CloseButton onPress={() => navigation.goBack()} />,
 });
 
+const getQRCodeOptions = navigation => ({
+  presentation: 'modal',
+  headerTitle: 'QR Code',
+  headerLeft: () => null,
+  headerRight: () => <CloseButton onPress={() => navigation.goBack()} />,
+});
+
 const commonScreenOptions = navigation => ({
   headerLeft: () => <BackArrow onPress={() => navigation.goBack()} />,
   headerRight: () => null,
@@ -170,6 +178,11 @@ const AppNavigator = () => {
           name="UpdateEmail"
           component={UpdateProfileScreen}
           options={({navigation}) => getUpdateEmailOptions(navigation, theme)}
+        />
+        <Stack.Screen
+          name="MyQrCode"
+          component={MyQrCode}
+          options={({navigation}) => getQRCodeOptions(navigation, theme)}
         />
         <Stack.Screen
           name="Transactions"

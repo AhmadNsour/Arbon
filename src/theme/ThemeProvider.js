@@ -2,7 +2,7 @@ import React, {createContext, useContext} from 'react';
 import {ThemeProvider as StyledThemeProvider} from 'styled-components/native';
 import {lightTheme, darkTheme} from './themes';
 import {useSelector, useDispatch} from 'react-redux';
-import {toggleTheme} from '../redux/actions/settingsActions';
+import {toggleTheme} from '@store/actions/settingsActions';
 
 const ThemeContext = createContext();
 

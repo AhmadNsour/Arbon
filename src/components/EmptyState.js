@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {SCREEN_WIDTH} from '../utils/helpers';
+import {useTheme} from '@theme/ThemeProvider';
+import {SCREEN_WIDTH} from '@utils/helpers';
 
 const EmptyState = ({
   title,

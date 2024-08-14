@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
-import {SCREEN_WIDTH} from '../utils/helpers';
 import {PieChart} from 'react-native-svg-charts';
 import {G, Text as SvgText} from 'react-native-svg';
+import {useTheme} from '@theme/ThemeProvider';
+import {SCREEN_WIDTH} from '@utils/helpers';
 
 const IncomeExpensesChart = ({income, expenses}) => {
   const {theme} = useTheme();

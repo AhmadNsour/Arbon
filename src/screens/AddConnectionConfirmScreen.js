@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
-import {useLoading} from '../context/LoadingContext';
+import {useTheme} from '@theme/ThemeProvider';
+import {useLoading} from '@context/LoadingContext';
 
 const AddConnectionConfirmScreen = ({route, navigation}) => {
   const {theme} = useTheme();

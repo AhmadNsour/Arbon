@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
-import {regexPatterns} from '../utils/regex';
+import {useTheme} from '@theme/ThemeProvider';
+import {regexPatterns} from '@utils/regex';
 
 const OTPComponent = ({
   textToShow = 'Enter the OTP sent to your mobile number',

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView, Linking} from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
+import {useTheme} from '@theme/ThemeProvider';
 
 const PrivacyPolicyScreen = () => {
   const {theme} = useTheme();

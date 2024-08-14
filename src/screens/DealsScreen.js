@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
-import EmptyState from '../components/EmptyState';
-import ChartView from '../components/ChartView';
-import {FloatingAction} from 'react-native-floating-action';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Layout from '../components/Layout';
+import {FloatingAction} from 'react-native-floating-action';
+import {useTheme} from '@theme/ThemeProvider';
+import EmptyState from '@components/EmptyState';
+import ChartView from '@components/ChartView';
+import Layout from '@components/Layout';
 
 const DealsScreen = ({navigation}) => {
   const {theme} = useTheme();

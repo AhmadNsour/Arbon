@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, ActivityIndicator} from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useTheme} from '@theme/ThemeProvider';
 
 const Layout = ({children, isLoading = false}) => {
   const {theme} = useTheme();

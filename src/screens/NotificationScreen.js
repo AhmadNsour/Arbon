@@ -8,7 +8,7 @@ import {
   Linking,
   Alert,
 } from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
+import {useTheme} from '@theme/ThemeProvider';
 
 const NotificationScreen = ({navigation}) => {
   const {theme} = useTheme();

@@ -6,9 +6,9 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
-import EmptyState from '../components/EmptyState';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useTheme} from '@theme/ThemeProvider';
+import EmptyState from '@components/EmptyState';
 
 const TransactionsScreen = ({navigation}) => {
   const {theme} = useTheme();

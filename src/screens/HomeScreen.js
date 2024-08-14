@@ -9,10 +9,11 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import EmptyState from '../components/EmptyState';
-import {SCREEN_WIDTH} from '../utils/helpers';
+import {useTheme} from '@theme/ThemeProvider';
+import EmptyState from '@components/EmptyState';
+import {SCREEN_WIDTH} from '@utils/helpers';
+
 import Modal from 'react-native-modal';
 
 const HomeScreen = ({navigation}) => {
@@ -359,6 +360,7 @@ const createStyles = theme =>
       margin: 0,
     },
     ModalContent: {
+      //height: SCREEN_HEIGHT / 2,
       backgroundColor: theme.colors.background,
       padding: 20,
       borderTopLeftRadius: 10,

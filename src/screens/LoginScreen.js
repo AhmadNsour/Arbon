@@ -8,13 +8,13 @@ import {
   Image,
   StatusBar,
 } from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import TopShape from '../components/TopShape';
-import {regexPatterns} from '../utils/regex';
-import {SCREEN_HEIGHT} from '../utils/helpers';
 import Icon from 'react-native-vector-icons/Ionicons';
-import PopupComponent from '../components/PopupComponent';
+import TopShape from '@components/TopShape';
+import PopupComponent from '@components/PopupComponent';
+import {useTheme} from '@theme/ThemeProvider';
+import {regexPatterns} from '@utils/regex';
+import {SCREEN_HEIGHT} from '@utils/helpers';
 
 const LoginScreen = ({navigation}) => {
   const {theme} = useTheme();
@@ -217,7 +217,7 @@ const LoginScreen = ({navigation}) => {
               style={styles.faceIDWrapper}
               onPress={handleFaceIDLogin}>
               <Image
-                source={require('../assets/images/faceId.png')}
+                source={require('@assets/images/faceId.png')}
                 style={styles.faceIDIcon}
               />
               <Text style={styles.faceIDTitle}>Sign-in with Biometric</Text>

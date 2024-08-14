@@ -7,8 +7,8 @@ import {
   Linking,
   ScrollView,
 } from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useTheme} from '@theme/ThemeProvider';
 
 const ContactUsScreen = () => {
   const {theme} = useTheme();

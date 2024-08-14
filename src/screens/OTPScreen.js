@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import OTPComponent from '../components/OTPComponent';
+import {useTheme} from '@theme/ThemeProvider';
+import OTPComponent from '@components/OTPComponent';
 
 const OTPScreen = ({navigation}) => {
   const {theme} = useTheme();

@@ -7,15 +7,15 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
+import {useTheme} from '@theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import TopShape from '../components/TopShape';
-import {SCREEN_HEIGHT} from '../utils/helpers';
-import {regexPatterns} from '../utils/regex';
 import Icon from 'react-native-vector-icons/Ionicons';
-import PasswordCriteria from '../components/PasswordCriteria';
-import PopupComponent from '../components/PopupComponent';
-import {getDeviceDetails} from '../utils/deviceInfo';
+import TopShape from '@components/TopShape';
+import PopupComponent from '@components/PopupComponent';
+import PasswordCriteria from '@components/PasswordCriteria';
+import {SCREEN_HEIGHT} from '@utils/helpers';
+import {regexPatterns} from '@utils/regex';
+import {getDeviceDetails} from '@utils/deviceInfo';
 
 const SignUpScreen = ({navigation}) => {
   const {theme} = useTheme();

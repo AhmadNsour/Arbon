@@ -106,3 +106,11 @@ export const formatNumber = (numb, fixedDecimals = true) => {
   }
   return formattedAmount;
 };
+
+export const maskNumber = value => {
+  if (!value) {
+    return '**********';
+  } else {
+    return value.slice(0, 2) + '********';
+  }
+};

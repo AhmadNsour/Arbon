@@ -9,8 +9,8 @@ import {
   ScrollView,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useTheme} from '../theme/ThemeProvider';
-import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../utils/helpers';
+import {useTheme} from '@theme/ThemeProvider';
+import {SCREEN_WIDTH, SCREEN_HEIGHT} from '@utils/helpers';
 
 const AvatarPicker = ({
   visible,

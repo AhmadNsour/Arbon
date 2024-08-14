@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, ActivityIndicator, StyleSheet, Modal} from 'react-native';
-import {useLoading} from '../context/LoadingContext';
-import {useTheme} from '../theme/ThemeProvider';
+import {useLoading} from '@context/LoadingContext';
+import {useTheme} from '@theme/ThemeProvider';
 
 const LoadingOverlay = () => {
   const {isLoading} = useLoading();

@@ -6,12 +6,12 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import {useTheme} from '../theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Modal from 'react-native-modal';
 import {FloatingAction} from 'react-native-floating-action';
 import {useTranslation} from 'react-i18next';
+import {useTheme} from '@theme/ThemeProvider';
 
 const MoreScreen = ({navigation}) => {
   const {theme} = useTheme();

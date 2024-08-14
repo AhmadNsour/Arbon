@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useTheme} from '../theme/ThemeProvider';
+import {useTheme} from '@theme/ThemeProvider';
 
 const BackArrow = ({onPress}) => {
   const {theme} = useTheme();

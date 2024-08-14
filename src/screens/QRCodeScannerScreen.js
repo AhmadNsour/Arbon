@@ -1,16 +1,17 @@
 import React from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
 import {RNCamera} from 'react-native-camera';
-import {useTheme} from '../theme/ThemeProvider';
+import {useTheme} from '@theme/ThemeProvider';
+import {decryptData} from '@utils/crypto';
 
 const QRCodeScannerScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
 
   const handleBarCodeRead = ({data}) => {
-    // Assuming the QR code contains user information in JSON format
     try {
-      const userInfo = JSON.parse(data);
+      const decryptedData = decryptData(data);
+      const userInfo = JSON.parse(decryptedData);
       navigation.navigate('AddConnectionConfirmScreen', userInfo);
     } catch (error) {
       Alert.alert('Invalid QR Code', 'The scanned QR code is not valid.');

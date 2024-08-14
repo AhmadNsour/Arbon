@@ -10,7 +10,7 @@ import {I18nextProvider} from 'react-i18next';
 import i18n from './src/locales/i18n';
 import {LoadingProvider} from './src/context/LoadingContext';
 import LoadingOverlay from './src/components/LoadingOverlay';
-import {store, persistor} from './src/redux/store';
+import {store, persistor} from './src/store/store';
 
 const App = () => {
   const [isRTL, setIsRTL] = useState(I18nManager.isRTL);

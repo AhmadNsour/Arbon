@@ -12,8 +12,6 @@ import {
   Modal,
 } from 'react-native';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
-import {useTheme} from '../theme/ThemeProvider';
-import defaultImage from '../assets/images/defaultProfile.png';
 import {useSelector, useDispatch} from 'react-redux';
 import {
   check,
@@ -22,7 +20,6 @@ import {
   RESULTS,
   openSettings,
 } from 'react-native-permissions';
-import AvatarPicker from '../components/AvatarPicker';
 import ActionSheet from 'react-native-actionsheet';
 import {useTranslation} from 'react-i18next';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -30,7 +27,10 @@ import {
   setLanguage,
   toggleFaceId,
   togglePushNotification,
-} from '../redux/actions/settingsActions';
+} from '@store/actions/settingsActions';
+import AvatarPicker from '@components/AvatarPicker';
+import {useTheme} from '@theme/ThemeProvider';
+import defaultImage from '@assets/images/defaultProfile.png';
 
 const ProfileScreen = ({navigation}) => {
   const {i18n} = useTranslation();
@@ -162,10 +162,10 @@ const ProfileScreen = ({navigation}) => {
   const handleLanguageSelection = index => {
     if (index === 0) {
       i18n.changeLanguage('en');
-      //dispatch(setLanguage('en'));
+      dispatch(setLanguage('en'));
     } else if (index === 1) {
       i18n.changeLanguage('ar');
-      //dispatch(setLanguage('ar'));
+      dispatch(setLanguage('ar'));
     }
   };
 
@@ -199,6 +199,10 @@ const ProfileScreen = ({navigation}) => {
     return stars;
   };
 
+  const navigateToQRCodeScreen = () => {
+    navigation.navigate('MyQrCode');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.profileHeader}>
@@ -218,6 +222,14 @@ const ProfileScreen = ({navigation}) => {
           </Text>
         </View>
       </View>
+      <TouchableOpacity
+        style={styles.qrCodeSection}
+        onPress={navigateToQRCodeScreen}>
+        <View style={styles.qrCodeContent}>
+          <Icon name="qr-code-outline" size={30} color={theme.colors.primary} />
+          <Text style={styles.qrCodeText}>My QR Code</Text>
+        </View>
+      </TouchableOpacity>
       <View style={styles.tabs}>
         <TouchableOpacity
           onPress={() => setSelectedTab('details')}
@@ -268,6 +280,7 @@ const ProfileScreen = ({navigation}) => {
             <Text style={styles.detailText}>Gender</Text>
             <Text style={styles.detailValue}>{user?.gender || 'Male'}</Text>
           </View>
+          {/* QR Code Section */}
         </ScrollView>
       ) : (
         <ScrollView style={styles.settings}>
@@ -276,7 +289,7 @@ const ProfileScreen = ({navigation}) => {
             onPress={() => languageActionSheet.current.show()}>
             <Text style={styles.settingText}>Language</Text>
             <Text style={styles.settingText}>
-              {i18n.language === 'en' ? 'English' : 'عربي'}
+              {settings.language === 'en' ? 'English' : 'عربي'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -389,7 +402,7 @@ const createStyles = theme =>
     profileHeader: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: 25,
+      marginBottom: 20,
     },
     profileImage: {
       width: 100,
@@ -467,6 +480,26 @@ const createStyles = theme =>
     detailValue: {
       fontSize: 16,
       color: theme.colors.text,
+    },
+    qrCodeSection: {
+      padding: 10,
+      backgroundColor: theme.colors.background,
+      borderRadius: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderWidth: 1,
+      borderColor: theme.colors.border,
+      marginBottom: 20,
+    },
+    qrCodeContent: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    qrCodeText: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: theme.colors.primary,
+      marginLeft: 10,
     },
     settings: {
       flex: 1,
