@@ -34,6 +34,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Ahmad Al Nsour
 
 [Email](mailto:ahmadmhnsour@gmail.com)
+
 [LinkedIn](https://linkedin.com/in/ahmad-al-nsour)
 
 Project Link: [https://github.com/AhmadNsour/Arbon](https://github.com/AhmadNsour/Arbon)
