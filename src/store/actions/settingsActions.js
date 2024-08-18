@@ -3,6 +3,8 @@ export const TOGGLE_THEME = 'TOGGLE_THEME';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const TOGGLE_FACE_ID = 'TOGGLE_FACE_ID';
 export const TOGGLE_PUSH_NOTIFICATION = 'TOGGLE_PUSH_NOTIFICATION';
+export const TOGGLE_IS_FIRST_TIME_USER = 'TOGGLE_IS_FIRST_TIME_USER';
+export const RESET_SETTINGS = 'RESET_SETTINGS';
 
 export const toggleTheme = () => {
   return {
@@ -26,5 +28,17 @@ export const toggleFaceId = () => {
 export const togglePushNotification = () => {
   return {
     type: TOGGLE_PUSH_NOTIFICATION,
+  };
+};
+
+export const toggleIsFirstTimeUser = () => {
+  return {
+    type: TOGGLE_IS_FIRST_TIME_USER,
+  };
+};
+
+export const resetSettings = () => {
+  return {
+    type: RESET_SETTINGS,
   };
 };

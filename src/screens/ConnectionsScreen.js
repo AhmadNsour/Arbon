@@ -46,7 +46,7 @@ const initialCustomers = [
   },
 ];
 
-const CustomerScreen = ({navigation}) => {
+const ConnectionsScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const selectedCustomerId = useRef(null);
@@ -319,4 +319,4 @@ const createStyles = theme =>
     },
   });
 
-export default CustomerScreen;
+export default ConnectionsScreen;

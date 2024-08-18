@@ -11,9 +11,9 @@ import {
 } from 'react-native';
 import {useTheme} from '@theme/ThemeProvider';
 
-const UpdateProfileScreen = ({navigation}) => {
+const UpdateEmailScreen = ({navigation}) => {
   const initialValues = {
-    email: 'ahmadmhnsour@gmail.com',
+    email: 'example@gmail.com',
   };
   const {theme} = useTheme();
   const [email, setEmail] = useState(initialValues.email);
@@ -102,4 +102,4 @@ const createStyles = theme =>
     },
   });
 
-export default UpdateProfileScreen;
+export default UpdateEmailScreen;

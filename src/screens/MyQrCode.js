@@ -6,7 +6,7 @@ import {useTheme} from '@theme/ThemeProvider';
 import {SCREEN_WIDTH} from '@utils/helpers';
 import {encryptData} from '@utils/crypto';
 
-const QRCodeScreen = () => {
+const MyQRCodeScreen = () => {
   const {theme} = useTheme();
   const user = useSelector(state => state.user);
   const styles = createStyles(theme);
@@ -59,4 +59,4 @@ const createStyles = theme =>
     },
   });
 
-export default QRCodeScreen;
+export default MyQRCodeScreen;

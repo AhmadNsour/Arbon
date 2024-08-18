@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
 
 //screens
 import HomeScreen from '@screens/HomeScreen';
@@ -28,6 +29,8 @@ import AddConnectionScreen from '@screens/AddConnectionScreen';
 import AddConnectionConfirmScreen from '@screens/AddConnectionConfirmScreen';
 import QRCodeScannerScreen from '@screens/QRCodeScannerScreen';
 import MyQrCode from '@screens/MyQrCode';
+import AppInfo from '@screens/AppInfo';
+import ResetSettingsScreen from '@screens/ResetSettingsScreen';
 
 //components
 import CloseButton from '@components/CloseButton';
@@ -134,11 +137,13 @@ const commonScreenOptions = navigation => ({
 
 const AppNavigator = () => {
   const {theme} = useTheme();
+  const isFirstTimeUser = useSelector(state => state.settings.isFirstTimeUser);
+  console.log(isFirstTimeUser);
 
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName={isFirstTimeUser ? 'Onboarding' : 'Home'}
         screenOptions={{
           gestureEnabled: Platform.OS === 'ios',
           headerStyle: {
@@ -149,6 +154,12 @@ const AppNavigator = () => {
           },
           headerTintColor: theme.colors.text,
         }}>
+        <Stack.Screen
+          name="Home"
+          component={HomeTabNavigator}
+          options={{headerShown: false}}
+        />
+        {/* onboarding start*/}
         <Stack.Screen
           name="Onboarding"
           component={OnboardingScreen}
@@ -164,11 +175,9 @@ const AppNavigator = () => {
           component={SignUpScreen}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="Home"
-          component={HomeTabNavigator}
-          options={{headerShown: false}}
-        />
+        {/* onboarding end*/}
+
+        {/* profile start*/}
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
@@ -185,29 +194,27 @@ const AppNavigator = () => {
           options={({navigation}) => getQRCodeOptions(navigation, theme)}
         />
         <Stack.Screen
-          name="Transactions"
-          component={TransactionsScreen}
-          options={({navigation}) => commonScreenOptions(navigation)}
+          name="ForgetPassword"
+          component={ForgetPasswordScreen}
+          options={({navigation}) => getForgetPassword(navigation)}
         />
+        {/* profile end */}
+
+        {/* notification start */}
         <Stack.Screen
           name="Notifications"
           component={NotificationScreen}
           options={({navigation}) => commonScreenOptions(navigation)}
         />
+        {/* notification end*/}
+
+        {/* more start*/}
         <Stack.Screen
           name="ContactUs"
           component={ContactUsScreen}
           options={({navigation}) => ({
             ...commonScreenOptions(navigation),
             title: 'Contact Us',
-          })}
-        />
-        <Stack.Screen
-          name="AddConnectionScreen"
-          component={AddConnectionScreen}
-          options={({navigation}) => ({
-            ...commonScreenOptions(navigation),
-            title: 'Add Connection',
           })}
         />
         <Stack.Screen
@@ -235,22 +242,23 @@ const AppNavigator = () => {
           })}
         />
         <Stack.Screen
-          name="TransactionDetails"
-          component={TransactionDetailsScreen}
+          name="AppInfo"
+          component={AppInfo}
           options={({navigation}) => ({
             ...commonScreenOptions(navigation),
-            title: 'Transaction Details',
+            title: 'App Info',
           })}
         />
+        {/* more end */}
+
+        {/* connection start*/}
         <Stack.Screen
-          name="ForgetPassword"
-          component={ForgetPasswordScreen}
-          options={({navigation}) => getForgetPassword(navigation)}
-        />
-        <Stack.Screen
-          name="OTP"
-          component={OTPScreen}
-          options={({navigation}) => commonScreenOptions(navigation)}
+          name="AddConnectionScreen"
+          component={AddConnectionScreen}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Add Connection',
+          })}
         />
         <Stack.Screen
           name="AddConnectionConfirmScreen"
@@ -268,6 +276,39 @@ const AppNavigator = () => {
             title: 'QR Scanner',
           })}
         />
+        {/* connection end*/}
+
+        {/* transaction start*/}
+        <Stack.Screen
+          name="TransactionDetails"
+          component={TransactionDetailsScreen}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Transaction Details',
+          })}
+        />
+        <Stack.Screen
+          name="Transactions"
+          component={TransactionsScreen}
+          options={({navigation}) => commonScreenOptions(navigation)}
+        />
+        {/* transaction end*/}
+
+        {/* general start */}
+        <Stack.Screen
+          name="OTP"
+          component={OTPScreen}
+          options={({navigation}) => commonScreenOptions(navigation)}
+        />
+        <Stack.Screen
+          name="ResetSettings"
+          component={ResetSettingsScreen}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Reset Settings',
+          })}
+        />
+        {/* general end */}
       </Stack.Navigator>
     </NavigationContainer>
   );

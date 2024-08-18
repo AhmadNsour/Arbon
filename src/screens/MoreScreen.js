@@ -129,6 +129,47 @@ const MoreScreen = ({navigation}) => {
             />
           </View>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => handleNavigation('AppInfo')}>
+          <View style={styles.itemContent}>
+            <Icon
+              name="apps-outline"
+              size={24}
+              color={theme.colors.primary}
+              style={styles.leftIcon}
+            />
+            <Text style={styles.itemText}>App Info</Text>
+            <Icon
+              name="chevron-forward-outline"
+              size={24}
+              color={theme.colors.primary}
+              style={styles.rightIcon}
+            />
+          </View>
+        </TouchableOpacity>
+
+        {__DEV__ && (
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() => handleNavigation('ResetSettings')}>
+            <View style={styles.itemContent}>
+              <Icon
+                name="settings-outline"
+                size={24}
+                color={theme.colors.primary}
+                style={styles.leftIcon}
+              />
+              <Text style={styles.itemText}>Reset Settings</Text>
+              <Icon
+                name="chevron-forward-outline"
+                size={24}
+                color={theme.colors.primary}
+                style={styles.rightIcon}
+              />
+            </View>
+          </TouchableOpacity>
+        )}
       </ScrollView>
       <FloatingAction
         position="right"

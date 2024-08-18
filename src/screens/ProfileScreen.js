@@ -47,6 +47,7 @@ const ProfileScreen = ({navigation}) => {
   const themeActionSheet = useRef();
   const languageActionSheet = useRef();
   const styles = createStyles(theme);
+  const dispatch = useDispatch();
   const toggleFaceID = () => {
     dispatch(toggleFaceId(previousState => !previousState));
   };
@@ -54,7 +55,6 @@ const ProfileScreen = ({navigation}) => {
     dispatch(togglePushNotification(previousState => !previousState));
   };
 
-  const dispatch = useDispatch();
   const requestPermission = async type => {
     const permission = Platform.select({
       ios:

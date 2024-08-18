@@ -3,6 +3,7 @@ const initialState = {
   language: 'en',
   faceIdEnabled: false,
   pushNotificationEnabled: false,
+  isFirstTimeUser: true,
 };
 
 const settingsReducer = (state = initialState, action) => {
@@ -27,6 +28,13 @@ const settingsReducer = (state = initialState, action) => {
         ...state,
         pushNotificationEnabled: !state.pushNotificationEnabled,
       };
+    case 'TOGGLE_IS_FIRST_TIME_USER':
+      return {
+        ...state,
+        isFirstTimeUser: !state.isFirstTimeUser,
+      };
+    case 'RESET_SETTINGS':
+      return initialState;
     default:
       return state;
   }
