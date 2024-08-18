@@ -31,7 +31,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Ahmad Al Nsour - [ahmadmhnsour@gmail.com](mailto:ahmadmhnsour@gmail.com)
+Ahmad Al Nsour
+
+[Email](mailto:ahmadmhnsour@gmail.com)
+[LinkedIn](https://linkedin.com/in/ahmad-al-nsour)
 
 Project Link: [https://github.com/AhmadNsour/Arbon](https://github.com/AhmadNsour/Arbon)
 
