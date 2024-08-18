@@ -22,6 +22,7 @@ import {
 } from 'react-native-permissions';
 import ActionSheet from 'react-native-actionsheet';
 import {useTranslation} from 'react-i18next';
+import {CommonActions} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   setLanguage,
@@ -203,6 +204,15 @@ const ProfileScreen = ({navigation}) => {
     navigation.navigate('MyQrCode');
   };
 
+  const handleLogout = async () => {
+    navigation.navigate('Login');
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{name: 'Login'}],
+      }),
+    );
+  };
   return (
     <View style={styles.container}>
       <View style={styles.profileHeader}>
@@ -337,7 +347,7 @@ const ProfileScreen = ({navigation}) => {
 
       <TouchableOpacity
         style={styles.logoutButton}
-        onPress={() => navigation.navigate('Login')}>
+        onPress={() => handleLogout()}>
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
 

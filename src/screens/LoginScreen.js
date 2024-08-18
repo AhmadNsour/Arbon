@@ -10,17 +10,18 @@ import {
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {CommonActions} from '@react-navigation/native';
 import TopShape from '@components/TopShape';
 import PopupComponent from '@components/PopupComponent';
 import {useTheme} from '@theme/ThemeProvider';
 import {regexPatterns} from '@utils/regex';
 import {SCREEN_HEIGHT} from '@utils/helpers';
+import {useSelector} from 'react-redux';
 
 const LoginScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const insets = useSafeAreaInsets();
-  const [faceIDEnabled, setFaceIDEnabled] = useState(true);
   const [nationalId, setNationalId] = useState('');
   const [NationalIdErrorMessage, setNationalIdErrorMessage] = useState('');
   const [password, setPassword] = useState('');
@@ -28,6 +29,7 @@ const LoginScreen = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const inputRefs = useRef([]);
   const [popupVisible, setPopupVisible] = useState(false);
+  const faceIdEnabled = useSelector(state => state.settings.faceIdEnabled);
 
   const handleCancel = () => {
     setPopupVisible(false);
@@ -37,7 +39,7 @@ const LoginScreen = ({navigation}) => {
     setPopupVisible(false);
   };
   const dynamicMarginTop =
-    SCREEN_HEIGHT > 800 ? (faceIDEnabled ? 100 : 0) : faceIDEnabled ? 50 : 0;
+    SCREEN_HEIGHT > 800 ? (faceIdEnabled ? 100 : 0) : faceIdEnabled ? 50 : 0;
 
   const handleFaceIDLogin = () => {
     alert('Face ID login initiated');
@@ -93,7 +95,7 @@ const LoginScreen = ({navigation}) => {
     navigation.navigate(route);
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (
       nationalId === '' ||
       nationalId.length < 10 ||
@@ -104,6 +106,12 @@ const LoginScreen = ({navigation}) => {
       return;
     } else {
       navigation.navigate('Home');
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'Home'}],
+        }),
+      );
       alert('Login success!');
     }
   };
@@ -210,7 +218,7 @@ const LoginScreen = ({navigation}) => {
           <Text style={styles.signUpText}>Sign Up</Text>
         </TouchableOpacity>
 
-        {faceIDEnabled && (
+        {faceIdEnabled && (
           <>
             <Text style={styles.orText}>OR</Text>
             <TouchableOpacity

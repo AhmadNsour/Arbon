@@ -2,6 +2,7 @@ import {SET_USER} from '../actions/userActions';
 
 const initialState = {
   user: null,
+  isloggedIn: false,
 };
 
 const userReducer = (state = initialState, action) => {

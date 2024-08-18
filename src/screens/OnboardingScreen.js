@@ -23,18 +23,20 @@ const slides = [
     image: require('@assets/images/onboarding1.png'),
   },
   {
-    title: 'Stay Connected',
-    description: 'Connect with people and share your experiences.',
+    title: 'Secure Transactions',
+    description:
+      'Payments are held in escrow until the service or product is received.',
     image: require('@assets/images/onboarding2.png'),
   },
   {
-    title: 'Discover Deals',
-    description: 'Find the best deals tailored for you.',
+    title: 'Rating System',
+    description:
+      'Both buyers and sellers can rate each other post-transaction.',
     image: require('@assets/images/onboarding3.png'),
   },
   {
-    title: 'Get Started',
-    description: 'Sign up or login to get started.',
+    title: 'Identity Verification',
+    description: ' Ensures participants use verified identities.',
     image: require('@assets/images/onboarding4.png'),
   },
 ];
