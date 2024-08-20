@@ -138,7 +138,6 @@ const commonScreenOptions = navigation => ({
 const AppNavigator = () => {
   const {theme} = useTheme();
   const isFirstTimeUser = useSelector(state => state.settings.isFirstTimeUser);
-  console.log(isFirstTimeUser);
 
   return (
     <NavigationContainer>
