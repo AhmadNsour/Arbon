@@ -40,7 +40,7 @@ const NotificationScreen = ({navigation}) => {
       category: '1',
       type: 'none',
       read: true,
-      date: new Date('2024-07-18T21:00:00Z'),
+      date: new Date('2024-07-10T21:00:00Z'),
     },
     {
       id: '3',

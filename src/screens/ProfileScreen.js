@@ -481,6 +481,11 @@ const createStyles = theme =>
       borderColor: theme.colors.border,
       justifyContent: 'center',
       height: 60,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
     },
     detailText: {
       fontSize: 16,
@@ -526,6 +531,11 @@ const createStyles = theme =>
       borderWidth: 1,
       borderColor: theme.colors.border,
       height: 60,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
     },
     settingText: {
       fontSize: 16,

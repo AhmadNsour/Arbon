@@ -54,5 +54,7 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>We need your permission to use the camera</string>
+	<key>NSContactsUsageDescription</key>
+	<string>We need access to your contacts to add new contacts.</string>
 </dict>
 </plist>

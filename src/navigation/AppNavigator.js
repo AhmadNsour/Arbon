@@ -142,7 +142,7 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={isFirstTimeUser ? 'Onboarding' : 'Login'}
+        initialRouteName={isFirstTimeUser ? 'Onboarding' : 'Home'}
         screenOptions={{
           gestureEnabled: Platform.OS === 'ios',
           headerStyle: {

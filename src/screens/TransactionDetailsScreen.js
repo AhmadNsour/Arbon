@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {useTheme} from '@theme/ThemeProvider';
 
 const TransactionDetailsScreen = ({route}) => {
@@ -8,62 +8,84 @@ const TransactionDetailsScreen = ({route}) => {
   const styles = createStyles(theme);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.detailTitle}>Transaction ID</Text>
-      <Text style={styles.detailText}>{transaction.id}</Text>
+    <ScrollView style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.detailTitle}>Transaction ID</Text>
+        <Text style={styles.detailText}>{transaction.id}</Text>
+      </View>
 
-      <Text style={styles.detailTitle}>Amount</Text>
-      <Text
-        style={[
-          styles.detailText,
-          transaction.amount > 0
-            ? styles.positiveAmount
-            : styles.negativeAmount,
-        ]}>
-        {transaction.amount > 0
-          ? `+ ${transaction.amount.toFixed(2)} JOD`
-          : `- ${Math.abs(transaction.amount).toFixed(2)} JOD`}
-      </Text>
+      <View style={styles.card}>
+        <Text style={styles.detailTitle}>Amount</Text>
+        <Text
+          style={[
+            styles.detailText,
+            transaction.amount > 0
+              ? styles.positiveAmount
+              : styles.negativeAmount,
+          ]}>
+          {transaction.amount > 0
+            ? `+ ${transaction.amount.toFixed(2)} JOD`
+            : `- ${Math.abs(transaction.amount).toFixed(2)} JOD`}
+        </Text>
+      </View>
 
-      <Text style={styles.detailTitle}>Title</Text>
-      <Text style={styles.detailText}>{transaction.title}</Text>
+      <View style={styles.card}>
+        <Text style={styles.detailTitle}>Title</Text>
+        <Text style={styles.detailText}>{transaction.title}</Text>
+      </View>
 
-      <Text style={styles.detailTitle}>Date</Text>
-      <Text style={styles.detailText}>{transaction.date}</Text>
+      <View style={styles.card}>
+        <Text style={styles.detailTitle}>Date</Text>
+        <Text style={styles.detailText}>{transaction.date}</Text>
+      </View>
 
-      <Text style={styles.detailTitle}>Description</Text>
-      <Text style={styles.detailText}>
-        {transaction.description || 'No description available.'}
-      </Text>
-    </View>
+      <View style={styles.card}>
+        <Text style={styles.detailTitle}>Description</Text>
+        <Text style={styles.detailText}>
+          {transaction.description || 'No description available.'}
+        </Text>
+      </View>
+    </ScrollView>
   );
 };
 
 const createStyles = theme =>
   StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: theme.colors.background,
       padding: 20,
+      backgroundColor: theme.colors.background,
+      flexGrow: 1,
+    },
+    card: {
+      backgroundColor: theme.colors.background,
+      padding: 15,
+      borderRadius: 10,
+      marginBottom: 15,
+      borderColor: theme.colors.border,
+      borderWidth: 1,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
     },
     detailTitle: {
       fontSize: 16,
       fontWeight: 'bold',
       color: theme.colors.text,
-      paddingTop: 10,
-      paddingBottom: 10,
+      marginBottom: 5,
     },
     detailText: {
       fontSize: 14,
       color: theme.colors.text,
-      paddingTop: 10,
-      paddingBottom: 10,
     },
     positiveAmount: {
       color: theme.colors.success,
+      fontWeight: 'bold',
     },
     negativeAmount: {
       color: theme.colors.danger,
+      fontWeight: 'bold',
     },
   });
 

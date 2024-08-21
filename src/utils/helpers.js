@@ -107,10 +107,18 @@ export const formatNumber = (numb, fixedDecimals = true) => {
   return formattedAmount;
 };
 
-export const maskNumber = value => {
+export const maskLastDigits = value => {
   if (!value) {
     return '**********';
   } else {
     return value.slice(0, 2) + '********';
+  }
+};
+
+export const maskFirstDigitsNumber = value => {
+  if (!value) {
+    return '**********';
+  } else {
+    return '******' + value.slice(0, 4);
   }
 };

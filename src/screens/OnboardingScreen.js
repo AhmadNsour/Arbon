@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {useDispatch} from 'react-redux';
+import {CommonActions} from '@react-navigation/native';
 import {useTheme} from '@theme/ThemeProvider';
 import {SCREEN_WIDTH} from '@utils/helpers';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -36,7 +37,12 @@ const slides = [
   },
   {
     title: 'Identity Verification',
-    description: ' Ensures participants use verified identities.',
+    description: 'Ensures participants use verified identities.',
+    image: require('@assets/images/onboarding4.png'),
+  },
+  {
+    title: 'Get Started',
+    description: 'Sign up or login to get started.',
     image: require('@assets/images/onboarding4.png'),
   },
 ];
@@ -98,6 +104,12 @@ const OnboardingScreen = ({navigation}) => {
     setIsModalVisible(false);
     dispatch(toggleIsFirstTimeUser(previousState => !previousState));
     navigation.navigate(route);
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{name: route}],
+      }),
+    );
   };
 
   return (
@@ -140,7 +152,7 @@ const OnboardingScreen = ({navigation}) => {
             <TouchableOpacity
               style={styles.button}
               onPress={() => setIsModalVisible(true)}>
-              <Text style={styles.buttonText}>Get Started</Text>
+              <Text style={styles.buttonText}>Lets Start</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -206,9 +218,8 @@ const createStyles = theme =>
     },
     image: {
       width: '80%',
-      height: '50%',
+      height: '45%',
       resizeMode: 'contain',
-      marginBottom: 0,
     },
     title: {
       fontSize: 24,
@@ -304,14 +315,20 @@ const createStyles = theme =>
       alignItems: 'center',
     },
     card: {
-      backgroundColor: theme.colors.background,
-      padding: 15,
-      borderRadius: 10,
-      marginBottom: 15,
-      borderColor: theme.colors.border,
-      borderWidth: 1,
-      width: '100%',
       flexDirection: 'row',
+      padding: 20,
+      backgroundColor: theme.colors.background,
+      marginBottom: 15,
+      borderWidth: 1,
+      borderRadius: 10,
+      borderColor: theme.colors.border,
+      height: 65,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
+      width: '100%',
       alignItems: 'center',
     },
     icon: {

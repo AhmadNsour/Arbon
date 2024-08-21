@@ -22,7 +22,7 @@ const AppInfoScreen = ({navigation}) => {
   const deviceId = DeviceInfo.getDeviceId();
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.header}>Application Information</Text>
       <View style={styles.card}>
         <Text style={styles.label}>App Name</Text>
@@ -99,6 +99,11 @@ const createStyles = theme =>
       marginBottom: 15,
       borderColor: theme.colors.border,
       borderWidth: 1,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
     },
     label: {
       fontSize: 16,

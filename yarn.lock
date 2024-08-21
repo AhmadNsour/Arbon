@@ -3246,6 +3246,7 @@ __metadata:
     react-native-actionsheet: ^2.4.2
     react-native-camera: ^4.2.1
     react-native-config: ^1.5.3
+    react-native-contacts: ^7.0.8
     react-native-device-info: ^11.1.0
     react-native-dotenv: ^3.4.11
     react-native-floating-action: ^1.22.0
@@ -9056,6 +9057,15 @@ __metadata:
     react-native-windows:
       optional: true
   checksum: 0eb74e0a10ae6e96422671482da83dea16571f4f5ad848d1f18015dccbecb9cbc066788df72a88c630abf4aed0edb7616ec27704817cff18bd6ed7d61979d671
+  languageName: node
+  linkType: hard
+
+"react-native-contacts@npm:^7.0.8":
+  version: 7.0.8
+  resolution: "react-native-contacts@npm:7.0.8"
+  peerDependencies:
+    react-native: ">=0.64.0"
+  checksum: 5a2f3084f47c935da60694cd60a96f27e7836dbd8b12a89561a22b93131df9c792d8ff75830d953ac4349782bf0c9265ea9d7b28312b20ba5731e90aeaf09b94
   languageName: node
   linkType: hard
 
