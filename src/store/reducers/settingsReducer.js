@@ -5,6 +5,7 @@ import {
   TOGGLE_FACE_ID,
   SET_LANGUAGE,
   TOGGLE_THEME,
+  TOGGLE_SCREEN_OVERVIEW,
 } from '../actions/settingsActions';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   faceIdEnabled: false,
   pushNotificationEnabled: false,
   isFirstTimeUser: true,
+  showScreenOverview: true,
 };
 
 const settingsReducer = (state = initialState, action) => {
@@ -44,6 +46,11 @@ const settingsReducer = (state = initialState, action) => {
       };
     case RESET_SETTINGS:
       return initialState;
+    case TOGGLE_SCREEN_OVERVIEW:
+      return {
+        ...state,
+        showScreenOverview: !state.showScreenOverview,
+      };
     default:
       return state;
   }

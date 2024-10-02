@@ -26,7 +26,7 @@ const AddConnectionScreen = ({navigation}) => {
 
   const handleAddConnection = () => {
     //call api
-    navigation.navigate('AddConnectionConfirmScreen', {
+    navigation.navigate('addConnectionConfirmScreen', {
       firstName: 'John',
       lastName: 'Doe',
       mobileNumber: '1234567890',

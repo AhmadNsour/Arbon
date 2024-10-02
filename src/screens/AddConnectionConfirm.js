@@ -22,7 +22,7 @@ const AddConnectionConfirmScreen = ({route, navigation}) => {
     // Call API
     // Alert.alert('Success', `Connection with ${firstName} added.`);
     // setIsLoading(false);
-    // navigation.navigate('Connections');
+    // navigation.navigate('connections');
   };
 
   return (

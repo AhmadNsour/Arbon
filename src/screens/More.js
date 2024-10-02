@@ -12,6 +12,7 @@ import Modal from 'react-native-modal';
 import {FloatingAction} from 'react-native-floating-action';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@theme/ThemeProvider';
+import InfoCard from '@components/InfoCard';
 
 const MoreScreen = ({navigation}) => {
   const {theme} = useTheme();
@@ -52,115 +53,24 @@ const MoreScreen = ({navigation}) => {
         styles.container,
         {paddingTop: insets.top, paddingBottom: insets.bottom},
       ]}>
+      <InfoCard
+        iconName="menu-outline"
+        title="More"
+        description="Explore additional options and settings. View policies, and more."
+      />
       <ScrollView style={styles.scrollView}>
-        <TouchableOpacity
-          style={styles.item}
-          onPress={() => handleNavigation('AboutUs')}>
-          <View style={styles.itemContent}>
-            <Icon
-              name="information-circle-outline"
-              size={24}
-              color={theme.colors.primary}
-              style={styles.leftIcon}
-            />
-            <Text style={styles.itemText}>{t('about_us')}</Text>
-            <Icon
-              name="chevron-forward-outline"
-              size={24}
-              color={theme.colors.primary}
-              style={styles.rightIcon}
-            />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.item}
-          onPress={() => handleNavigation('ContactUs')}>
-          <View style={styles.itemContent}>
-            <Icon
-              name="call-outline"
-              size={24}
-              color={theme.colors.primary}
-              style={styles.leftIcon}
-            />
-            <Text style={styles.itemText}>Contact Us</Text>
-            <Icon
-              name="chevron-forward-outline"
-              size={24}
-              color={theme.colors.primary}
-              style={styles.rightIcon}
-            />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.item}
-          onPress={() => handleNavigation('PrivacyPolicy')}>
-          <View style={styles.itemContent}>
-            <Icon
-              name="shield-checkmark-outline"
-              size={24}
-              color={theme.colors.primary}
-              style={styles.leftIcon}
-            />
-            <Text style={styles.itemText}>Privacy Policy</Text>
-            <Icon
-              name="chevron-forward-outline"
-              size={24}
-              color={theme.colors.primary}
-              style={styles.rightIcon}
-            />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.item}
-          onPress={() => handleNavigation('TermsAndConditions')}>
-          <View style={styles.itemContent}>
-            <Icon
-              name="document-text-outline"
-              size={24}
-              color={theme.colors.primary}
-              style={styles.leftIcon}
-            />
-            <Text style={styles.itemText}>Terms and Conditions</Text>
-            <Icon
-              name="chevron-forward-outline"
-              size={24}
-              color={theme.colors.primary}
-              style={styles.rightIcon}
-            />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.item}
-          onPress={() => handleNavigation('AppInfo')}>
-          <View style={styles.itemContent}>
-            <Icon
-              name="apps-outline"
-              size={24}
-              color={theme.colors.primary}
-              style={styles.leftIcon}
-            />
-            <Text style={styles.itemText}>App Info</Text>
-            <Icon
-              name="chevron-forward-outline"
-              size={24}
-              color={theme.colors.primary}
-              style={styles.rightIcon}
-            />
-          </View>
-        </TouchableOpacity>
-
-        {__DEV__ && (
+        <View>
           <TouchableOpacity
             style={styles.item}
-            onPress={() => handleNavigation('ResetSettings')}>
+            onPress={() => handleNavigation('aboutUs')}>
             <View style={styles.itemContent}>
               <Icon
-                name="settings-outline"
+                name="information-circle-outline"
                 size={24}
                 color={theme.colors.primary}
                 style={styles.leftIcon}
               />
-              <Text style={styles.itemText}>Reset Settings</Text>
+              <Text style={styles.itemText}>{t('about_us')}</Text>
               <Icon
                 name="chevron-forward-outline"
                 size={24}
@@ -169,7 +79,104 @@ const MoreScreen = ({navigation}) => {
               />
             </View>
           </TouchableOpacity>
-        )}
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() => handleNavigation('contactUs')}>
+            <View style={styles.itemContent}>
+              <Icon
+                name="call-outline"
+                size={24}
+                color={theme.colors.primary}
+                style={styles.leftIcon}
+              />
+              <Text style={styles.itemText}>Contact Us</Text>
+              <Icon
+                name="chevron-forward-outline"
+                size={24}
+                color={theme.colors.primary}
+                style={styles.rightIcon}
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() => handleNavigation('privacyPolicy')}>
+            <View style={styles.itemContent}>
+              <Icon
+                name="shield-checkmark-outline"
+                size={24}
+                color={theme.colors.primary}
+                style={styles.leftIcon}
+              />
+              <Text style={styles.itemText}>Privacy Policy</Text>
+              <Icon
+                name="chevron-forward-outline"
+                size={24}
+                color={theme.colors.primary}
+                style={styles.rightIcon}
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() => handleNavigation('termsAndConditions')}>
+            <View style={styles.itemContent}>
+              <Icon
+                name="document-text-outline"
+                size={24}
+                color={theme.colors.primary}
+                style={styles.leftIcon}
+              />
+              <Text style={styles.itemText}>Terms & Conditions</Text>
+              <Icon
+                name="chevron-forward-outline"
+                size={24}
+                color={theme.colors.primary}
+                style={styles.rightIcon}
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() => handleNavigation('appInfo')}>
+            <View style={styles.itemContent}>
+              <Icon
+                name="apps-outline"
+                size={24}
+                color={theme.colors.primary}
+                style={styles.leftIcon}
+              />
+              <Text style={styles.itemText}>App Info</Text>
+              <Icon
+                name="chevron-forward-outline"
+                size={24}
+                color={theme.colors.primary}
+                style={styles.rightIcon}
+              />
+            </View>
+          </TouchableOpacity>
+          {__DEV__ && (
+            <TouchableOpacity
+              style={styles.item}
+              onPress={() => handleNavigation('resetSettings')}>
+              <View style={styles.itemContent}>
+                <Icon
+                  name="settings-outline"
+                  size={24}
+                  color={theme.colors.primary}
+                  style={styles.leftIcon}
+                />
+                <Text style={styles.itemText}>Reset Settings</Text>
+                <Icon
+                  name="chevron-forward-outline"
+                  size={24}
+                  color={theme.colors.primary}
+                  style={styles.rightIcon}
+                />
+              </View>
+            </TouchableOpacity>
+          )}
+        </View>
       </ScrollView>
       <FloatingAction
         position="right"
@@ -215,7 +222,6 @@ const createStyles = theme =>
     },
     scrollView: {
       paddingBottom: 20,
-      paddingTop: 20,
     },
     item: {
       padding: 20,
@@ -279,6 +285,48 @@ const createStyles = theme =>
     modalItemText: {
       fontSize: 18,
       color: theme.colors.primary,
+    },
+    tagsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 20,
+    },
+    tag: {
+      padding: 10,
+      borderRadius: 20,
+      backgroundColor: theme.colors.background,
+      borderWidth: 1,
+      borderColor: theme.colors.border,
+    },
+    selectedTag: {
+      backgroundColor: theme.colors.primary,
+    },
+    tagText: {
+      fontSize: 16,
+      color: theme.colors.text,
+    },
+    selectedTagText: {
+      color: theme.colors.white,
+    },
+    NewServiceContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: theme.colors.background,
+      padding: 20,
+    },
+    title: {
+      fontSize: 28,
+      fontWeight: 'bold',
+      color: theme.colors.primary,
+      marginVertical: 20,
+      textAlign: 'center',
+    },
+    subtitle: {
+      fontSize: 16,
+      color: theme.colors.text,
+      marginBottom: 20,
+      textAlign: 'center',
     },
   });
 

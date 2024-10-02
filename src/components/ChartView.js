@@ -38,7 +38,9 @@ const IncomeExpensesChart = ({income, expenses}) => {
             <SvgText
               x={0}
               y={0}
-              fill={theme.colors.primary}
+              fill={
+                income > expenses ? theme.colors.primary : theme.colors.danger
+              }
               textAnchor="middle"
               alignmentBaseline="middle"
               fontSize={24}

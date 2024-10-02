@@ -131,6 +131,7 @@ const createStyles = theme =>
     },
     lastSection: {
       borderBottomWidth: 0,
+      marginBottom: 50,
     },
     link: {
       color: theme.colors.primary,

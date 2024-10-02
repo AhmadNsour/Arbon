@@ -13,7 +13,6 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from '@theme/ThemeProvider';
 import EmptyState from '@components/EmptyState';
 import {SCREEN_WIDTH} from '@utils/helpers';
-
 import Modal from 'react-native-modal';
 
 const HomeScreen = ({navigation}) => {
@@ -67,7 +66,7 @@ const HomeScreen = ({navigation}) => {
       <View style={[styles.topSection, {paddingTop: insets.top}]}>
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Notifications')}>
+            onPress={() => navigation.navigate('notifications')}>
             <Icon
               name="notifications-outline"
               size={30}
@@ -78,7 +77,7 @@ const HomeScreen = ({navigation}) => {
           <Text style={styles.welcome}>
             Welcome, {user.username ? user.username : 'Ahmad'}
           </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <TouchableOpacity onPress={() => navigation.navigate('profile')}>
             <Icon
               name="person-outline"
               size={30}
@@ -144,7 +143,7 @@ const HomeScreen = ({navigation}) => {
       <View style={styles.lastTransactions}>
         <Text style={styles.sectionTitle}>Transactions</Text>
         {transactions.length > 4 && (
-          <TouchableOpacity onPress={() => navigation.navigate('Transactions')}>
+          <TouchableOpacity onPress={() => navigation.navigate('transactions')}>
             <Text style={styles.viewAllLink}>View all</Text>
           </TouchableOpacity>
         )}
@@ -156,7 +155,7 @@ const HomeScreen = ({navigation}) => {
               <TouchableOpacity
                 key={transaction.id}
                 onPress={() => {
-                  navigation.navigate('TransactionDetails', {
+                  navigation.navigate('transactionDetails', {
                     data: transaction,
                   });
                 }}>
@@ -252,7 +251,7 @@ const createStyles = theme =>
     },
     balanceSection: {
       alignItems: 'center',
-      marginVertical: 20,
+      marginVertical: 5,
     },
     balanceText: {
       fontSize: 16,

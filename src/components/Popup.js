@@ -41,7 +41,7 @@ const PopupComponent = ({
             </View>
           )}
           {title && <Text style={styles.title}>{title}</Text>}
-          {title && <Text style={styles.subTitle}>{subTitle}</Text>}
+          {subTitle && <Text style={styles.subTitle}>{subTitle}</Text>}
           <Text style={styles.text}>{textToShow}</Text>
           <View style={styles.buttonContainer}>
             {showCancelButton && (
@@ -91,8 +91,8 @@ const createStyles = (theme, showCancelButton) =>
       fontSize: 18,
       color: theme.colors.text,
       textAlign: 'center',
-      marginBottom: 10,
       fontWeight: 'bold',
+      marginBottom: 10,
     },
     subTitle: {
       fontSize: 16,
@@ -130,10 +130,12 @@ const createStyles = (theme, showCancelButton) =>
     cancelButtonText: {
       color: theme.colors.danger,
       fontWeight: 'bold',
+      fontSize: 16,
     },
     confirmButtonText: {
       color: '#fff',
       fontWeight: 'bold',
+      fontSize: 16,
     },
   });
 

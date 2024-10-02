@@ -71,7 +71,7 @@ const AppInfoScreen = ({navigation}) => {
         <Text style={styles.label}>SCREEN_WIDTH</Text>
         <Text style={styles.value}>{SCREEN_WIDTH}</Text>
       </View>
-      <View style={styles.card}>
+      <View style={styles.cardLast}>
         <Text style={styles.label}>SCREEN_HEIGHT</Text>
         <Text style={styles.value}>{SCREEN_HEIGHT}</Text>
       </View>
@@ -97,6 +97,19 @@ const createStyles = theme =>
       padding: 15,
       borderRadius: 10,
       marginBottom: 15,
+      borderColor: theme.colors.border,
+      borderWidth: 1,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
+    },
+    cardLast: {
+      backgroundColor: theme.colors.background,
+      padding: 15,
+      borderRadius: 10,
+      marginBottom: 50,
       borderColor: theme.colors.border,
       borderWidth: 1,
       shadowColor: '#000',

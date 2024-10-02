@@ -63,7 +63,7 @@ const OnboardingScreen = ({navigation}) => {
         animated: true,
       });
     } else {
-      navigation.navigate('Login');
+      navigation.navigate('login');
     }
   };
 
@@ -74,7 +74,7 @@ const OnboardingScreen = ({navigation}) => {
         animated: true,
       });
     } else {
-      navigation.navigate('Login');
+      navigation.navigate('login');
     }
   };
 
@@ -170,7 +170,7 @@ const OnboardingScreen = ({navigation}) => {
           <TouchableOpacity
             style={styles.modalItem}
             onPress={() => {
-              setIsFirstTimeUser('Login');
+              setIsFirstTimeUser('login');
             }}>
             <View style={styles.card}>
               <Text style={styles.modalItemText}>Login</Text>
@@ -186,7 +186,7 @@ const OnboardingScreen = ({navigation}) => {
             style={styles.modalItem}
             onPress={() => {
               setIsModalVisible(false);
-              setIsFirstTimeUser('SignUp');
+              setIsFirstTimeUser('signUp');
             }}>
             <View style={styles.card}>
               <Text style={styles.modalItemText}>Register</Text>

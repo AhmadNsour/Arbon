@@ -27,7 +27,7 @@ const ForgetPasswordScreen = ({navigation}) => {
       setStep(1);
     } else if (step === 1) {
       console.log(otp);
-      navigation.navigate('Login');
+      navigation.navigate('login');
       alert('Password reset successfully!');
     }
   };

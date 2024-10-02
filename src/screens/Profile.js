@@ -28,6 +28,7 @@ import {
   setLanguage,
   toggleFaceId,
   togglePushNotification,
+  toggleScreenOverview,
 } from '@store/actions/settingsActions';
 import AvatarPicker from '@components/AvatarPicker';
 import {useTheme} from '@theme/ThemeProvider';
@@ -54,6 +55,10 @@ const ProfileScreen = ({navigation}) => {
   };
   const togglePushNotifications = () => {
     dispatch(togglePushNotification(previousState => !previousState));
+  };
+
+  const toggleScreenOverviewOption = () => {
+    dispatch(toggleScreenOverview(previousState => !previousState));
   };
 
   const requestPermission = async type => {
@@ -201,16 +206,35 @@ const ProfileScreen = ({navigation}) => {
   };
 
   const navigateToQRCodeScreen = () => {
-    navigation.navigate('MyQrCode');
+    navigation.navigate('QrCode');
   };
 
-  const handleLogout = async () => {
-    navigation.navigate('Login');
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{name: 'Login'}],
-      }),
+  const handleLogout = () => {
+    Alert.alert(
+      'Confirm Logout',
+      'Are you sure you want to logout?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {
+            return false;
+          },
+          style: 'cancel',
+        },
+        {
+          text: 'Logout',
+          onPress: () => {
+            navigation.navigate('login');
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{name: 'login'}],
+              }),
+            );
+          },
+        },
+      ],
+      {cancelable: false},
     );
   };
   return (
@@ -312,12 +336,12 @@ const ProfileScreen = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.settingItem}
-            onPress={() => navigation.navigate('UpdateEmail')}>
+            onPress={() => navigation.navigate('updateEmail')}>
             <Text style={styles.settingText}>Update Email</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.settingItem}
-            onPress={() => navigation.navigate('ForgetPassword')}>
+            onPress={() => navigation.navigate('forgetPassword')}>
             <Text style={styles.settingText}>Reset Password</Text>
           </TouchableOpacity>
           <View style={styles.settingItem}>
@@ -336,6 +360,17 @@ const ProfileScreen = ({navigation}) => {
             <Switch
               value={settings.pushNotificationEnabled}
               onValueChange={togglePushNotifications}
+              trackColor={{
+                false: theme.colors.darkGrayishViolet,
+                true: theme.colors.primary,
+              }}
+            />
+          </View>
+          <View style={styles.settingItem}>
+            <Text style={styles.settingText}>Show Screen Overview</Text>
+            <Switch
+              value={settings.showScreenOverview}
+              onValueChange={toggleScreenOverviewOption}
               trackColor={{
                 false: theme.colors.darkGrayishViolet,
                 true: theme.colors.primary,

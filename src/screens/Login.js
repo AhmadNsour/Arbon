@@ -5,35 +5,42 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Image,
   StatusBar,
+  Alert,
 } from 'react-native';
-import {useTheme} from '@theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
-import TopShape from '@components/TopShape';
-import PopupComponent from '@components/PopupComponent';
-import PasswordCriteria from '@components/PasswordCriteria';
-import {SCREEN_HEIGHT} from '@utils/helpers';
+import {CommonActions} from '@react-navigation/native';
+import Popup from '@components/Popup';
+import {useTheme} from '@theme/ThemeProvider';
 import {regexPatterns} from '@utils/regex';
-import {getDeviceDetails} from '@utils/deviceInfo';
+import {useSelector} from 'react-redux';
+import logo from '@assets/images/logoWhite.png';
 
-const SignUpScreen = ({navigation}) => {
+const LoginScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const insets = useSafeAreaInsets();
-  const inputRefs = useRef([]);
   const [nationalId, setNationalId] = useState('');
-  const [nationalIdErrorMessage, setNationalIdErrorMessage] = useState('');
+  const [NationalIdErrorMessage, setNationalIdErrorMessage] = useState('');
   const [password, setPassword] = useState('');
-  const [repeatedPassword, setRepeatedPassword] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [repeatedPasswordVisible, setRepeatedPasswordVisible] = useState(false);
-  const [repeatedPasswordErrorMessage, setRepeatedPasswordErrorMessage] =
-    useState('');
+  const inputRefs = useRef([]);
   const [popupVisible, setPopupVisible] = useState(false);
+  const faceIdEnabled = useSelector(state => state.settings.faceIdEnabled);
 
-  const dynamicMarginTop = SCREEN_HEIGHT > 800 ? 130 : 65;
+  const handleCancel = () => {
+    setPopupVisible(false);
+  };
+
+  const handleConfirm = () => {
+    setPopupVisible(false);
+  };
+  const handleFaceIDLogin = () => {
+    alert('Face ID login initiated');
+  };
 
   const handleNationalIdOnChange = value => {
     if (regexPatterns.digits.test(value) || value === '') {
@@ -43,6 +50,7 @@ const SignUpScreen = ({navigation}) => {
       setNationalIdErrorMessage('National ID can only contain digits.');
     }
   };
+
   const handleNationalIdBlur = () => {
     if (nationalId.length === 0) {
       return;
@@ -55,12 +63,8 @@ const SignUpScreen = ({navigation}) => {
   };
 
   const handlePasswordOnChange = value => {
-    if (regexPatterns.noWhiteSpaces.test(value) || value === '') {
-      setPasswordErrorMessage('');
-      setPassword(value);
-    } else {
-      setPasswordErrorMessage('Password must not contain white spaces.');
-    }
+    setPasswordErrorMessage('');
+    setPassword(value);
   };
 
   const handlePasswordBlur = () => {
@@ -74,87 +78,73 @@ const SignUpScreen = ({navigation}) => {
     }
   };
 
-  const handleRepeatedPasswordKeyPress = event => {
-    if (event.nativeEvent.key === 'v' && (event.ctrlKey || event.metaKey)) {
-      event.preventDefault();
-    }
-  };
-
-  const handleRepeatedPasswordOnChange = value => {
-    if (regexPatterns.noWhiteSpaces.test(value) || value === '') {
-      setRepeatedPasswordErrorMessage('');
-      setRepeatedPassword(value);
-    } else {
-      setRepeatedPasswordErrorMessage(
-        'Repeated Password must not contain white spaces.',
-      );
-    }
-  };
-
-  const handleRepeatedPasswordBlur = () => {
-    if (repeatedPassword.length === 0) {
-      return;
-    }
-    if (password.length < 8) {
-      setRepeatedPasswordErrorMessage(
-        'Repeated Password must be at least 8 digits long.',
-      );
-    } else {
-      setRepeatedPasswordErrorMessage('');
-    }
-  };
-
   const handlePasswordKeyPress = event => {
     if (event.nativeEvent.key === 'v' && (event.ctrlKey || event.metaKey)) {
       event.preventDefault();
     }
   };
-  const getDeviceInfo = async () => {
-    var globalDeviceDetails = await getDeviceDetails();
-    console.log('Device Details:', globalDeviceDetails);
+
+  const clearValuesAndNavigate = route => {
+    setNationalId('');
+    setPassword('');
+    setPasswordErrorMessage('');
+    setNationalIdErrorMessage('');
+    navigation.navigate(route);
+  };
+
+  const handleLogin = async () => {
+    if (
+      nationalId === '' ||
+      nationalId.length < 10 ||
+      password === '' ||
+      password.length < 8
+    ) {
+      alert('Please fill all required fields.');
+      return;
+    } else {
+      navigation.navigate('home');
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'home'}],
+        }),
+      );
+      Alert.alert('Login success!');
+    }
   };
   useEffect(() => {
-    getDeviceInfo();
     if (inputRefs.current) {
       inputRefs.current.focus();
     }
   }, []);
   return (
-    <View
-      style={[
-        styles.container,
-        {paddingTop: insets.top, paddingBottom: insets.bottom},
-      ]}>
-      <StatusBar barStyle={'light-content'} />
-      <TopShape color1={theme.colors.primary} />
-      <View style={[styles.content, {marginTop: dynamicMarginTop}]}>
-        <Text style={styles.title}>Sign Up</Text>
-        <Text style={styles.subtitle}>Please sign up to continue.</Text>
+    <View style={[styles.container, {paddingBottom: insets.bottom}]}>
+      <StatusBar />
+      <View style={[styles.topSection, {paddingTop: insets.top}]}>
+        <View>
+          <Image source={logo} style={styles.logo} />
+        </View>
+      </View>
+      <View style={styles.content}>
+        <Text style={styles.title}>Login</Text>
+        <Text style={styles.subtitle}>Please sign in to continue.</Text>
         <View style={styles.inputWrapper}>
-          <View style={styles.nationalIdView}>
-            <Text style={styles.inputLabel}>National Id</Text>
-            <TouchableOpacity onPress={() => setPopupVisible(!popupVisible)}>
-              <Icon
-                name="information-circle"
-                size={25}
-                color={theme.colors.primary}
-              />
-            </TouchableOpacity>
-          </View>
+          <Text style={styles.inputLabel}>National ID</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter your National Identity"
+            placeholder="Enter your national Identity"
             keyboardType="numeric"
-            value={nationalId}
             maxLength={10}
             ref={ref => (inputRefs.current = ref)}
+            value={nationalId}
             onChangeText={value => {
               handleNationalIdOnChange(value);
             }}
             onBlur={handleNationalIdBlur}
           />
-          {nationalIdErrorMessage && (
-            <Text style={styles.errorText}>{nationalIdErrorMessage}</Text>
+
+          {NationalIdErrorMessage && (
+            <Text style={styles.errorText}>{NationalIdErrorMessage}</Text>
           )}
         </View>
 
@@ -187,71 +177,68 @@ const SignUpScreen = ({navigation}) => {
           {passwordErrorMessage && (
             <Text style={styles.errorText}>{passwordErrorMessage}</Text>
           )}
-          <PasswordCriteria />
         </View>
 
-        <View style={styles.inputWrapper}>
-          <Text style={styles.inputLabel}>Repeat Password</Text>
-          <View style={styles.passwordContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your password again"
-              secureTextEntry={!repeatedPasswordVisible}
-              value={repeatedPassword}
-              onChangeText={value => {
-                handleRepeatedPasswordOnChange(value);
-              }}
-              onBlur={handleRepeatedPasswordBlur}
-              onKeyPress={handleRepeatedPasswordKeyPress}
-            />
-            <TouchableOpacity
-              style={styles.eyeIconWrapper}
-              onPress={() =>
-                setRepeatedPasswordVisible(!repeatedPasswordVisible)
-              }>
-              <Icon
-                name={repeatedPasswordVisible ? 'eye-off' : 'eye'}
-                size={25}
-                color={theme.colors.primary}
-              />
-            </TouchableOpacity>
-          </View>
-          {repeatedPasswordErrorMessage && (
-            <Text style={styles.errorText}>{repeatedPasswordErrorMessage}</Text>
-          )}
-        </View>
         <TouchableOpacity
+          onPress={() => {
+            clearValuesAndNavigate('ForgetPassword');
+          }}>
+          <Text style={styles.forgotPassword}>Forgot password?</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          disabled={
+            nationalId === '' ||
+            nationalId.length < 10 ||
+            password === '' ||
+            password.length < 8
+          }
           style={
             nationalId === '' ||
             nationalId.length < 10 ||
             password === '' ||
-            password.length < 8 ||
-            repeatedPassword === '' ||
-            repeatedPassword.length < 8
-              ? styles.signUpButtonDisabled
-              : styles.signUpButtonEnabled
+            password.length < 8
+              ? styles.loginButtonDisabled
+              : styles.loginButtonEnabled
           }
-          onPress={() => alert('Register')}>
-          <Text style={styles.signUpButtonText}>Register</Text>
+          onPress={() => handleLogin()}>
+          <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.footer}
-          onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.footerText}>Already have an account?</Text>
-          <Text style={styles.signInText}>Sign in</Text>
+          onPress={() => {
+            clearValuesAndNavigate('signUp');
+          }}>
+          <Text style={styles.footerText}>Don't have an account?</Text>
+          <Text style={styles.signUpText}>Sign Up</Text>
         </TouchableOpacity>
+
+        {faceIdEnabled && (
+          <>
+            <Text style={styles.orText}>OR</Text>
+            <TouchableOpacity
+              style={styles.faceIDWrapper}
+              onPress={handleFaceIDLogin}>
+              <Image
+                source={require('@assets/images/faceId.png')}
+                style={styles.faceIDIcon}
+              />
+              <Text style={styles.faceIDTitle}>Sign-in with Biometric</Text>
+            </TouchableOpacity>
+          </>
+        )}
       </View>
-      <PopupComponent
+      <Popup
         title="Dear Customer"
-        textToShow="Please make sure that you have already registered in SANAD before continuing as your account information will be fetched from your SANAD account"
+        subTitle="Please confirm your choice"
+        textToShow="Are you sure you want to delete this device?"
         visible={popupVisible}
-        cancelButtonText=""
-        confirmButtonText="ok"
-        onConfirm={() => {
-          setPopupVisible(!popupVisible);
-        }}
-        showCancelButton={false}
+        cancelButtonText="Cancel"
+        confirmButtonText="Confirm"
+        onCancel={handleCancel}
+        onConfirm={handleConfirm}
+        showCancelButton={true}
         dismissible={true}
         showCloseIcon={false}
       />
@@ -267,7 +254,6 @@ const createStyles = theme =>
       position: 'relative',
     },
     content: {
-      flex: 1,
       justifyContent: 'center',
       paddingHorizontal: 20,
     },
@@ -280,7 +266,7 @@ const createStyles = theme =>
     subtitle: {
       fontSize: 16,
       color: theme.colors.text,
-      marginBottom: 10,
+      marginBottom: 30,
     },
     inputWrapper: {
       marginVertical: 10,
@@ -290,13 +276,6 @@ const createStyles = theme =>
       color: theme.colors.text,
       marginBottom: 5,
       fontWeight: 'bold',
-    },
-    nationalIdView: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginBottom: 5,
     },
     input: {
       width: '100%',
@@ -309,25 +288,31 @@ const createStyles = theme =>
       shadowOffset: {width: 0, height: 2},
       shadowRadius: 4,
     },
-    errorText: {
-      color: theme.colors.danger,
-      marginTop: 5,
-      fontSize: 12,
-    },
-    eyeIconWrapper: {
-      position: 'absolute',
-      right: 15,
-    },
-    passwordContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
     hintText: {
       marginTop: 5,
       fontSize: 12,
       color: theme.colors.text,
     },
-    signUpButtonEnabled: {
+    eyeIconWrapper: {
+      position: 'absolute',
+      right: 15,
+    },
+    errorText: {
+      color: theme.colors.danger,
+      marginTop: 5,
+      fontSize: 12,
+    },
+    passwordContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    forgotPassword: {
+      marginVertical: 10,
+      color: theme.colors.primary,
+      fontWeight: 'bold',
+      textAlign: 'right',
+    },
+    loginButtonEnabled: {
       width: '100%',
       padding: 15,
       backgroundColor: theme.colors.primary,
@@ -335,7 +320,7 @@ const createStyles = theme =>
       alignItems: 'center',
       marginVertical: 20,
     },
-    signUpButtonDisabled: {
+    loginButtonDisabled: {
       width: '100%',
       padding: 15,
       backgroundColor: theme.colors.darkGrayishViolet,
@@ -343,7 +328,7 @@ const createStyles = theme =>
       alignItems: 'center',
       marginVertical: 20,
     },
-    signUpButtonText: {
+    loginButtonText: {
       color: '#fff',
       fontWeight: 'bold',
       fontSize: 16,
@@ -357,11 +342,48 @@ const createStyles = theme =>
       fontSize: 14,
       color: theme.colors.text,
     },
-    signInText: {
+    signUpText: {
       marginLeft: 5,
       color: theme.colors.primary,
       fontWeight: 'bold',
     },
+    orText: {
+      textAlign: 'center',
+      color: theme.colors.text,
+      marginVertical: 30,
+    },
+    faceIDWrapper: {
+      alignItems: 'center',
+    },
+    faceIDIcon: {
+      marginBottom: 20,
+      width: 50,
+      height: 50,
+    },
+    faceIDTitle: {
+      fontSize: 16,
+      color: theme.colors.primary,
+      fontWeight: 'bold',
+      marginBottom: 5,
+    },
+    faceIDSubtitle: {
+      fontSize: 14,
+      color: theme.colors.text,
+      textAlign: 'center',
+    },
+    topSection: {
+      backgroundColor: theme.colors.primary,
+      borderBottomLeftRadius: 30,
+      borderBottomRightRadius: 30,
+      display: 'flex',
+      alignItems: 'center',
+      marginBottom: 20,
+    },
+    logo: {
+      width: 200,
+      height: 150,
+      resizeMode: 'contain',
+    },
   });
 
-export default SignUpScreen;
+export default LoginScreen;

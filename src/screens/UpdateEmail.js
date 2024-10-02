@@ -83,7 +83,7 @@ const createStyles = theme =>
       opacity: 1,
     },
     saveButtonDisabled: {
-      backgroundColor: theme.colors.primary,
+      backgroundColor: theme.colors.darkGrayishViolet,
       padding: 15,
       borderRadius: 10,
       alignItems: 'center',

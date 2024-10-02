@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {resetSettings} from '@store/actions/settingsActions';
 import {useTheme} from '@theme/ThemeProvider';
+import {CommonActions} from '@react-navigation/native';
 
 const ResetSettingsScreen = ({navigation}) => {
   const {theme} = useTheme();
@@ -22,7 +23,13 @@ const ResetSettingsScreen = ({navigation}) => {
           text: 'Reset',
           onPress: () => {
             dispatch(resetSettings());
-            navigation.navigate('Login');
+            navigation.navigate('login');
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{name: 'login'}],
+              }),
+            );
           },
           style: 'destructive',
         },
@@ -49,7 +56,6 @@ const createStyles = theme =>
     container: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
       padding: 20,
       backgroundColor: theme.colors.background,
     },
@@ -58,6 +64,7 @@ const createStyles = theme =>
       fontWeight: 'bold',
       color: theme.colors.primary,
       marginBottom: 20,
+      textAlign: 'center',
     },
     description: {
       fontSize: 16,
@@ -70,6 +77,7 @@ const createStyles = theme =>
       paddingVertical: 15,
       paddingHorizontal: 30,
       borderRadius: 10,
+      alignItems: 'center',
     },
     resetButtonText: {
       color: theme.colors.white,

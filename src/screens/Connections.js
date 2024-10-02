@@ -19,6 +19,7 @@ import {useTheme} from '@theme/ThemeProvider';
 import Layout from '@components/Layout';
 import EmptyState from '@components/EmptyState';
 import {maskFirstDigitsNumber} from '@utils/helpers';
+import InfoCard from '@components/InfoCard';
 
 const initialCustomers = [
   {
@@ -66,16 +67,37 @@ const ConnectionsScreen = ({navigation}) => {
   const handleAddConnection = method => {
     setIsModalVisible(false);
     if (method === 'qr_code') {
-      navigation.navigate('QRCodeScannerScreen');
+      navigation.navigate('qrCodeScannerScreen');
     } else if (method === 'manual') {
-      navigation.navigate('AddConnectionScreen');
+      navigation.navigate('addConnectionScreen');
     }
   };
 
   const handleDeleteCustomer = () => {
-    setCustomers(prev => prev.filter(c => c.id !== selectedCustomer.id));
-    Alert.alert('Contact deleted successfully');
-    setIsModalVisible(false);
+    Alert.alert(
+      'Confirm Delete Customer',
+      `Are you sure you want to delete ${selectedCustomer.name} ?`,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {
+            return false;
+          },
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          onPress: () => {
+            setCustomers(prev =>
+              prev.filter(c => c.id !== selectedCustomer.id),
+            );
+            Alert.alert('Contact deleted successfully');
+            setIsModalVisible(false);
+          },
+        },
+      ],
+      {cancelable: false},
+    );
   };
 
   const handleSendArbon = () => {
@@ -242,6 +264,11 @@ const ConnectionsScreen = ({navigation}) => {
 
   return (
     <Layout>
+      <InfoCard
+        iconName="person-outline"
+        title="Connections"
+        description="Easily manage your connections. Add new contacts manually or by QR code, view saved contacts. Stay in control of your network with options to edit, delete, or quickly send requests to any connection."
+      />
       {customers.length > 0 ? (
         <FlatList
           data={isCustomerLazyLoading ? [...customers, {}, {}] : customers}
@@ -291,6 +318,19 @@ const ConnectionsScreen = ({navigation}) => {
               ? styles.iosModalContent
               : styles.androidModalContent
           }>
+          <View style={styles.selectedCustomerCard}>
+            <Image
+              source={
+                selectedCustomer.pic
+                  ? {uri: selectedCustomer.pic}
+                  : require('@assets/images/defaultProfile.png')
+              }
+              style={styles.customerAvatar}
+            />
+            <Text style={styles.customerSubtitle}>
+              Actions for {selectedCustomer.name}
+            </Text>
+          </View>
           <TouchableOpacity style={styles.modalItem} onPress={handleSendArbon}>
             <Text style={styles.modalItemText}>Send Arbon</Text>
           </TouchableOpacity>
@@ -328,7 +368,6 @@ const createStyles = theme =>
     },
     listContainer: {
       paddingBottom: 20,
-      paddingTop: 20,
     },
     customerCard: {
       flexDirection: 'row',
@@ -415,6 +454,32 @@ const createStyles = theme =>
     modalItemText: {
       fontSize: 18,
       color: theme.colors.primary,
+    },
+    selectedCustomerCard: {
+      alignItems: 'center',
+      padding: 20,
+      backgroundColor: theme.colors.background,
+      borderBottomColor: theme.colors.primary,
+      borderBottomWidth: 2,
+      width: '100%',
+    },
+    customerAvatar: {
+      width: 80,
+      height: 80,
+      borderRadius: 40,
+      marginBottom: 15,
+      backgroundColor: theme.colors.lightGray,
+    },
+    selectedCustomerName: {
+      fontSize: 20,
+      fontWeight: '600',
+      color: theme.colors.primary,
+      marginBottom: 10,
+    },
+    customerSubtitle: {
+      fontSize: 14,
+      color: theme.colors.text,
+      textAlign: 'center',
     },
   });
 

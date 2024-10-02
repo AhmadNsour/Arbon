@@ -37,7 +37,7 @@ const TransactionsScreen = ({navigation}) => {
               <TouchableOpacity
                 key={transaction.id}
                 onPress={() => {
-                  navigation.navigate('TransactionDetails', {
+                  navigation.navigate('transactionDetails', {
                     data: transaction,
                   });
                 }}>

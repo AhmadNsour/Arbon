@@ -12,7 +12,7 @@ const QRCodeScannerScreen = ({navigation}) => {
     try {
       const decryptedData = decryptData(data);
       const userInfo = JSON.parse(decryptedData);
-      navigation.navigate('AddConnectionConfirmScreen', userInfo);
+      navigation.navigate('addConnectionConfirmScreen', userInfo);
     } catch (error) {
       Alert.alert('Invalid QR Code', 'The scanned QR code is not valid.');
     }
