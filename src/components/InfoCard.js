@@ -55,8 +55,7 @@ const createStyles = theme =>
     description: {
       fontSize: 14,
       color: theme.colors.white,
-      //textAlign: 'center',
-      lineHeight: 20, // Controls the space between lines
+      lineHeight: 20,
       textAlign: 'justify',
     },
   });
