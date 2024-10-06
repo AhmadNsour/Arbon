@@ -9,3 +9,8 @@
 // send money screen
 // always scroll to top of screen on click on bottom menu
 // wallet screen to be revisited the next time as the design is not correct and screen does not have enough items to show
+// subscribions screen
+// limited features
+// feature control
+// delete account screen
+//
