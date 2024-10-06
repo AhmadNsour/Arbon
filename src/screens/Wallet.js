@@ -11,16 +11,17 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '@theme/ThemeProvider';
 import Layout from '@components/Layout';
-import InfoCard from '@components/InfoCard';
+import WhatsNew from '@components/WhatsNew';
 import {SCREEN_WIDTH} from '@utils/helpers';
 
-const FinanceScreen = ({navigation}) => {
+const WalletScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
 
+  const [selectedTab, setSelectedTab] = useState('account');
   const [accounts, setAccounts] = useState([
     {id: '1', bankName: 'Bank A', accountNumber: '4363910293745832'},
-    {id: '2', bankName: 'Bank A', accountNumber: '4363910293745832'},
+    {id: '2', bankName: 'Bank B', accountNumber: '1234567890123456'},
   ]);
   const [cards, setCards] = useState([
     {
@@ -33,33 +34,39 @@ const FinanceScreen = ({navigation}) => {
       id: '2',
       cardNumber: '1234567890123456',
       cardType: 'MASTER',
-      bankName: 'Bank A',
+      bankName: 'Bank B',
     },
   ]);
 
-  const handleDeleteAccount = id => {
+  const handleDeleteAccount = item => {
     Alert.alert(
-      'Delete Account',
+      `Delete Account ${item.bankName}`,
       'Are you sure you want to delete this account?',
       [
         {text: 'Cancel', style: 'cancel'},
         {
           text: 'Delete',
           onPress: () =>
-            setAccounts(accounts.filter(account => account.id !== id)),
+            setAccounts(accounts.filter(account => account.id !== item.id)),
+          style: 'destructive',
         },
       ],
     );
   };
 
-  const handleDeleteCard = id => {
-    Alert.alert('Delete Card', 'Are you sure you want to delete this card?', [
-      {text: 'Cancel', style: 'cancel'},
-      {
-        text: 'Delete',
-        onPress: () => setCards(cards.filter(card => card.id !== id)),
-      },
-    ]);
+  const handleDeleteCard = item => {
+    Alert.alert(
+      `Delete Card ${item.bankName}`,
+      'Are you sure you want to delete this card?',
+      [
+        {text: 'Cancel', style: 'cancel'},
+        {
+          text: 'Delete',
+          onPress: () => setCards(cards.filter(card => card.id !== item.id)),
+          style: 'destructive',
+        },
+      ],
+    );
   };
 
   const addNewCard = () => {
@@ -93,7 +100,7 @@ const FinanceScreen = ({navigation}) => {
             ' XXXX XXXX ' +
             item.cardNumber.slice(-4)}
         </Text>
-        <TouchableOpacity onPress={() => handleDeleteAccount(item.id)}>
+        <TouchableOpacity onPress={() => handleDeleteCard(item)}>
           <Icon name="trash-outline" size={24} color={theme.colors.white} />
         </TouchableOpacity>
       </View>
@@ -111,7 +118,7 @@ const FinanceScreen = ({navigation}) => {
             ' XXXX XXXX ' +
             item.accountNumber.slice(-4)}
         </Text>
-        <TouchableOpacity onPress={() => handleDeleteAccount(item.id)}>
+        <TouchableOpacity onPress={() => handleDeleteAccount(item)}>
           <Icon name="trash-outline" size={24} color={theme.colors.white} />
         </TouchableOpacity>
       </View>
@@ -138,37 +145,70 @@ const FinanceScreen = ({navigation}) => {
 
   return (
     <Layout>
+      <WhatsNew screenName="wallet" />
+
+      {/* Custom Tab Switcher */}
+      <View style={styles.tabSwitcherContainer}>
+        <TouchableOpacity
+          onPress={() => setSelectedTab('account')}
+          style={[
+            styles.tabButton,
+            selectedTab === 'account' && styles.activeTabButton,
+          ]}>
+          <Text
+            style={[
+              styles.tabText,
+              selectedTab === 'account' && styles.activeTabText,
+            ]}>
+            {`Accounts (${accounts.length})`}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setSelectedTab('card')}
+          style={[
+            styles.tabButton,
+            selectedTab === 'card' && styles.activeTabButton,
+          ]}>
+          <Text
+            style={[
+              styles.tabText,
+              selectedTab === 'card' && styles.activeTabText,
+            ]}>
+            {`Cards (${cards.length})`}
+          </Text>
+        </TouchableOpacity>
+      </View>
+
       <ScrollView style={styles.container}>
-        <InfoCard
-          iconName="card-outline"
-          title="Finance"
-          description="Manage your linked bank accounts and cards for seamless transactions. Add new accounts or cards, view details, and remove old payment methods."
-          collapsedText="Finance Overview"
-        />
-        <Text style={styles.header}>Linked Accounts</Text>
-        {accounts.length === 0 ? (
-          renderEmpty('Add New Account', addNewAccount)
-        ) : (
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.carouselContainer}>
-            {accounts.map(renderAccount)}
-            {renderAddMore('Add New Account', addNewAccount)}
-          </ScrollView>
-        )}
-        <Text style={styles.header}>Linked Cards</Text>
-        {cards.length === 0 ? (
-          renderEmpty('Add New Card', addNewCard)
-        ) : (
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.carouselContainer}>
-            {cards.map(renderCard)}
-            {renderAddMore('Add New Card', addNewCard)}
-          </ScrollView>
-        )}
+        {selectedTab === 'account' &&
+          (accounts.length === 0 ? (
+            renderEmpty('Add New Account', addNewAccount)
+          ) : (
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={styles.carouselContainer}
+              snapToInterval={SCREEN_WIDTH * 0.8 + 15}
+              decelerationRate="fast">
+              {accounts.map(renderAccount)}
+              {renderAddMore('Add New Account', addNewAccount)}
+            </ScrollView>
+          ))}
+
+        {selectedTab === 'card' &&
+          (cards.length === 0 ? (
+            renderEmpty('Add New Card', addNewCard)
+          ) : (
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={styles.carouselContainer}
+              snapToInterval={SCREEN_WIDTH * 0.8 + 15}
+              decelerationRate="fast">
+              {cards.map(renderCard)}
+              {renderAddMore('Add New Card', addNewCard)}
+            </ScrollView>
+          ))}
       </ScrollView>
     </Layout>
   );
@@ -180,12 +220,6 @@ const createStyles = theme =>
       flex: 1,
       padding: 0,
       backgroundColor: theme.colors.background,
-    },
-    header: {
-      fontSize: 22,
-      fontWeight: 'bold',
-      marginBottom: 20,
-      color: theme.colors.text,
     },
     carouselContainer: {
       marginBottom: 30,
@@ -212,12 +246,6 @@ const createStyles = theme =>
       fontSize: 22,
       color: theme.colors.white,
       fontWeight: 'bold',
-    },
-    emptyTitle: {
-      fontSize: 18,
-      color: theme.colors.white,
-      fontWeight: 'bold',
-      textAlign: 'center',
     },
     number: {
       fontSize: 18,
@@ -271,11 +299,31 @@ const createStyles = theme =>
       marginBottom: 10,
       textAlign: 'center',
     },
-    addButton: {
-      backgroundColor: theme.colors.primary,
-      padding: 10,
-      borderRadius: 50,
+    tabSwitcherContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      backgroundColor: theme.colors.darkGrayishViolet,
+      borderRadius: 30,
+      padding: 5,
+      marginBottom: 20,
+    },
+    tabButton: {
+      flex: 1,
+      paddingVertical: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 30,
+    },
+    activeTabButton: {
+      backgroundColor: theme.colors.lightGrey,
+    },
+    tabText: {
+      fontSize: 16,
+      color: theme.colors.text,
+    },
+    activeTabText: {
+      fontWeight: 'bold',
     },
   });
 
-export default FinanceScreen;
+export default WalletScreen;

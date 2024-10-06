@@ -7,20 +7,24 @@ import {
   ScrollView,
   StatusBar,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from '@theme/ThemeProvider';
 import EmptyState from '@components/EmptyState';
 import {SCREEN_WIDTH} from '@utils/helpers';
 import Modal from 'react-native-modal';
+import {toggleBalance} from '@store/actions/settingsActions';
 
 const HomeScreen = ({navigation}) => {
   const user = useSelector(state => state.user);
-  const [isBalanceVisible, setIsBalanceVisible] = useState(false);
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const insets = useSafeAreaInsets();
+  const dispatch = useDispatch();
+  const isBalanceVisible = useSelector(
+    state => state.settings.isBalanceVisible,
+  );
 
   const [transactions] = useState([
     {id: 1, title: 'Incoming Transfer', amount: 60.0, date: 'Today, 12:49'},
@@ -39,7 +43,7 @@ const HomeScreen = ({navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const toggleBalanceVisibility = () => {
-    setIsBalanceVisible(!isBalanceVisible);
+    dispatch(toggleBalance(previousState => !previousState));
   };
 
   const showMoreOptions = () => {
@@ -87,12 +91,12 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.balanceSection}>
+          <Text style={styles.accountText}>Available Balance</Text>
           {isBalanceVisible ? (
             <Text style={styles.balanceAmount}>50,000.00</Text>
           ) : (
             <Text style={styles.balanceAmount}>******</Text>
           )}
-          <Text style={styles.accountText}>Available Balance</Text>
           <View style={styles.balanceIcons}>
             {isBalanceVisible ? (
               <TouchableOpacity onPress={toggleBalanceVisibility}>
@@ -258,24 +262,24 @@ const createStyles = theme =>
       color: theme.colors.white,
     },
     balanceAmount: {
-      fontSize: 40,
+      fontSize: 35,
       fontWeight: 'bold',
       color: theme.colors.white,
     },
     accountText: {
-      fontSize: 16,
+      fontSize: 20,
       color: theme.colors.white,
+      marginBottom: 5,
     },
     balanceIcons: {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 10,
     },
     actions: {
       flexDirection: 'row',
       justifyContent: 'space-around',
-      marginVertical: 20,
+      marginVertical: 10,
     },
     actionItem: {
       marginTop: 10,

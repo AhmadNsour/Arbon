@@ -5,7 +5,7 @@ export const TOGGLE_FACE_ID = 'TOGGLE_FACE_ID';
 export const TOGGLE_PUSH_NOTIFICATION = 'TOGGLE_PUSH_NOTIFICATION';
 export const TOGGLE_IS_FIRST_TIME_USER = 'TOGGLE_IS_FIRST_TIME_USER';
 export const RESET_SETTINGS = 'RESET_SETTINGS';
-export const TOGGLE_SCREEN_OVERVIEW = 'TOGGLE_SCREEN_OVERVIEW';
+export const TOGGLE_BALANCE = 'TOGGLE_BALANCE';
 
 export const toggleTheme = () => {
   return {
@@ -43,8 +43,9 @@ export const resetSettings = () => {
     type: RESET_SETTINGS,
   };
 };
-export const toggleScreenOverview = () => {
+
+export const toggleBalance = () => {
   return {
-    type: TOGGLE_SCREEN_OVERVIEW,
+    type: TOGGLE_BALANCE,
   };
 };

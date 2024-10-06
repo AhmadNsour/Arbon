@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Linking,
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -12,7 +13,7 @@ import Modal from 'react-native-modal';
 import {FloatingAction} from 'react-native-floating-action';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@theme/ThemeProvider';
-import InfoCard from '@components/InfoCard';
+import WhatsNew from '@components/WhatsNew';
 
 const MoreScreen = ({navigation}) => {
   const {theme} = useTheme();
@@ -33,13 +34,13 @@ const MoreScreen = ({navigation}) => {
   const handleHelpOptionPress = option => {
     setIsModalVisible(false);
     switch (option) {
-      case 'Call us':
-        alert('Calling support...');
+      case 'call_us':
+        Linking.openURL('tel:+1234567890');
         break;
-      case 'Message us':
-        alert('Messaging support...');
+      case 'email_us':
+        Linking.openURL('mailto:support@arbon.com');
         break;
-      case 'Report an issue':
+      case 'report_an_issue':
         alert('Reporting an issue...');
         break;
       default:
@@ -53,11 +54,7 @@ const MoreScreen = ({navigation}) => {
         styles.container,
         {paddingTop: insets.top, paddingBottom: insets.bottom},
       ]}>
-      <InfoCard
-        iconName="menu-outline"
-        title="More"
-        description="Explore additional options and settings. View policies, and more."
-      />
+      <WhatsNew screenName="more" />
       <ScrollView style={styles.scrollView}>
         <View>
           <TouchableOpacity
@@ -119,7 +116,7 @@ const MoreScreen = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.item}
-            onPress={() => handleNavigation('termsAndConditions')}>
+            onPress={() => handleNavigation('terms&Conditions')}>
             <View style={styles.itemContent}>
               <Icon
                 name="document-text-outline"
@@ -194,17 +191,17 @@ const MoreScreen = ({navigation}) => {
         <View style={styles.ModalContent}>
           <TouchableOpacity
             style={styles.modalItem}
-            onPress={() => handleHelpOptionPress('Call us')}>
+            onPress={() => handleHelpOptionPress('call_us')}>
             <Text style={styles.modalItemText}>Call us</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.modalItem}
-            onPress={() => handleHelpOptionPress('Message us')}>
-            <Text style={styles.modalItemText}>Message us</Text>
+            onPress={() => handleHelpOptionPress('email_us')}>
+            <Text style={styles.modalItemText}>Email us</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.modalItem}
-            onPress={() => handleHelpOptionPress('Report an issue')}>
+            onPress={() => handleHelpOptionPress('report_an_issue')}>
             <Text style={styles.modalItemText}>Report an issue</Text>
           </TouchableOpacity>
         </View>

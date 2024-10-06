@@ -109,7 +109,7 @@ const LoginScreen = ({navigation}) => {
           routes: [{name: 'home'}],
         }),
       );
-      Alert.alert('Login success!');
+      Alert.alert('Login Successfully!');
     }
   };
   useEffect(() => {
@@ -181,7 +181,7 @@ const LoginScreen = ({navigation}) => {
 
         <TouchableOpacity
           onPress={() => {
-            clearValuesAndNavigate('ForgetPassword');
+            clearValuesAndNavigate('forgetPassword');
           }}>
           <Text style={styles.forgotPassword}>Forgot password?</Text>
         </TouchableOpacity>
@@ -204,7 +204,6 @@ const LoginScreen = ({navigation}) => {
           onPress={() => handleLogin()}>
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
-
         <TouchableOpacity
           style={styles.footer}
           onPress={() => {
@@ -213,7 +212,6 @@ const LoginScreen = ({navigation}) => {
           <Text style={styles.footerText}>Don't have an account?</Text>
           <Text style={styles.signUpText}>Sign Up</Text>
         </TouchableOpacity>
-
         {faceIdEnabled && (
           <>
             <Text style={styles.orText}>OR</Text>

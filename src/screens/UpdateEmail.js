@@ -52,7 +52,7 @@ const UpdateEmailScreen = ({navigation}) => {
         }
         onPress={saveEmail}
         disabled={!isButtonEnabled}>
-        <Text style={styles.saveButtonText}>Save</Text>
+        <Text style={styles.saveButtonText}>Update</Text>
       </TouchableOpacity>
     </View>
   );

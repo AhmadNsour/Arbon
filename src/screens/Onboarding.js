@@ -170,33 +170,29 @@ const OnboardingScreen = ({navigation}) => {
           <TouchableOpacity
             style={styles.modalItem}
             onPress={() => {
-              setIsFirstTimeUser('login');
+              setIsModalVisible(false);
+              setIsFirstTimeUser('signUp');
             }}>
-            <View style={styles.card}>
-              <Text style={styles.modalItemText}>Login</Text>
-              <Icon
-                name="log-in-outline"
-                size={24}
-                color={theme.colors.primary}
-                style={styles.icon}
-              />
-            </View>
+            <Text style={styles.modalItemText}>Register</Text>
+            <Icon
+              name="person-add-outline"
+              size={24}
+              color={theme.colors.primary}
+              style={styles.icon}
+            />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.modalItem}
             onPress={() => {
-              setIsModalVisible(false);
-              setIsFirstTimeUser('signUp');
+              setIsFirstTimeUser('login');
             }}>
-            <View style={styles.card}>
-              <Text style={styles.modalItemText}>Register</Text>
-              <Icon
-                name="person-add-outline"
-                size={24}
-                color={theme.colors.primary}
-                style={styles.icon}
-              />
-            </View>
+            <Text style={styles.modalItemText}>Login</Text>
+            <Icon
+              name="log-in-outline"
+              size={24}
+              color={theme.colors.primary}
+              style={styles.icon}
+            />
           </TouchableOpacity>
         </View>
       </Modal>
@@ -310,7 +306,19 @@ const createStyles = theme =>
       alignSelf: 'center',
     },
     modalItem: {
-      padding: 15,
+      flexDirection: 'row',
+      padding: 20,
+      backgroundColor: theme.colors.background,
+      marginBottom: 15,
+      borderWidth: 1,
+      borderRadius: 10,
+      borderColor: theme.colors.border,
+      height: 65,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
       width: '100%',
       alignItems: 'center',
     },

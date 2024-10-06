@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from '@theme/ThemeProvider';
 
-const Layout = ({children, isLoading = false}) => {
+const Layout = ({children}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const insets = useSafeAreaInsets();
@@ -15,11 +15,6 @@ const Layout = ({children, isLoading = false}) => {
         {paddingTop: insets.top, paddingBottom: insets.bottom},
       ]}>
       {children}
-      {isLoading && (
-        <View style={styles.loadingOverlay}>
-          <ActivityIndicator size="large" color={theme.colors.primary} />
-        </View>
-      )}
     </View>
   );
 };

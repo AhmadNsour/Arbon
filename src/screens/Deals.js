@@ -12,7 +12,7 @@ import {useTheme} from '@theme/ThemeProvider';
 import EmptyState from '@components/EmptyState';
 import ChartView from '@components/ChartView';
 import Layout from '@components/Layout';
-import InfoCard from '@components/InfoCard';
+import WhatsNew from '@components/WhatsNew';
 
 const DealsScreen = ({navigation}) => {
   const {theme} = useTheme();
@@ -37,12 +37,7 @@ const DealsScreen = ({navigation}) => {
 
   return (
     <Layout>
-      <InfoCard
-        iconName="pricetags-outline"
-        title="Deals"
-        description="Manage and review your financial deals, both sent and received. Easily track transaction history, view details of each deal, and create new deals for a seamless financial experience."
-        collapsedText="Deals overview"
-      />
+      <WhatsNew screenName="deals" />
       <ScrollView>
         <ChartView income={90000.1023} expenses={40000} />
         <View style={styles.deals}>
@@ -151,6 +146,7 @@ const createStyles = theme =>
     },
     deals: {
       marginBottom: 20,
+      marginTop: 10,
     },
     dealItem: {
       flexDirection: 'row',
@@ -193,6 +189,3 @@ const createStyles = theme =>
   });
 
 export default DealsScreen;
-
-// add to contacts list if needed
-// partial payment for each contact

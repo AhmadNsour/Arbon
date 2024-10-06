@@ -16,19 +16,19 @@ import UpdateProfile from '@screens/UpdateEmail';
 import Notification from '@screens/Notification';
 import PrivacyPolicy from '@screens/PrivacyPolicy';
 import ContactUs from '@screens/ContactUs';
-import TermsAndConditions from '@screens/TermsAndConditions';
+import TermsAndConditions from '@screens/Terms&Conditions';
 import AboutUs from '@screens/AboutUs';
 import Connections from '@screens/Connections';
 import TransactionDetails from '@screens/TransactionDetails';
 import ForgetPassword from '@screens/ForgetPassword';
 import OTP from '@screens/OTP';
 import AddConnection from '@screens/AddConnection';
-import AddConnectionConfirm from '@screens/AddConnectionConfirm';
+import ReviewConnection from '@screens/ReviewConnection';
 import QRCodeScanner from '@screens/QRCodeScanner';
 import QrCode from '@screens/QrCode';
 import AppInfo from '@screens/AppInfo';
 import ResetSettings from '@screens/ResetSettings';
-import Finance from '@screens/Finance';
+import Wallet from '@screens/Wallet';
 
 //components
 import CloseButton from '@components/CloseButton';
@@ -95,10 +95,10 @@ const HomeTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Finance"
-        component={Finance}
+        name="Wallet"
+        component={Wallet}
         options={{
-          tabBarIcon: getTabBarIcon('card-outline'),
+          tabBarIcon: getTabBarIcon('wallet-outline'),
         }}
       />
       <Tab.Screen
@@ -214,7 +214,10 @@ const AppNavigator = () => {
         <Stack.Screen
           name="notifications"
           component={Notification}
-          options={({navigation}) => commonScreenOptions(navigation)}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Notifications',
+          })}
         />
         {/* notification end*/}
 
@@ -244,11 +247,11 @@ const AppNavigator = () => {
           })}
         />
         <Stack.Screen
-          name="termsAndConditions"
+          name="terms&Conditions"
           component={TermsAndConditions}
           options={({navigation}) => ({
             ...commonScreenOptions(navigation),
-            title: 'Terms and Conditions',
+            title: 'Terms & Conditions',
           })}
         />
         <Stack.Screen
@@ -263,7 +266,7 @@ const AppNavigator = () => {
 
         {/* connection start*/}
         <Stack.Screen
-          name="addConnectionScreen"
+          name="addConnection"
           component={AddConnection}
           options={({navigation}) => ({
             ...commonScreenOptions(navigation),
@@ -271,15 +274,15 @@ const AppNavigator = () => {
           })}
         />
         <Stack.Screen
-          name="addConnectionConfirmScreen"
-          component={AddConnectionConfirm}
+          name="reviewConnection"
+          component={ReviewConnection}
           options={({navigation}) => ({
             ...commonScreenOptions(navigation),
-            title: 'Confirm Connection',
+            title: 'Connection Review',
           })}
         />
         <Stack.Screen
-          name="qrCodeScannerScreen"
+          name="qrCodeScanner"
           component={QRCodeScanner}
           options={({navigation}) => ({
             ...commonScreenOptions(navigation),
@@ -300,7 +303,10 @@ const AppNavigator = () => {
         <Stack.Screen
           name="transactions"
           component={Transactions}
-          options={({navigation}) => commonScreenOptions(navigation)}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Transactions',
+          })}
         />
         {/* transaction end*/}
 

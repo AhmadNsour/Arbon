@@ -28,7 +28,6 @@ import {
   setLanguage,
   toggleFaceId,
   togglePushNotification,
-  toggleScreenOverview,
 } from '@store/actions/settingsActions';
 import AvatarPicker from '@components/AvatarPicker';
 import {useTheme} from '@theme/ThemeProvider';
@@ -50,15 +49,23 @@ const ProfileScreen = ({navigation}) => {
   const languageActionSheet = useRef();
   const styles = createStyles(theme);
   const dispatch = useDispatch();
+
   const toggleFaceID = () => {
     dispatch(toggleFaceId(previousState => !previousState));
-  };
-  const togglePushNotifications = () => {
-    dispatch(togglePushNotification(previousState => !previousState));
+    Alert.alert(
+      !settings.faceIdEnabled
+        ? 'Enabled Successfully!'
+        : 'Disabled Successfully!',
+    );
   };
 
-  const toggleScreenOverviewOption = () => {
-    dispatch(toggleScreenOverview(previousState => !previousState));
+  const togglePushNotifications = () => {
+    dispatch(togglePushNotification(previousState => !previousState));
+    Alert.alert(
+      !settings.pushNotificationEnabled
+        ? 'Enabled Successfully!'
+        : 'Disabled Successfully!',
+    );
   };
 
   const requestPermission = async type => {
@@ -310,10 +317,6 @@ const ProfileScreen = ({navigation}) => {
             <Text style={styles.detailText}>Date of Birth</Text>
             <Text style={styles.detailValue}>{user?.dob || '12/08/1993'}</Text>
           </View>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailText}>Gender</Text>
-            <Text style={styles.detailValue}>{user?.gender || 'Male'}</Text>
-          </View>
           {/* QR Code Section */}
         </ScrollView>
       ) : (
@@ -360,17 +363,6 @@ const ProfileScreen = ({navigation}) => {
             <Switch
               value={settings.pushNotificationEnabled}
               onValueChange={togglePushNotifications}
-              trackColor={{
-                false: theme.colors.darkGrayishViolet,
-                true: theme.colors.primary,
-              }}
-            />
-          </View>
-          <View style={styles.settingItem}>
-            <Text style={styles.settingText}>Show Screen Overview</Text>
-            <Switch
-              value={settings.showScreenOverview}
-              onValueChange={toggleScreenOverviewOption}
               trackColor={{
                 false: theme.colors.darkGrayishViolet,
                 true: theme.colors.primary,

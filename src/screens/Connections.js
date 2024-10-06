@@ -19,7 +19,7 @@ import {useTheme} from '@theme/ThemeProvider';
 import Layout from '@components/Layout';
 import EmptyState from '@components/EmptyState';
 import {maskFirstDigitsNumber} from '@utils/helpers';
-import InfoCard from '@components/InfoCard';
+import WhatsNew from '@components/WhatsNew';
 
 const initialCustomers = [
   {
@@ -67,9 +67,9 @@ const ConnectionsScreen = ({navigation}) => {
   const handleAddConnection = method => {
     setIsModalVisible(false);
     if (method === 'qr_code') {
-      navigation.navigate('qrCodeScannerScreen');
+      navigation.navigate('qrCodeScanner');
     } else if (method === 'manual') {
-      navigation.navigate('addConnectionScreen');
+      navigation.navigate('addConnection');
     }
   };
 
@@ -87,11 +87,12 @@ const ConnectionsScreen = ({navigation}) => {
         },
         {
           text: 'Delete',
+          style: 'destructive',
           onPress: () => {
             setCustomers(prev =>
               prev.filter(c => c.id !== selectedCustomer.id),
             );
-            Alert.alert('Contact deleted successfully');
+            Alert.alert('Contact deleted Successfully!');
             setIsModalVisible(false);
           },
         },
@@ -176,7 +177,7 @@ const ConnectionsScreen = ({navigation}) => {
         if (err) {
           Alert.alert('Error adding contact:', err);
         } else {
-          Alert.alert('Contact added successfully');
+          Alert.alert('Contact added Successfully!');
         }
       });
     } catch (error) {
@@ -208,7 +209,7 @@ const ConnectionsScreen = ({navigation}) => {
         name="ellipsis-vertical"
         size={24}
         color={theme.colors.primary}
-        onPress={() => handleItemsSelection(item.id)}
+        onPress={() => handleItemsSelection(item)}
         style={styles.leftIcon}
       />
     </TouchableOpacity>
@@ -228,6 +229,7 @@ const ConnectionsScreen = ({navigation}) => {
     if (!isCustomerLazyLoading) {
       return;
     }
+    console.log('Loading customers', customers.length);
     setIsCustomerLazyLoading(true);
     setTimeout(() => {
       const moreCustomers = Array.from({length: 1}, (_, index) => ({
@@ -264,11 +266,7 @@ const ConnectionsScreen = ({navigation}) => {
 
   return (
     <Layout>
-      <InfoCard
-        iconName="person-outline"
-        title="Connections"
-        description="Easily manage your connections. Add new contacts manually or by QR code, view saved contacts. Stay in control of your network with options to edit, delete, or quickly send requests to any connection."
-      />
+      <WhatsNew screenName="connections" />
       {customers.length > 0 ? (
         <FlatList
           data={isCustomerLazyLoading ? [...customers, {}, {}] : customers}
@@ -278,7 +276,7 @@ const ConnectionsScreen = ({navigation}) => {
           keyExtractor={(item, index) => item.id || `placeholder-${index}`}
           contentContainerStyle={styles.listContainer}
           onEndReached={loadMoreCustomers}
-          onEndReachedThreshold={0.5}
+          onEndReachedThreshold={0.3}
         />
       ) : (
         <EmptyState
@@ -459,8 +457,6 @@ const createStyles = theme =>
       alignItems: 'center',
       padding: 20,
       backgroundColor: theme.colors.background,
-      borderBottomColor: theme.colors.primary,
-      borderBottomWidth: 2,
       width: '100%',
     },
     customerAvatar: {
@@ -468,7 +464,7 @@ const createStyles = theme =>
       height: 80,
       borderRadius: 40,
       marginBottom: 15,
-      backgroundColor: theme.colors.lightGray,
+      backgroundColor: theme.colors.lightGrey,
     },
     selectedCustomerName: {
       fontSize: 20,

@@ -12,6 +12,7 @@ import {
 import {useTheme} from '@theme/ThemeProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {CommonActions} from '@react-navigation/native';
 import Popup from '@components/Popup';
 import {regexPatterns} from '@utils/regex';
 import {getDeviceDetails} from '@utils/deviceInfo';
@@ -258,7 +259,15 @@ const SignUpScreen = ({navigation}) => {
 
           <TouchableOpacity
             style={styles.footer}
-            onPress={() => navigation.navigate('login')}>
+            onPress={() => {
+              navigation.navigate('login');
+              navigation.dispatch(
+                CommonActions.reset({
+                  index: 0,
+                  routes: [{name: 'login'}],
+                }),
+              );
+            }}>
             <Text style={styles.footerText}>Already have an account?</Text>
             <Text style={styles.signInText}>Sign in</Text>
           </TouchableOpacity>

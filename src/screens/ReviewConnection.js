@@ -5,24 +5,32 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
 import {useTheme} from '@theme/ThemeProvider';
 import {useLoading} from '@context/LoadingContext';
 
-const AddConnectionConfirmScreen = ({route, navigation}) => {
+const ReviewConnectionScreen = ({route, navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const {setIsLoading} = useLoading();
 
-  const {firstName, lastName, mobileNumber, gender, email, dateOfBirth} =
-    route.params;
+  const {
+    firstName,
+    lastName,
+    mobileNumber,
+    email,
+    dateOfBirth,
+    nationalId,
+    nickName,
+  } = route.params;
 
   const confirmAddConnection = () => {
     setIsLoading(true);
-    // Call API
-    // Alert.alert('Success', `Connection with ${firstName} added.`);
-    // setIsLoading(false);
-    // navigation.navigate('connections');
+    //Call API
+    Alert.alert('Success', `Connection with ${firstName} added.`);
+    setIsLoading(false);
+    navigation.navigate('Connections');
   };
 
   return (
@@ -37,12 +45,16 @@ const AddConnectionConfirmScreen = ({route, navigation}) => {
           <Text style={styles.detailValue}>{lastName}</Text>
         </View>
         <View style={styles.detailItem}>
+          <Text style={styles.detailText}>National Id</Text>
+          <Text style={styles.detailValue}>{nationalId}</Text>
+        </View>
+        <View style={styles.detailItem}>
           <Text style={styles.detailText}>Mobile Number</Text>
           <Text style={styles.detailValue}>{mobileNumber}</Text>
         </View>
         <View style={styles.detailItem}>
-          <Text style={styles.detailText}>Gender</Text>
-          <Text style={styles.detailValue}>{gender}</Text>
+          <Text style={styles.detailText}>Nickname</Text>
+          <Text style={styles.detailValue}>{nickName}</Text>
         </View>
         <View style={styles.detailItem}>
           <Text style={styles.detailText}>Email</Text>
@@ -65,7 +77,7 @@ const AddConnectionConfirmScreen = ({route, navigation}) => {
           onPress={() => {
             confirmAddConnection();
           }}>
-          <Text style={styles.confirmButtonText}>Confirm</Text>
+          <Text style={styles.confirmButtonText}>Add</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -100,7 +112,7 @@ const createStyles = theme =>
     },
     infoContainer: {
       padding: 15,
-      backgroundColor: theme.colors.lightGray,
+      backgroundColor: theme.colors.lightGrey,
       borderRadius: 10,
       marginBottom: 20,
     },
@@ -129,4 +141,4 @@ const createStyles = theme =>
     },
   });
 
-export default AddConnectionConfirmScreen;
+export default ReviewConnectionScreen;

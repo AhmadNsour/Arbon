@@ -229,7 +229,7 @@ const createStyles = theme =>
       borderColor: theme.colors.border,
     },
     readNotification: {
-      backgroundColor: theme.colors.lightGray,
+      backgroundColor: theme.colors.lightGrey,
     },
     unreadNotification: {
       backgroundColor: theme.colors.background,

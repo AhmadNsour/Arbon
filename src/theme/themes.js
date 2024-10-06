@@ -9,7 +9,7 @@ export const lightTheme = {
     success: '#4CAF50',
     white: '#fff',
     lighterBackground: '#F7F7F7',
-    lightGray: '#f0f0f0',
+    lightGrey: '#f0f0f0',
   },
 };
 
@@ -24,6 +24,6 @@ export const darkTheme = {
     success: '#4CAF50',
     white: '#fff',
     lighterBackground: '#F7F7F7',
-    lightGray: '#303030',
+    lightGrey: '#303030',
   },
 };

@@ -69,11 +69,7 @@ const ForgetPasswordScreen = ({navigation}) => {
   }, [debounceTimeout]);
 
   return (
-    <View
-      style={[
-        styles.container,
-        {paddingTop: insets.top, paddingBottom: insets.bottom},
-      ]}>
+    <View style={[styles.container, {paddingBottom: insets.bottom}]}>
       {step === 0 ? (
         <View>
           <Text style={styles.title}>

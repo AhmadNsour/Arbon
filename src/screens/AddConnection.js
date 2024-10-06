@@ -26,13 +26,15 @@ const AddConnectionScreen = ({navigation}) => {
 
   const handleAddConnection = () => {
     //call api
-    navigation.navigate('addConnectionConfirmScreen', {
+    navigation.navigate('reviewConnection', {
       firstName: 'John',
       lastName: 'Doe',
       mobileNumber: '1234567890',
       gender: 'Male',
       email: 'john.doe@example.com',
-      dateOfBirth: '01/01/1990',
+      dateOfBirth: '11/04/1994',
+      nationalId: nationalId,
+      nickName: nickname,
     });
   };
 
@@ -130,7 +132,7 @@ const AddConnectionScreen = ({navigation}) => {
             nickname.length < 4
           }
           onPress={handleAddConnection}>
-          <Text style={styles.addButtonText}>Add</Text>
+          <Text style={styles.addButtonText}>Fetch & Review</Text>
         </TouchableOpacity>
       </View>
     </View>

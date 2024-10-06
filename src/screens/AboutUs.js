@@ -102,7 +102,7 @@ const createStyles = theme =>
     heading: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: theme.colors.text,
+      color: theme.colors.primary,
       marginBottom: 10,
     },
     paragraph: {
