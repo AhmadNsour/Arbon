@@ -44,7 +44,9 @@ const ProfileScreen = ({navigation}) => {
     user?.profileImage ? {uri: user?.profileImage} : defaultImage,
   );
   const [isAvatarPickerVisible, setIsAvatarPickerVisible] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isRateModalVisible, setIsRateModalVisible] = useState(false);
+  const [deleteAccountModalVisible, setDeleteAccountModalVisible] =
+    useState(false);
   const themeActionSheet = useRef();
   const languageActionSheet = useRef();
   const styles = createStyles(theme);
@@ -216,6 +218,8 @@ const ProfileScreen = ({navigation}) => {
     navigation.navigate('QrCode');
   };
 
+  const deleteAccount = () => {};
+
   const handleLogout = () => {
     Alert.alert(
       'Confirm Logout',
@@ -254,7 +258,7 @@ const ProfileScreen = ({navigation}) => {
           <Text style={styles.name}>{user?.name || 'Ahmad Al Nsour'}</Text>
           <TouchableOpacity
             style={styles.rateContainer}
-            onPress={() => setIsModalVisible(true)}>
+            onPress={() => setIsRateModalVisible(true)}>
             <Text style={styles.rateText}>Rate: </Text>
             {renderStars(user?.rate || 4.5)}
           </TouchableOpacity>
@@ -369,6 +373,11 @@ const ProfileScreen = ({navigation}) => {
               }}
             />
           </View>
+          <TouchableOpacity
+            style={styles.settingItem}
+            onPress={() => setDeleteAccountModalVisible(true)}>
+            <Text style={styles.settingText}>Delete Account</Text>
+          </TouchableOpacity>
         </ScrollView>
       )}
 
@@ -406,10 +415,10 @@ const ProfileScreen = ({navigation}) => {
       />
 
       <Modal
-        visible={isModalVisible}
+        visible={isRateModalVisible}
         transparent={true}
         animationType="slide"
-        onRequestClose={() => setIsModalVisible(false)}>
+        onRequestClose={() => setIsRateModalVisible(false)}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Rate Information</Text>
@@ -419,7 +428,28 @@ const ProfileScreen = ({navigation}) => {
             </Text>
             <TouchableOpacity
               style={styles.modalCloseButton}
-              onPress={() => setIsModalVisible(false)}>
+              onPress={() => setIsRateModalVisible(false)}>
+              <Text style={styles.modalCloseButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        visible={deleteAccountModalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setDeleteAccountModalVisible(false)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Delete my Account</Text>
+            <Text style={styles.modalText}>
+              If you want to delete your account, please contact us at
+              support@arbon.com
+            </Text>
+            <TouchableOpacity
+              style={styles.modalCloseButton}
+              onPress={() => setDeleteAccountModalVisible(false)}>
               <Text style={styles.modalCloseButtonText}>Close</Text>
             </TouchableOpacity>
           </View>
@@ -587,7 +617,7 @@ const createStyles = theme =>
       backgroundColor: 'rgba(0,0,0,0.5)',
     },
     modalContent: {
-      width: '80%',
+      width: '70%',
       padding: 20,
       backgroundColor: theme.colors.background,
       borderRadius: 10,

@@ -12,5 +12,6 @@
 // subscribions screen
 // limited features
 // feature control
-// delete account screen
-//
+// delete account screen -- done
+// offline screen
+// offline data?
