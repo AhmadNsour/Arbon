@@ -6,13 +6,12 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {FloatingAction} from 'react-native-floating-action';
 import {useTheme} from '@theme/ThemeProvider';
 import EmptyState from '@components/EmptyState';
 import ChartView from '@components/ChartView';
 import Layout from '@components/Layout';
 import WhatsNew from '@components/WhatsNew';
+import HeaderSection from '@components/HeaderSection';
 
 const DealsScreen = ({navigation}) => {
   const {theme} = useTheme();
@@ -37,56 +36,56 @@ const DealsScreen = ({navigation}) => {
 
   return (
     <Layout>
-      <WhatsNew screenName="deals" />
-      <ScrollView>
-        <ChartView income={90000.1023} expenses={40000} />
-        <View style={styles.deals}>
-          {Deals.length > 0 ? (
-            Deals.map(deal => (
-              <TouchableOpacity
-                key={deal.id}
-                onPress={() => {
-                  navigation.navigate('dealDetails', {
-                    data: deal,
-                  });
-                }}>
-                <View key={deal.id} style={styles.dealItem}>
-                  <View style={styles.dealDetails}>
-                    <Text style={styles.dealTitle}>{deal.title}</Text>
-                    <Text style={styles.dealDate}>{deal.date}</Text>
-                  </View>
-                  <Text
-                    style={[
-                      styles.dealAmount,
-                      deal.amount > 0
-                        ? styles.positiveAmount
-                        : styles.negativeAmount,
-                    ]}>
-                    {deal.amount > 0
-                      ? `+ ${deal.amount.toFixed(2)} JOD`
-                      : `- ${Math.abs(deal.amount).toFixed(2)} JOD`}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            ))
-          ) : (
-            <EmptyState
-              title="No Deals Yet"
-              subtitle="After your first deal you will be able to view it here."
-              buttonLabel="New deal"
-              onButtonPress={() => createNewDeal()}
-              iconName="pricetags-outline"
-            />
-          )}
-        </View>
-      </ScrollView>
-      <FloatingAction
-        position="right"
-        onPressMain={createNewDeal}
-        floatingIcon={<Icon name="add" size={24} color={theme.colors.white} />}
-        color={theme.colors.primary}
-        showBackground={false}
+      <HeaderSection
+        navigation={navigation}
+        action={createNewDeal}
+        showSection={Deals.length !== 0}
       />
+      <WhatsNew screenName="deals" />
+      {Deals.length > 0 && <ChartView income={90000.1023} expenses={40000} />}
+      {Deals.length > 0 && (
+        <ScrollView>
+          <View style={styles.deals}>
+            {Deals.length > 0 &&
+              Deals.map(deal => (
+                <TouchableOpacity
+                  key={deal.id}
+                  onPress={() => {
+                    navigation.navigate('dealDetails', {
+                      data: deal,
+                    });
+                  }}>
+                  <View key={deal.id} style={styles.dealItem}>
+                    <View style={styles.dealDetails}>
+                      <Text style={styles.dealTitle}>{deal.title}</Text>
+                      <Text style={styles.dealDate}>{deal.date}</Text>
+                    </View>
+                    <Text
+                      style={[
+                        styles.dealAmount,
+                        deal.amount > 0
+                          ? styles.positiveAmount
+                          : styles.negativeAmount,
+                      ]}>
+                      {deal.amount > 0
+                        ? `+ ${deal.amount.toFixed(2)} JOD`
+                        : `- ${Math.abs(deal.amount).toFixed(2)} JOD`}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+          </View>
+        </ScrollView>
+      )}
+      {Deals.length === 0 && (
+        <EmptyState
+          title="No Deals Yet"
+          subtitle="After your first deal you will be able to view it here."
+          buttonLabel="New deal"
+          onButtonPress={() => createNewDeal()}
+          iconName="pricetags-outline"
+        />
+      )}
     </Layout>
   );
 };
@@ -185,6 +184,24 @@ const createStyles = theme =>
     },
     negativeAmount: {
       color: theme.colors.danger,
+    },
+    headerText: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: theme.colors.text,
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 10,
+    },
+    iconHolder: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      backgroundColor: theme.colors.primary,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });
 

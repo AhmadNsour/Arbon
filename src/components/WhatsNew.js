@@ -10,27 +10,27 @@ const WhatsNew = ({iconName, description, screenName}) => {
   //mock data for now to call api later
   const [showScreenOverview, setShowScreenOverview] = useState({
     deals: {
-      visible: true,
+      visible: false,
       Content:
         'Manage and review your financial deals, both sent and received. Easily track transaction history, view details of each deal, and create new deals for a seamless financial experience.',
     },
     connections: {
-      visible: true,
+      visible: false,
       Content:
         'Easily manage your connections. Add new contacts manually or by QR code, view saved contacts. Stay in control of your network with options to edit, delete, or quickly send requests to any connection.',
     },
     wallet: {
-      visible: true,
+      visible: false,
       Content:
         'Manage your linked bank accounts and cards for seamless transactions. Add new accounts or cards, view details, and remove old payment methods.',
     },
     more: {
-      visible: true,
+      visible: false,
       Content:
         'Explore additional options and settings. View policies, and more.',
     },
     notification: {
-      visible: true,
+      visible: false,
       Content: '',
     },
   });
@@ -78,7 +78,7 @@ const createStyles = theme =>
       paddingVertical: 20,
       paddingHorizontal: 20,
       alignItems: 'center',
-      marginBottom: 30,
+      marginBottom: 20,
     },
     iconContainer: {
       backgroundColor: theme.colors.background,

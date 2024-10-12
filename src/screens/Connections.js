@@ -13,13 +13,13 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {FloatingAction} from 'react-native-floating-action';
 import Contacts from 'react-native-contacts';
 import {useTheme} from '@theme/ThemeProvider';
 import Layout from '@components/Layout';
 import EmptyState from '@components/EmptyState';
 import {maskFirstDigitsNumber} from '@utils/helpers';
 import WhatsNew from '@components/WhatsNew';
+import HeaderSection from '@components/HeaderSection';
 
 const initialCustomers = [
   {
@@ -54,6 +54,14 @@ const initialCustomers = [
     pic: 'https://via.placeholder.com/100',
     isAddedToContacts: false,
   },
+  {
+    id: '5',
+    name: 'Sam Wilson',
+    nickName: 'Wilson',
+    NationalId: '9912392010',
+    pic: 'https://via.placeholder.com/100',
+    isAddedToContacts: false,
+  },
 ];
 
 const ConnectionsScreen = ({navigation}) => {
@@ -62,10 +70,20 @@ const ConnectionsScreen = ({navigation}) => {
   const [selectedCustomer, setSelectedCustomer] = useState({});
   const [customers, setCustomers] = useState(initialCustomers);
   const [isCustomerLazyLoading, setIsCustomerLazyLoading] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [
+    isConntectionActionsModalVisible,
+    setIsConntectionActionsModalVisible,
+  ] = useState(false);
 
-  const handleAddConnection = method => {
-    setIsModalVisible(false);
+  const [isAddConnectionModalVisible, setIsAddConnectionModalVisible] =
+    useState(false);
+
+  const handleAddConnection = () => {
+    setIsAddConnectionModalVisible(true);
+  };
+
+  const AddConnection = method => {
+    setIsAddConnectionModalVisible(false);
     if (method === 'qr_code') {
       navigation.navigate('qrCodeScanner');
     } else if (method === 'manual') {
@@ -93,7 +111,7 @@ const ConnectionsScreen = ({navigation}) => {
               prev.filter(c => c.id !== selectedCustomer.id),
             );
             Alert.alert('Contact deleted Successfully!');
-            setIsModalVisible(false);
+            setIsConntectionActionsModalVisible(false);
           },
         },
       ],
@@ -105,12 +123,12 @@ const ConnectionsScreen = ({navigation}) => {
     console.log(
       `Customer with id ${selectedCustomer.id} will receive a request`,
     );
-    setIsModalVisible(false);
+    setIsConntectionActionsModalVisible(false);
   };
 
   const handleEditCustomer = () => {
     console.log(`Customer with id ${selectedCustomer.id} edited successfully`);
-    setIsModalVisible(false);
+    setIsConntectionActionsModalVisible(false);
   };
 
   const fetchUserInformation = async userId => {
@@ -146,7 +164,7 @@ const ConnectionsScreen = ({navigation}) => {
     return false;
   };
   const handleAddToContactList = async () => {
-    setIsModalVisible(false);
+    setIsConntectionActionsModalVisible(false);
     try {
       const hasPermission = await requestContactPermission();
       if (!hasPermission) {
@@ -187,11 +205,7 @@ const ConnectionsScreen = ({navigation}) => {
 
   const handleItemsSelection = item => {
     setSelectedCustomer(item);
-    setIsModalVisible(true);
-  };
-
-  const noConnectionAddButton = () => {
-    setIsModalVisible(true);
+    setIsConntectionActionsModalVisible(true);
   };
 
   const renderItem = ({item}) => (
@@ -245,27 +259,13 @@ const ConnectionsScreen = ({navigation}) => {
     }, 1500);
   };
 
-  const actions = [
-    {
-      text: 'Using QR Code',
-      icon: (
-        <Icon name="qr-code-outline" size={25} color={theme.colors.white} />
-      ),
-      name: 'qr_code',
-      position: 1,
-      color: theme.colors.primary,
-    },
-    {
-      text: 'Manual',
-      icon: <Icon name="create-outline" size={25} color={theme.colors.white} />,
-      name: 'manual',
-      position: 2,
-      color: theme.colors.primary,
-    },
-  ];
-
   return (
     <Layout>
+      <HeaderSection
+        navigation={navigation}
+        action={handleAddConnection}
+        showSection={customers.length !== 0}
+      />
       <WhatsNew screenName="connections" />
       {customers.length > 0 ? (
         <FlatList
@@ -283,32 +283,13 @@ const ConnectionsScreen = ({navigation}) => {
           title="No Connections Yet"
           subtitle="After your first connection you will be able to view it here."
           buttonLabel="Connect"
-          onButtonPress={() => noConnectionAddButton()}
-          iconName="person-outlinee"
-        />
-      )}
-      {customers.length > 0 && (
-        <FloatingAction
-          position="right"
-          actions={actions}
-          onPressItem={name => {
-            if (name === 'qr_code') {
-              handleAddConnection('qr_code');
-            } else if (name === 'manual') {
-              handleAddConnection('manual');
-            }
-          }}
-          floatingIcon={
-            <Icon name="add" size={24} color={theme.colors.white} />
-          }
-          color={theme.colors.primary}
-          showBackground={false}
-          actionsPaddingTopBottom={10}
+          onButtonPress={() => handleAddConnection()}
+          iconName="person-outline"
         />
       )}
       <Modal
-        isVisible={isModalVisible}
-        onBackdropPress={() => setIsModalVisible(false)}
+        isVisible={isConntectionActionsModalVisible}
+        onBackdropPress={() => setIsConntectionActionsModalVisible(false)}
         style={styles.modal}>
         <View
           style={
@@ -350,6 +331,35 @@ const ConnectionsScreen = ({navigation}) => {
             <Text style={[styles.modalItemText, {color: theme.colors.danger}]}>
               Delete
             </Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+      <Modal
+        isVisible={isAddConnectionModalVisible}
+        onBackdropPress={() => setIsAddConnectionModalVisible(false)}
+        style={styles.modal}>
+        <View
+          style={
+            Platform.OS === 'ios'
+              ? styles.iosModalContent
+              : styles.androidModalContent
+          }>
+          <View style={styles.AddConnectionModalTitle}>
+            <Text style={styles.customerSubtitle}>Add Connections</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={() => {
+              AddConnection('qr_code');
+            }}>
+            <Text style={styles.modalItemText}>Using Qr Code</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalItem}
+            onPress={() => {
+              AddConnection('manual');
+            }}>
+            <Text style={styles.modalItemText}>Manual</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -472,10 +482,32 @@ const createStyles = theme =>
       color: theme.colors.primary,
       marginBottom: 10,
     },
+    AddConnectionModalTitle: {
+      marginBottom: 10,
+    },
     customerSubtitle: {
-      fontSize: 14,
       color: theme.colors.text,
       textAlign: 'center',
+      fontSize: 20,
+      fontWeight: '600',
+    },
+    headerText: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: theme.colors.text,
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 20,
+    },
+    iconHolder: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      backgroundColor: theme.colors.primary,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });
 

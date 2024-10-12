@@ -14,6 +14,7 @@ import {FloatingAction} from 'react-native-floating-action';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@theme/ThemeProvider';
 import WhatsNew from '@components/WhatsNew';
+import HeaderSection from '@components/HeaderSection';
 
 const MoreScreen = ({navigation}) => {
   const {theme} = useTheme();
@@ -324,6 +325,24 @@ const createStyles = theme =>
       color: theme.colors.text,
       marginBottom: 20,
       textAlign: 'center',
+    },
+    headerText: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: theme.colors.text,
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 20,
+    },
+    iconHolder: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      backgroundColor: theme.colors.primary,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });
 
