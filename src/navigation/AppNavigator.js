@@ -26,7 +26,7 @@ import AddConnection from '@screens/AddConnection';
 import ReviewConnection from '@screens/ReviewConnection';
 import QRCodeScanner from '@screens/QRCodeScanner';
 import QrCode from '@screens/QrCode';
-import AppInfo from '@screens/AppInfo';
+import GeneralInformation from '@screens/GeneralInformation';
 import ResetSettings from '@screens/ResetSettings';
 import Wallet from '@screens/Wallet';
 
@@ -255,11 +255,11 @@ const AppNavigator = () => {
           })}
         />
         <Stack.Screen
-          name="appInfo"
-          component={AppInfo}
+          name="generalInformation"
+          component={GeneralInformation}
           options={({navigation}) => ({
             ...commonScreenOptions(navigation),
-            title: 'App Info',
+            title: 'General Information',
           })}
         />
         {/* more end */}

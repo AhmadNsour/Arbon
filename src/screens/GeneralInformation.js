@@ -23,7 +23,7 @@ const AppInfoScreen = ({navigation}) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.header}>Application Information</Text>
+      <Text style={styles.header}>App</Text>
       <View style={styles.card}>
         <Text style={styles.label}>App Name</Text>
         <Text style={styles.value}>{appName}</Text>
@@ -48,7 +48,7 @@ const AppInfoScreen = ({navigation}) => {
           </Text>
         </View>
       )}
-      <Text style={styles.header}>Device Information</Text>
+      <Text style={styles.header}>Device</Text>
       <View style={styles.card}>
         <Text style={styles.label}>Brand</Text>
         <Text style={styles.value}>{deviceBrand}</Text>

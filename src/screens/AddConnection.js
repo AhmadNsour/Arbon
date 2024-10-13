@@ -74,39 +74,41 @@ const AddConnectionScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.inputWrapper}>
-          <Text style={styles.inputLabel}>National Id</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter the national Identity"
-            keyboardType="numeric"
-            value={nationalId}
-            maxLength={10}
-            onChangeText={value => {
-              handleNationalIdOnChange(value);
-            }}
-            onBlur={handleNationalIdBlur}
-          />
-          {nationalIdErrorMessage && (
-            <Text style={styles.errorText}>{nationalIdErrorMessage}</Text>
-          )}
-        </View>
-        <View style={styles.inputWrapper}>
-          <Text style={styles.inputLabel}>Nickname</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter a nickname"
-            value={nickname}
-            maxLength={15}
-            onChangeText={handleNicknameOnChange}
-            onBlur={handleNicknameBlur}
-          />
-          {nicknameErrorMessage && (
-            <Text style={styles.errorText}>{nicknameErrorMessage}</Text>
-          )}
-        </View>
-      </ScrollView>
+      <Text style={styles.title}>
+        From here you can add new connection to your list to use later to send
+        arbon
+      </Text>
+      <View style={styles.inputWrapper}>
+        <Text style={styles.inputLabel}>National Id</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter the national Identity"
+          keyboardType="numeric"
+          value={nationalId}
+          maxLength={10}
+          onChangeText={value => {
+            handleNationalIdOnChange(value);
+          }}
+          onBlur={handleNationalIdBlur}
+        />
+        {nationalIdErrorMessage && (
+          <Text style={styles.errorText}>{nationalIdErrorMessage}</Text>
+        )}
+      </View>
+      <View style={styles.inputWrapper}>
+        <Text style={styles.inputLabel}>Nickname</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter a nickname"
+          value={nickname}
+          maxLength={15}
+          onChangeText={handleNicknameOnChange}
+          onBlur={handleNicknameBlur}
+        />
+        {nicknameErrorMessage && (
+          <Text style={styles.errorText}>{nicknameErrorMessage}</Text>
+        )}
+      </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={
@@ -137,9 +139,6 @@ const createStyles = theme =>
       flex: 1,
       padding: 20,
       backgroundColor: theme.colors.background,
-    },
-    content: {
-      flexGrow: 1,
     },
     title: {
       fontSize: 16,
@@ -172,6 +171,7 @@ const createStyles = theme =>
       fontSize: 12,
     },
     buttonContainer: {
+      flex: 1,
       justifyContent: 'flex-end',
     },
     addButton: {

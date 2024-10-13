@@ -14,7 +14,6 @@ import {FloatingAction} from 'react-native-floating-action';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@theme/ThemeProvider';
 import WhatsNew from '@components/WhatsNew';
-import HeaderSection from '@components/HeaderSection';
 
 const MoreScreen = ({navigation}) => {
   const {theme} = useTheme();
@@ -136,7 +135,7 @@ const MoreScreen = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.item}
-            onPress={() => handleNavigation('appInfo')}>
+            onPress={() => handleNavigation('generalInformation')}>
             <View style={styles.itemContent}>
               <Icon
                 name="apps-outline"
@@ -144,7 +143,7 @@ const MoreScreen = ({navigation}) => {
                 color={theme.colors.primary}
                 style={styles.leftIcon}
               />
-              <Text style={styles.itemText}>App Info</Text>
+              <Text style={styles.itemText}>General Information</Text>
               <Icon
                 name="chevron-forward-outline"
                 size={24}
