@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import OTPComponent from '@components/OTPComponent';
 import {useTheme} from '@theme/ThemeProvider';
 import {regexPatterns} from '@utils/regex';
 
-const ForgetPasswordScreen = ({navigation}) => {
+const ResetPasswordScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const insets = useSafeAreaInsets();
@@ -19,8 +19,6 @@ const ForgetPasswordScreen = ({navigation}) => {
   const [step, setStep] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const [nationalIdErrorMessage, setNationalIdErrorMessage] = useState('');
-  const [debounceTimeout, setDebounceTimeout] = useState(null);
-  const inputRefs = useRef([]);
 
   const handleResetPassword = otp => {
     if (step === 0) {
@@ -42,38 +40,20 @@ const ForgetPasswordScreen = ({navigation}) => {
   };
 
   const handleNationalIdBlur = () => {
-    if (debounceTimeout) {
-      clearTimeout(debounceTimeout);
+    if (nationalId.length < 10) {
+      setNationalIdErrorMessage('National ID must be at least 10 digits long.');
+    } else {
+      setNationalIdErrorMessage('');
     }
-
-    const timeout = setTimeout(() => {
-      if (nationalId.length < 10) {
-        setNationalIdErrorMessage(
-          'National ID must be at least 10 digits long.',
-        );
-      } else {
-        setNationalIdErrorMessage('');
-      }
-    }, 100);
-
-    setDebounceTimeout(timeout);
   };
-
-  useEffect(() => {
-    inputRefs.current.focus();
-    return () => {
-      if (debounceTimeout) {
-        clearTimeout(debounceTimeout);
-      }
-    };
-  }, [debounceTimeout]);
 
   return (
     <View style={[styles.container, {paddingBottom: insets.bottom}]}>
       {step === 0 ? (
-        <View>
+        <>
           <Text style={styles.title}>
-            Enter your National Id to Identify your self.
+            From here you can reset your password that you use to authenticate
+            your self.
           </Text>
           <View style={styles.inputWrapper}>
             <Text style={styles.inputLabel}>National Id</Text>
@@ -83,7 +63,6 @@ const ForgetPasswordScreen = ({navigation}) => {
               keyboardType="numeric"
               value={nationalId}
               maxLength={10}
-              ref={ref => (inputRefs.current = ref)}
               onChangeText={value => {
                 handleNationalIdOnChange(value);
               }}
@@ -93,17 +72,19 @@ const ForgetPasswordScreen = ({navigation}) => {
               <Text style={styles.errorText}>{nationalIdErrorMessage}</Text>
             )}
           </View>
-          <TouchableOpacity
-            style={
-              nationalId === '' || nationalId.length < 10
-                ? styles.resetButtonDisabled
-                : styles.resetButton
-            }
-            disabled={nationalId === '' || nationalId.length < 10}
-            onPress={() => handleResetPassword()}>
-            <Text style={styles.resetButtonText}>Reset</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={
+                nationalId === '' || nationalId.length < 10
+                  ? styles.resetButtonDisabled
+                  : styles.resetButton
+              }
+              disabled={nationalId === '' || nationalId.length < 10}
+              onPress={() => handleResetPassword()}>
+              <Text style={styles.resetButtonText}>Reset</Text>
+            </TouchableOpacity>
+          </View>
+        </>
       ) : (
         <OTPComponent
           errorMessage={errorMessage}
@@ -152,6 +133,11 @@ const createStyles = theme =>
       marginTop: 5,
       fontSize: 12,
     },
+    buttonContainer: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      marginBottom: 20,
+    },
     resetButton: {
       width: '100%',
       padding: 15,
@@ -184,4 +170,4 @@ const createStyles = theme =>
     },
   });
 
-export default ForgetPasswordScreen;
+export default ResetPasswordScreen;

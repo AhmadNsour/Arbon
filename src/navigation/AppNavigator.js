@@ -20,7 +20,7 @@ import TermsAndConditions from '@screens/Terms&Conditions';
 import AboutUs from '@screens/AboutUs';
 import Connections from '@screens/Connections';
 import TransactionDetails from '@screens/TransactionDetails';
-import ForgetPassword from '@screens/ForgetPassword';
+import ResetPassword from '@screens/ResetPassword';
 import OTP from '@screens/OTP';
 import AddConnection from '@screens/AddConnection';
 import ReviewConnection from '@screens/ReviewConnection';
@@ -119,7 +119,7 @@ const getProfileOptions = navigation => ({
   headerRight: () => <CloseButton onPress={() => navigation.goBack()} />,
 });
 
-const getForgetPassword = navigation => ({
+const getResetPassword = navigation => ({
   presentation: 'modal',
   headerTitle: 'Forget Password',
   headerLeft: () => null,
@@ -128,7 +128,7 @@ const getForgetPassword = navigation => ({
 
 const getUpdateEmailOptions = navigation => ({
   presentation: 'modal',
-  headerTitle: 'Update Email',
+  headerTitle: 'Update Email Address',
   headerLeft: () => null,
   headerRight: () => <CloseButton onPress={() => navigation.goBack()} />,
 });
@@ -204,9 +204,9 @@ const AppNavigator = () => {
           options={({navigation}) => getQRCodeOptions(navigation, theme)}
         />
         <Stack.Screen
-          name="forgetPassword"
-          component={ForgetPassword}
-          options={({navigation}) => getForgetPassword(navigation)}
+          name="resetPassword"
+          component={ResetPassword}
+          options={({navigation}) => getResetPassword(navigation)}
         />
         {/* profile end */}
 

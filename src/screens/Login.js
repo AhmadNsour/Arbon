@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -27,7 +27,6 @@ const LoginScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const inputRefs = useRef([]);
   const [popupVisible, setPopupVisible] = useState(false);
   const faceIdEnabled = useSelector(state => state.settings.faceIdEnabled);
 
@@ -112,11 +111,7 @@ const LoginScreen = ({navigation}) => {
       Alert.alert('Login Successfully!');
     }
   };
-  useEffect(() => {
-    if (inputRefs.current) {
-      inputRefs.current.focus();
-    }
-  }, []);
+
   return (
     <View style={[styles.container, {paddingBottom: insets.bottom}]}>
       <StatusBar />
@@ -135,7 +130,6 @@ const LoginScreen = ({navigation}) => {
             placeholder="Enter your national Identity"
             keyboardType="numeric"
             maxLength={10}
-            ref={ref => (inputRefs.current = ref)}
             value={nationalId}
             onChangeText={value => {
               handleNationalIdOnChange(value);
@@ -181,7 +175,7 @@ const LoginScreen = ({navigation}) => {
 
         <TouchableOpacity
           onPress={() => {
-            clearValuesAndNavigate('forgetPassword');
+            clearValuesAndNavigate('resetPassword');
           }}>
           <Text style={styles.forgotPassword}>Forgot password?</Text>
         </TouchableOpacity>

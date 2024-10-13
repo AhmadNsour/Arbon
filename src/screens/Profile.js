@@ -32,11 +32,12 @@ import {
 import AvatarPicker from '@components/AvatarPicker';
 import {useTheme} from '@theme/ThemeProvider';
 import defaultImage from '@assets/images/defaultProfile.png';
+import {useLoading} from '@context/LoadingContext';
 
 const ProfileScreen = ({navigation}) => {
   const {i18n} = useTranslation();
+  const {setIsLoading} = useLoading();
   const [selectedTab, setSelectedTab] = useState('details');
-
   const {theme, isDarkMode, toggleThemeMode} = useTheme();
   const user = useSelector(state => state.user);
   const settings = useSelector(state => state.settings);
@@ -218,8 +219,6 @@ const ProfileScreen = ({navigation}) => {
     navigation.navigate('QrCode');
   };
 
-  const deleteAccount = () => {};
-
   const handleLogout = () => {
     Alert.alert(
       'Confirm Logout',
@@ -235,6 +234,7 @@ const ProfileScreen = ({navigation}) => {
         {
           text: 'Logout',
           onPress: () => {
+            setIsLoading(true);
             navigation.navigate('login');
             navigation.dispatch(
               CommonActions.reset({
@@ -242,6 +242,7 @@ const ProfileScreen = ({navigation}) => {
                 routes: [{name: 'login'}],
               }),
             );
+            setIsLoading(false);
           },
         },
       ],
@@ -348,8 +349,8 @@ const ProfileScreen = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.settingItem}
-            onPress={() => navigation.navigate('forgetPassword')}>
-            <Text style={styles.settingText}>Reset Password</Text>
+            onPress={() => navigation.navigate('updatePassword')}>
+            <Text style={styles.settingText}>Update Password</Text>
           </TouchableOpacity>
           <View style={styles.settingItem}>
             <Text style={styles.settingText}>Face ID</Text>

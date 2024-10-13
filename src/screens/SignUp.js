@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -22,7 +22,6 @@ const SignUpScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const insets = useSafeAreaInsets();
-  const inputRefs = useRef([]);
   const [nationalId, setNationalId] = useState('');
   const [nationalIdErrorMessage, setNationalIdErrorMessage] = useState('');
   const [password, setPassword] = useState('');
@@ -116,9 +115,6 @@ const SignUpScreen = ({navigation}) => {
   };
   useEffect(() => {
     getDeviceInfo();
-    if (inputRefs.current) {
-      inputRefs.current.focus();
-    }
   }, []);
   return (
     <View style={[styles.container, {paddingBottom: insets.bottom}]}>
@@ -150,7 +146,6 @@ const SignUpScreen = ({navigation}) => {
               keyboardType="numeric"
               value={nationalId}
               maxLength={10}
-              ref={ref => (inputRefs.current = ref)}
               onChangeText={value => {
                 handleNationalIdOnChange(value);
               }}

@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -16,13 +16,6 @@ const AddConnectionScreen = ({navigation}) => {
   const [nickname, setNickname] = useState('');
   const [nationalIdErrorMessage, setNationalIdErrorMessage] = useState('');
   const [nicknameErrorMessage, setNicknameErrorMessage] = useState('');
-  const inputRefs = useRef([]);
-
-  useEffect(() => {
-    if (inputRefs.current) {
-      inputRefs.current.focus();
-    }
-  }, []);
 
   const handleAddConnection = () => {
     //call api
@@ -90,7 +83,6 @@ const AddConnectionScreen = ({navigation}) => {
             keyboardType="numeric"
             value={nationalId}
             maxLength={10}
-            ref={ref => (inputRefs.current = ref)}
             onChangeText={value => {
               handleNationalIdOnChange(value);
             }}
