@@ -13,7 +13,6 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from '@theme/ThemeProvider';
 import EmptyState from '@components/EmptyState';
 import {SCREEN_WIDTH} from '@utils/helpers';
-import Modal from 'react-native-modal';
 import {toggleBalance} from '@store/actions/settingsActions';
 
 const HomeScreen = ({navigation}) => {
@@ -40,28 +39,8 @@ const HomeScreen = ({navigation}) => {
     {id: 6, title: 'Incoming Transfer', amount: 129.0, date: '13 AUGUST'},
   ]);
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
   const toggleBalanceVisibility = () => {
     dispatch(toggleBalance(previousState => !previousState));
-  };
-
-  const showMoreOptions = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOptionPress = option => {
-    setIsModalVisible(false);
-    switch (option) {
-      case 'New deal':
-        alert('New deal...');
-        break;
-      case 'Release a deal':
-        alert('Release a deal...');
-        break;
-      default:
-        break;
-    }
   };
 
   return (
@@ -113,33 +92,37 @@ const HomeScreen = ({navigation}) => {
           <View style={styles.actionItem}>
             <TouchableOpacity
               style={styles.actionIconContainer}
-              onPress={() => alert('Send Money')}>
+              onPress={() => alert('New arbon')}>
               <Icon
-                name="arrow-up-outline"
+                name="pricetags-outline"
                 size={30}
                 color={theme.colors.white}
               />
-              <Text style={styles.actionText}>Send Money</Text>
+              <Text style={styles.actionText}>New Arbon</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.actionItem}>
             <TouchableOpacity
               style={styles.actionIconContainer}
               onPress={() => alert('Add Money')}>
-              <Icon name="add-outline" size={30} color={theme.colors.white} />
+              <Icon
+                name="wallet-outline"
+                size={30}
+                color={theme.colors.white}
+              />
               <Text style={styles.actionText}>Add Money</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.actionItem}>
             <TouchableOpacity
               style={styles.actionIconContainer}
-              onPress={showMoreOptions}>
+              onPress={() => alert('Release Money')}>
               <Icon
-                name="ellipsis-horizontal-outline"
+                name="lock-open-outline"
                 size={30}
                 color={theme.colors.white}
               />
-              <Text style={styles.actionText}>More</Text>
+              <Text style={styles.actionText}>Release Arbon</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -209,23 +192,6 @@ const HomeScreen = ({navigation}) => {
           )}
         </View>
       </ScrollView>
-      <Modal
-        isVisible={isModalVisible}
-        onBackdropPress={() => setIsModalVisible(false)}
-        style={styles.modal}>
-        <View style={styles.ModalContent}>
-          <TouchableOpacity
-            style={styles.modalItem}
-            onPress={() => handleOptionPress('New deal')}>
-            <Text style={styles.modalItemText}>New deal</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.modalItem}
-            onPress={() => handleOptionPress('Release a deal')}>
-            <Text style={styles.modalItemText}>Release a deal</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
     </View>
   );
 };
@@ -363,7 +329,6 @@ const createStyles = theme =>
       margin: 0,
     },
     ModalContent: {
-      //height: SCREEN_HEIGHT / 2,
       backgroundColor: theme.colors.background,
       padding: 20,
       borderTopLeftRadius: 10,

@@ -41,7 +41,7 @@ const MoreScreen = ({navigation}) => {
         Linking.openURL('mailto:support@arbon.com');
         break;
       case 'report_an_issue':
-        alert('Reporting an issue...');
+        navigation.navigate('request_complaint');
         break;
       default:
         break;

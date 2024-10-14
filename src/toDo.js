@@ -2,7 +2,6 @@
 // partial payment for each contact
 // edit screen for each connection
 // deals details screen
-// report an issue screen
 // add account or card to account list screen
 // enable notification based on the device settings
 // add money screen

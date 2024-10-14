@@ -29,6 +29,7 @@ import QrCode from '@screens/QrCode';
 import GeneralInformation from '@screens/GeneralInformation';
 import ResetSettings from '@screens/ResetSettings';
 import Wallet from '@screens/Wallet';
+import Request_ComplaintScreen from '@screens/Requests&Complaints';
 
 //components
 import CloseButton from '@components/CloseButton';
@@ -260,6 +261,14 @@ const AppNavigator = () => {
           options={({navigation}) => ({
             ...commonScreenOptions(navigation),
             title: 'General Information',
+          })}
+        />
+        <Stack.Screen
+          name="request_complaint"
+          component={Request_ComplaintScreen}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Requests & Complaints',
           })}
         />
         {/* more end */}
