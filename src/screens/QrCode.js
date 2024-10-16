@@ -75,7 +75,6 @@ const createStyles = theme =>
       backgroundColor: theme.colors.background,
     },
     qrCodeContainer: {
-      padding: 20,
       backgroundColor: theme.colors.white,
       alignItems: 'center',
       justifyContent: 'center',
@@ -93,8 +92,7 @@ const createStyles = theme =>
       backgroundColor: theme.colors.primary,
       width: '100%',
       alignItems: 'center',
-      paddingVertical: 15,
-      paddingHorizontal: 30,
+      padding: 15,
       borderRadius: 10,
     },
     shareButtonText: {

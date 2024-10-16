@@ -134,11 +134,16 @@ const getUpdateEmailOptions = navigation => ({
   headerLeft: () => null,
   headerRight: () => <CloseButton onPress={() => navigation.goBack()} />,
 });
+
 const getQRCodeOptions = navigation => ({
   presentation: 'modal',
-  headerTitle: 'QR Code',
+  headerTitle: '',
   headerLeft: () => null,
   headerRight: () => <CloseButton onPress={() => navigation.goBack()} />,
+  cardStyle: {
+    borderRadius: 20,
+  },
+  headerTransparent: true,
 });
 
 const commonScreenOptions = navigation => ({

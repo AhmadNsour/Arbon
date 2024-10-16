@@ -324,37 +324,6 @@ const createStyles = theme =>
     negativeAmount: {
       color: theme.colors.danger,
     },
-    modal: {
-      justifyContent: 'flex-end',
-      margin: 0,
-    },
-    ModalContent: {
-      backgroundColor: theme.colors.background,
-      padding: 20,
-      borderTopLeftRadius: 10,
-      borderTopRightRadius: 10,
-      alignItems: 'center',
-    },
-    modalItem: {
-      padding: 20,
-      backgroundColor: theme.colors.background,
-      marginBottom: 15,
-      borderWidth: 1,
-      borderRadius: 10,
-      borderColor: theme.colors.border,
-      height: 65,
-      shadowColor: '#000',
-      shadowOffset: {width: 0, height: 2},
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 2,
-      width: '100%',
-      alignItems: 'center',
-    },
-    modalItemText: {
-      fontSize: 18,
-      color: theme.colors.primary,
-    },
   });
 
 export default HomeScreen;

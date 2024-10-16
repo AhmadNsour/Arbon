@@ -234,7 +234,6 @@ const ProfileScreen = ({navigation}) => {
         {
           text: 'Logout',
           onPress: () => {
-            setIsLoading(true);
             navigation.navigate('login');
             navigation.dispatch(
               CommonActions.reset({
@@ -242,7 +241,6 @@ const ProfileScreen = ({navigation}) => {
                 routes: [{name: 'login'}],
               }),
             );
-            setIsLoading(false);
           },
         },
       ],

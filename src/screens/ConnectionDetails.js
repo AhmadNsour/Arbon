@@ -7,28 +7,38 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
-  Platform,
+  TextInput,
   PermissionsAndroid,
+  Platform,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Modal from 'react-native-modal';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import Contacts from 'react-native-contacts';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from '@theme/ThemeProvider';
 import {maskFirstDigitsNumber} from '@utils/helpers';
 
 const ConnectionDetailsScreen = ({route, navigation}) => {
   const {connection} = route.params;
-  console.log(connection);
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const insets = useSafeAreaInsets();
   const [nickname, setNickname] = useState(connection.nickName);
+  const [newNickname, setNewNickname] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedTab, setSelectedTab] = useState('details');
 
   // Save the new nickname
   const handleSaveNickname = () => {
-    Alert.alert('Success', `Nickname changed to ${nickname}`);
+    if (newNickname.trim()) {
+      setNickname(newNickname);
+      setNewNickname('');
+      setIsModalVisible(false);
+      Alert.alert('Success', `Nickname changed to ${newNickname}`);
+    } else {
+      Alert.alert('Error', 'Please enter a valid nickname.');
+    }
   };
 
   const handleDeleteCustomer = () => {
@@ -88,7 +98,6 @@ const ConnectionDetailsScreen = ({route, navigation}) => {
   };
 
   const fetchUserInformation = async userId => {
-    // Replace with your API call to fetch user information
     return {
       firstName: 'John',
       lastName: 'Doe',
@@ -158,16 +167,17 @@ const ConnectionDetailsScreen = ({route, navigation}) => {
       Alert.alert('Error adding to contact list:', error);
     }
   };
+
   const navigateToQRCodeScreen = () => {
     navigation.navigate('QrCode', {user: connection});
   };
 
+  const handleSendArbon = () => {
+    Alert.alert('Success', `Arbon sent to ${connection.name}`);
+  };
+
   return (
-    <View
-      style={[
-        styles.container,
-        {paddingTop: insets.top, paddingBottom: insets.bottom},
-      ]}>
+    <View style={[styles.container, {paddingBottom: insets.bottom}]}>
       {/* Profile Header */}
       <View style={styles.profileHeader}>
         <Image source={{uri: connection.pic}} style={styles.profileImage} />
@@ -191,6 +201,7 @@ const ConnectionDetailsScreen = ({route, navigation}) => {
           <Text style={styles.qrCodeText}>Account QR Code</Text>
         </View>
       </TouchableOpacity>
+
       {/* Tabs */}
       <View style={styles.tabs}>
         <TouchableOpacity
@@ -231,20 +242,19 @@ const ConnectionDetailsScreen = ({route, navigation}) => {
         <View style={styles.manage}>
           <TouchableOpacity
             style={styles.settingItem}
-            onPress={() => handleSaveNickname()}>
+            onPress={handleSendArbon}>
             <Text style={styles.settingText}>Send Arbon</Text>
             <Icon name="pricetags" size={20} color={theme.colors.primary} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.settingItem}
-            onPress={() => handleAddToContactList()}>
+            onPress={handleAddToContactList}>
             <Text style={styles.settingText}>Add to Contacts</Text>
             <Icon name="person-add" size={20} color={theme.colors.primary} />
           </TouchableOpacity>
-
           <TouchableOpacity
             style={styles.settingItem}
-            onPress={() => handleSaveNickname()}>
+            onPress={() => setIsModalVisible(true)}>
             <Text style={styles.settingText}>Edit Nickname</Text>
             <Icon name="pencil" size={20} color={theme.colors.primary} />
           </TouchableOpacity>
@@ -256,6 +266,43 @@ const ConnectionDetailsScreen = ({route, navigation}) => {
           </TouchableOpacity>
         </View>
       )}
+
+      {/* Edit Nickname Modal */}
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={() => {
+          setIsModalVisible(false);
+        }}
+        style={styles.modal}>
+        <View style={styles.ModalContent}>
+          <View style={styles.TitleContainer}>
+            <Text style={styles.modalTitle}>Edit Nickname</Text>
+          </View>
+          <Text style={styles.currentNickname}>
+            Current Nickname: {nickname}
+          </Text>
+          <View style={styles.modalContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter new nickname"
+              value={newNickname}
+              onChangeText={setNewNickname}
+            />
+            <View style={styles.modalButtons}>
+              <TouchableOpacity
+                disabled={newNickname === '' || newNickname === nickname}
+                style={
+                  newNickname !== '' && newNickname !== nickname
+                    ? styles.saveButton
+                    : styles.saveButtonDisabled
+                }
+                onPress={handleSaveNickname}>
+                <Text style={styles.saveText}>Save</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -403,27 +450,59 @@ const createStyles = theme =>
       padding: 20,
       borderTopLeftRadius: 10,
       borderTopRightRadius: 10,
-      alignItems: 'center',
     },
-    modalItem: {
-      padding: 20,
+    TitleContainer: {alignItems: 'center'},
+    modalContainer: {
       backgroundColor: theme.colors.background,
-      marginBottom: 15,
-      borderWidth: 1,
       borderRadius: 10,
-      borderColor: theme.colors.border,
-      height: 65,
-      shadowColor: '#000',
-      shadowOffset: {width: 0, height: 2},
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 2,
-      width: '100%',
       alignItems: 'center',
     },
-    modalItemText: {
-      fontSize: 18,
-      color: theme.colors.primary,
+    currentNickname: {
+      fontSize: 16,
+      color: theme.colors.text,
+      marginBottom: 20,
+    },
+    input: {
+      width: '100%',
+      padding: 15,
+      borderWidth: 1,
+      borderColor: theme.colors.border,
+      borderRadius: 10,
+      marginBottom: 15,
+      color: theme.colors.text,
+      backgroundColor: theme.colors.background,
+    },
+    modalButtons: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+    },
+    saveButton: {
+      width: '100%',
+      padding: 15,
+      backgroundColor: theme.colors.primary,
+      borderRadius: 10,
+      alignItems: 'center',
+      marginTop: 10,
+      marginBottom: 30,
+    },
+    saveButtonDisabled: {
+      width: '100%',
+      padding: 15,
+      backgroundColor: theme.colors.darkGrayishViolet,
+      borderRadius: 10,
+      alignItems: 'center',
+      marginTop: 10,
+      marginBottom: 30,
+    },
+    saveText: {
+      color: theme.colors.white,
+      fontSize: 16,
+    },
+    modalTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginBottom: 15,
+      color: theme.colors.text,
     },
   });
 

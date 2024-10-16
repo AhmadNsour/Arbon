@@ -318,7 +318,7 @@ const createStyles = theme =>
       marginBottom: 10,
     },
     AddConnectionModalTitle: {
-      marginBottom: 10,
+      marginBottom: 20,
     },
     customerSubtitle: {
       color: theme.colors.text,

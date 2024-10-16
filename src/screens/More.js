@@ -188,7 +188,7 @@ const MoreScreen = ({navigation}) => {
         isVisible={isModalVisible}
         onBackdropPress={toggleModalVisibility}
         style={styles.modal}>
-        <View style={styles.ModalContent}>
+        <View style={styles.modalContent}>
           <TouchableOpacity
             style={styles.modalItem}
             onPress={() => handleHelpOptionPress('call_us')}>
@@ -256,7 +256,7 @@ const createStyles = theme =>
       justifyContent: 'flex-end',
       margin: 0,
     },
-    ModalContent: {
+    modalContent: {
       backgroundColor: theme.colors.background,
       padding: 20,
       borderTopLeftRadius: 10,
