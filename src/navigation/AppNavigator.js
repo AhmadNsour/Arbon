@@ -30,6 +30,7 @@ import GeneralInformation from '@screens/GeneralInformation';
 import ResetSettings from '@screens/ResetSettings';
 import Wallet from '@screens/Wallet';
 import Request_ComplaintScreen from '@screens/Requests&Complaints';
+import ConnectionDetailsScreen from '@screens/ConnectionDetails';
 
 //components
 import CloseButton from '@components/CloseButton';
@@ -296,6 +297,14 @@ const AppNavigator = () => {
           options={({navigation}) => ({
             ...commonScreenOptions(navigation),
             title: 'QR Scanner',
+          })}
+        />
+        <Stack.Screen
+          name="ConnectionDetails"
+          component={ConnectionDetailsScreen}
+          options={({navigation}) => ({
+            ...commonScreenOptions(navigation),
+            title: 'Connection Details',
           })}
         />
         {/* connection end*/}

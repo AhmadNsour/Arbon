@@ -216,7 +216,7 @@ const ProfileScreen = ({navigation}) => {
   };
 
   const navigateToQRCodeScreen = () => {
-    navigation.navigate('QrCode');
+    navigation.navigate('QrCode', {user: user});
   };
 
   const handleLogout = () => {
@@ -322,7 +322,6 @@ const ProfileScreen = ({navigation}) => {
             <Text style={styles.detailText}>Date of Birth</Text>
             <Text style={styles.detailValue}>{user?.dob || '12/08/1993'}</Text>
           </View>
-          {/* QR Code Section */}
         </ScrollView>
       ) : (
         <ScrollView style={styles.settings}>
@@ -346,11 +345,13 @@ const ProfileScreen = ({navigation}) => {
             style={styles.settingItem}
             onPress={() => navigation.navigate('updateEmail')}>
             <Text style={styles.settingText}>Update Email</Text>
+            <Icon name="pencil" size={20} color={theme.colors.primary} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.settingItem}
             onPress={() => navigation.navigate('updatePassword')}>
             <Text style={styles.settingText}>Update Password</Text>
+            <Icon name="pencil" size={20} color={theme.colors.primary} />
           </TouchableOpacity>
           <View style={styles.settingItem}>
             <Text style={styles.settingText}>Face ID</Text>
@@ -378,6 +379,7 @@ const ProfileScreen = ({navigation}) => {
             style={styles.settingItem}
             onPress={() => setDeleteAccountModalVisible(true)}>
             <Text style={styles.settingText}>Delete Account</Text>
+            <Icon name="trash" size={20} color={theme.colors.danger} />
           </TouchableOpacity>
         </ScrollView>
       )}

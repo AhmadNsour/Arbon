@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import {
   View,
   Text,
@@ -8,12 +7,9 @@ import {
   FlatList,
   TouchableOpacity,
   Platform,
-  PermissionsAndroid,
-  Alert,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Contacts from 'react-native-contacts';
 import {useTheme} from '@theme/ThemeProvider';
 import Layout from '@components/Layout';
 import EmptyState from '@components/EmptyState';
@@ -26,7 +22,9 @@ const initialCustomers = [
     id: '1',
     name: 'Ahmad Al Nsour',
     nickName: 'Al Nsour',
-    NationalId: '9912392010',
+    nationalId: '9912392010',
+    mobileNumber: '0797433919',
+    email: 'Ahmadmhnsour@gmail.com',
     pic: 'https://via.placeholder.com/100',
     isAddedToContacts: true,
   },
@@ -34,7 +32,10 @@ const initialCustomers = [
     id: '2',
     name: 'Jane Smith',
     nickName: 'Smith',
-    NationalId: '9912392010',
+    nationalId: '9912392010',
+    mobileNumber: '0797433919',
+    email: 'Ahmadmhnsour@gmail.com',
+
     pic: 'https://via.placeholder.com/100',
     isAddedToContacts: false,
   },
@@ -42,7 +43,9 @@ const initialCustomers = [
     id: '3',
     name: 'Sam Wilson',
     nickName: 'Wilson',
-    NationalId: '9912392010',
+    nationalId: '9912392010',
+    mobileNumber: '0797433919',
+    email: 'Ahmadmhnsour@gmail.com',
     pic: 'https://via.placeholder.com/100',
     isAddedToContacts: false,
   },
@@ -50,7 +53,9 @@ const initialCustomers = [
     id: '4',
     name: 'Sam Wilson',
     nickName: 'Wilson',
-    NationalId: '9912392010',
+    nationalId: '9912392010',
+    mobileNumber: '0797433919',
+    email: 'Ahmadmhnsour@gmail.com',
     pic: 'https://via.placeholder.com/100',
     isAddedToContacts: false,
   },
@@ -58,7 +63,9 @@ const initialCustomers = [
     id: '5',
     name: 'Sam Wilson',
     nickName: 'Wilson',
-    NationalId: '9912392010',
+    nationalId: '9912392010',
+    mobileNumber: '0797433919',
+    email: 'Ahmadmhnsour@gmail.com',
     pic: 'https://via.placeholder.com/100',
     isAddedToContacts: false,
   },
@@ -67,14 +74,8 @@ const initialCustomers = [
 const ConnectionsScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
-  const [selectedCustomer, setSelectedCustomer] = useState({});
   const [customers, setCustomers] = useState(initialCustomers);
   const [isCustomerLazyLoading, setIsCustomerLazyLoading] = useState(false);
-  const [
-    isConntectionActionsModalVisible,
-    setIsConntectionActionsModalVisible,
-  ] = useState(false);
-
   const [isAddConnectionModalVisible, setIsAddConnectionModalVisible] =
     useState(false);
 
@@ -91,139 +92,25 @@ const ConnectionsScreen = ({navigation}) => {
     }
   };
 
-  const handleDeleteCustomer = () => {
-    Alert.alert(
-      'Confirm Delete Customer',
-      `Are you sure you want to delete ${selectedCustomer.name} ?`,
-      [
-        {
-          text: 'Cancel',
-          onPress: () => {
-            return false;
-          },
-          style: 'cancel',
-        },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: () => {
-            setCustomers(prev =>
-              prev.filter(c => c.id !== selectedCustomer.id),
-            );
-            Alert.alert('Contact deleted Successfully!');
-            setIsConntectionActionsModalVisible(false);
-          },
-        },
-      ],
-      {cancelable: false},
-    );
-  };
-
-  const handleSendArbon = () => {
-    console.log(
-      `Customer with id ${selectedCustomer.id} will receive a request`,
-    );
-    setIsConntectionActionsModalVisible(false);
-  };
-
-  const handleEditCustomer = () => {
-    console.log(`Customer with id ${selectedCustomer.id} edited successfully`);
-    setIsConntectionActionsModalVisible(false);
-  };
-
-  const fetchUserInformation = async userId => {
-    // Replace with your API call to fetch user information
-    return {
-      firstName: 'John',
-      lastName: 'Doe',
-      phoneNumber: '1234567890',
-      email: 'johndoe@example.com',
-    };
-  };
-
-  const requestContactPermission = async () => {
-    if (Platform.OS === 'ios') {
-      const status = await check(PERMISSIONS.IOS.CONTACTS);
-      if (status === RESULTS.GRANTED) {
-        return true;
-      }
-      const result = await request(PERMISSIONS.IOS.CONTACTS);
-      return result === RESULTS.GRANTED;
-    } else if (Platform.OS === 'android') {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.WRITE_CONTACTS,
-        {
-          title: 'Contacts Permission',
-          message:
-            'This app needs access to your contacts to add new contacts.',
-          buttonPositive: 'OK',
-        },
-      );
-      return granted === PermissionsAndroid.RESULTS.GRANTED;
-    }
-    return false;
-  };
-  const handleAddToContactList = async () => {
-    setIsConntectionActionsModalVisible(false);
-    try {
-      const hasPermission = await requestContactPermission();
-      if (!hasPermission) {
-        Alert.alert('Permission to access contacts was denied');
-        return;
-      }
-
-      const userInfo = await fetchUserInformation(selectedCustomer.id);
-
-      const newContact = {
-        familyName: userInfo.lastName,
-        givenName: userInfo.firstName,
-        phoneNumbers: [
-          {
-            label: 'mobile',
-            number: userInfo.phoneNumber,
-          },
-        ],
-        emailAddresses: [
-          {
-            label: 'work',
-            email: userInfo.email,
-          },
-        ],
-      };
-
-      Contacts.addContact(newContact, err => {
-        if (err) {
-          Alert.alert('Error adding contact:', err);
-        } else {
-          Alert.alert('Contact added Successfully!');
-        }
-      });
-    } catch (error) {
-      Alert.alert('Error adding to contact list:', error);
-    }
-  };
-
-  const handleItemsSelection = item => {
-    setSelectedCustomer(item);
-    setIsConntectionActionsModalVisible(true);
+  const handleViewCustomer = connection => {
+    navigation.navigate('ConnectionDetails', {connection: connection});
   };
 
   const renderItem = ({item}) => (
     <TouchableOpacity
       style={styles.customerCard}
-      onPress={() => handleItemsSelection(item)}>
+      onPress={() => handleViewCustomer(item)}>
       <Image source={{uri: item.pic}} style={styles.customerPic} />
       <View style={styles.customerInfo}>
         <Text style={styles.customerName}>{item.nickName}</Text>
         <Text style={styles.customerNationalId}>
-          {maskFirstDigitsNumber(item.NationalId)}
+          {maskFirstDigitsNumber(item.nationalId)}
         </Text>
       </View>
       <Icon
-        name="ellipsis-vertical"
+        name="chevron-forward-outline"
         size={24}
         color={theme.colors.primary}
-        onPress={() => handleItemsSelection(item)}
         style={styles.leftIcon}
       />
     </TouchableOpacity>
@@ -250,7 +137,7 @@ const ConnectionsScreen = ({navigation}) => {
         id: `${customers.length + index + 1}`,
         name: `New Customer ${customers.length + index + 1}`,
         nickName: `New Customer ${customers.length + index + 1}`,
-        NationalId: `991239201${customers.length + index + 1}`,
+        nationalId: `991239201${customers.length + index + 1}`,
         pic: 'https://via.placeholder.com/100',
       }));
 
@@ -288,53 +175,6 @@ const ConnectionsScreen = ({navigation}) => {
         />
       )}
       <Modal
-        isVisible={isConntectionActionsModalVisible}
-        onBackdropPress={() => setIsConntectionActionsModalVisible(false)}
-        style={styles.modal}>
-        <View
-          style={
-            Platform.OS === 'ios'
-              ? styles.iosModalContent
-              : styles.androidModalContent
-          }>
-          <View style={styles.selectedCustomerCard}>
-            <Image
-              source={
-                selectedCustomer.pic
-                  ? {uri: selectedCustomer.pic}
-                  : require('@assets/images/defaultProfile.png')
-              }
-              style={styles.customerAvatar}
-            />
-            <Text style={styles.customerSubtitle}>
-              Actions for {selectedCustomer.name}
-            </Text>
-          </View>
-          <TouchableOpacity style={styles.modalItem} onPress={handleSendArbon}>
-            <Text style={styles.modalItemText}>Send Arbon</Text>
-          </TouchableOpacity>
-          {selectedCustomer && !selectedCustomer.isAddedToContacts && (
-            <TouchableOpacity
-              style={styles.modalItem}
-              onPress={handleAddToContactList}>
-              <Text style={styles.modalItemText}>Add to Contact</Text>
-            </TouchableOpacity>
-          )}
-          <TouchableOpacity
-            style={styles.modalItem}
-            onPress={handleEditCustomer}>
-            <Text style={styles.modalItemText}>Edit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.modalItem}
-            onPress={handleDeleteCustomer}>
-            <Text style={[styles.modalItemText, {color: theme.colors.danger}]}>
-              Delete
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-      <Modal
         isVisible={isAddConnectionModalVisible}
         onBackdropPress={() => setIsAddConnectionModalVisible(false)}
         style={styles.modal}>
@@ -369,11 +209,6 @@ const ConnectionsScreen = ({navigation}) => {
 
 const createStyles = theme =>
   StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.colors.background,
-      padding: 20,
-    },
     listContainer: {
       paddingBottom: 20,
     },
