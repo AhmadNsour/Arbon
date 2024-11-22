@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Modal,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import {View, Text, Modal, TouchableOpacity, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '@theme/ThemeProvider';
 import {SCREEN_WIDTH, SCREEN_HEIGHT} from '@utils/helpers';
@@ -15,7 +7,6 @@ import {SCREEN_WIDTH, SCREEN_HEIGHT} from '@utils/helpers';
 const AvatarPicker = ({
   visible,
   onClose,
-  onSelect,
   onReset,
   onImageSelect,
   onTakePhoto,
@@ -36,21 +27,10 @@ const AvatarPicker = ({
           <View style={styles.header}>
             <Text style={styles.title}>Select an Avatar</Text>
             <TouchableOpacity onPress={onReset}>
-              <Text style={styles.resetText}>Reset</Text>
+              <Text style={styles.resetText}>Default</Text>
             </TouchableOpacity>
           </View>
-          <ScrollView contentContainerStyle={styles.avatarContainer}>
-            <TouchableOpacity
-              style={styles.avatarOption}
-              onPress={() => {
-                onSelect('https://example.com/avatar1.png');
-                onClose();
-              }}>
-              <Image
-                source={{uri: 'https://example.com/avatar1.png'}}
-                style={styles.avatarImage}
-              />
-            </TouchableOpacity>
+          <View style={styles.avatarContainer}>
             <TouchableOpacity
               style={styles.actionButton}
               onPress={onImageSelect}>
@@ -69,7 +49,7 @@ const AvatarPicker = ({
               />
               <Text style={styles.actionText}>Take a Photo</Text>
             </TouchableOpacity>
-          </ScrollView>
+          </View>
         </TouchableOpacity>
       </TouchableOpacity>
     </Modal>
@@ -107,11 +87,12 @@ const createStyles = theme =>
     resetText: {
       color: theme.colors.primary,
       fontSize: 16,
+      marginBottom: 20,
     },
     avatarContainer: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      justifyContent: 'space-between',
+      justifyContent: 'space-around',
       alignItems: 'center',
       width: '100%',
     },
@@ -123,12 +104,11 @@ const createStyles = theme =>
       width: SCREEN_WIDTH / 3 - 30,
       height: SCREEN_WIDTH / 3 - 30,
       borderRadius: 10,
-      backgroundColor: theme.colors.background,
     },
     avatarImage: {
-      width: 50,
-      height: 50,
-      borderRadius: 25,
+      width: 40,
+      height: 40,
+      borderRadius: 10,
     },
     actionButton: {
       alignItems: 'center',
@@ -141,7 +121,7 @@ const createStyles = theme =>
       backgroundColor: theme.colors.background,
     },
     actionText: {
-      fontSize: 14,
+      fontSize: 16,
       textAlign: 'center',
       color: theme.colors.text,
     },

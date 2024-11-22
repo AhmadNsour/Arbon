@@ -3244,6 +3244,7 @@ __metadata:
     react-i18next: ^15.0.0
     react-native: 0.74.2
     react-native-actionsheet: ^2.4.2
+    react-native-biometrics: ^3.0.1
     react-native-camera: ^4.2.1
     react-native-config: ^1.5.3
     react-native-contacts: ^7.0.8
@@ -8975,6 +8976,15 @@ __metadata:
   dependencies:
     prop-types: ^15.7.2
   checksum: eb35821de36ae4eb00f97d99fc22ed79bd017248092ff1299f9d46a7ab946de16d2e6d6bfbf4cab5ef77d0d3bf47684aec761a7670ec7d36aae8d77ab8ddd171
+  languageName: node
+  linkType: hard
+
+"react-native-biometrics@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "react-native-biometrics@npm:3.0.1"
+  peerDependencies:
+    react-native: ">=0.60.0"
+  checksum: 3864fea4bbf3dee1d360daf048e4f9980083c4e919e95082a5e4646e3b22475bb2b592cae18cccd7fb55b50498dca29e5346cf98d958646cbfc26fed5654bc53
   languageName: node
   linkType: hard
 

@@ -48,10 +48,9 @@ const HomeScreen = ({navigation}) => {
       <StatusBar />
       <View style={[styles.topSection, {paddingTop: insets.top}]}>
         <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('notifications')}>
+          <TouchableOpacity onPress={() => navigation.navigate('profile')}>
             <Icon
-              name="notifications-outline"
+              name="person-outline"
               size={30}
               color={theme.colors.white}
               style={styles.icon}
@@ -60,9 +59,10 @@ const HomeScreen = ({navigation}) => {
           <Text style={styles.welcome}>
             Welcome, {user.username ? user.username : 'Ahmad'}
           </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('profile')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('notifications')}>
             <Icon
-              name="person-outline"
+              name="notifications-outline"
               size={30}
               color={theme.colors.white}
               style={styles.icon}

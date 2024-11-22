@@ -56,5 +56,9 @@
 	<string>We need your permission to use the camera</string>
 	<key>NSContactsUsageDescription</key>
 	<string>We need access to your contacts to add new contacts.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>This app requires Face ID to authenticate users securely.</string>
+	<key>NSTouchIDUsageDescription</key>
+	<string>This app requires Touch ID to authenticate users securely.</string>
 </dict>
 </plist>

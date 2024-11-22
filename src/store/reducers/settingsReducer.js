@@ -2,7 +2,7 @@ import {
   RESET_SETTINGS,
   TOGGLE_IS_FIRST_TIME_USER,
   TOGGLE_PUSH_NOTIFICATION,
-  TOGGLE_FACE_ID,
+  TOGGLE_BIOMETRIC_LOGIN,
   SET_LANGUAGE,
   TOGGLE_THEME,
   TOGGLE_BALANCE,
@@ -11,7 +11,7 @@ import {
 const initialState = {
   isDarkMode: false,
   language: 'en',
-  faceIdEnabled: false,
+  biometricLoginEnabled: false,
   pushNotificationEnabled: false,
   isFirstTimeUser: true,
   isBalanceVisible: false,
@@ -29,10 +29,10 @@ const settingsReducer = (state = initialState, action) => {
         ...state,
         language: action.payload,
       };
-    case TOGGLE_FACE_ID:
+    case TOGGLE_BIOMETRIC_LOGIN:
       return {
         ...state,
-        faceIdEnabled: !state.faceIdEnabled,
+        biometricLoginEnabled: !state.biometricLoginEnabled,
       };
     case TOGGLE_PUSH_NOTIFICATION:
       return {

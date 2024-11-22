@@ -1,7 +1,7 @@
 // actions/settingsActions.js
 export const TOGGLE_THEME = 'TOGGLE_THEME';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
-export const TOGGLE_FACE_ID = 'TOGGLE_FACE_ID';
+export const TOGGLE_BIOMETRIC_LOGIN = 'TOGGLE_BIOMETRIC_LOGIN';
 export const TOGGLE_PUSH_NOTIFICATION = 'TOGGLE_PUSH_NOTIFICATION';
 export const TOGGLE_IS_FIRST_TIME_USER = 'TOGGLE_IS_FIRST_TIME_USER';
 export const RESET_SETTINGS = 'RESET_SETTINGS';
@@ -20,9 +20,9 @@ export const setLanguage = language => {
   };
 };
 
-export const toggleFaceId = () => {
+export const toggleBiometricLogin = () => {
   return {
-    type: TOGGLE_FACE_ID,
+    type: TOGGLE_BIOMETRIC_LOGIN,
   };
 };
 

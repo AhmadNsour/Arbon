@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
   Alert,
   Platform,
   Modal,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import {useSelector, useDispatch} from 'react-redux';
@@ -23,16 +24,18 @@ import {
 import ActionSheet from 'react-native-actionsheet';
 import {useTranslation} from 'react-i18next';
 import {CommonActions} from '@react-navigation/native';
+import ReactNativeBiometrics from 'react-native-biometrics';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   setLanguage,
-  toggleFaceId,
+  toggleBiometricLogin,
   togglePushNotification,
 } from '@store/actions/settingsActions';
 import AvatarPicker from '@components/AvatarPicker';
 import {useTheme} from '@theme/ThemeProvider';
 import defaultImage from '@assets/images/defaultProfile.png';
 import {useLoading} from '@context/LoadingContext';
+import {checkBiometricAvailability} from '@utils/helpers';
 
 const ProfileScreen = ({navigation}) => {
   const {i18n} = useTranslation();
@@ -52,14 +55,60 @@ const ProfileScreen = ({navigation}) => {
   const languageActionSheet = useRef();
   const styles = createStyles(theme);
   const dispatch = useDispatch();
+  const [biometricAvailable, setBiometricAvailable] = useState(false);
+  const [biometricsType, setBiometricType] = useState(null);
 
-  const toggleFaceID = () => {
-    dispatch(toggleFaceId(previousState => !previousState));
-    Alert.alert(
-      !settings.faceIdEnabled
-        ? 'Enabled Successfully!'
-        : 'Disabled Successfully!',
-    );
+  const handleBiometricVerification = () => {
+    return new Promise(async (resolve, reject) => {
+      const rnBiometrics = new ReactNativeBiometrics();
+
+      if (!biometricAvailable) {
+        return reject('Biometrics unavailable');
+      }
+
+      // Check biometry type and inform the user
+      let biometricTypeMessage = 'Biometric authentication';
+      if (biometricsType === ReactNativeBiometrics.TouchID) {
+        biometricTypeMessage = 'Touch ID';
+      } else if (biometricsType === ReactNativeBiometrics.FaceID) {
+        biometricTypeMessage = 'Face ID';
+      } else if (biometricsType === ReactNativeBiometrics.Biometrics) {
+        biometricTypeMessage = 'Biometric authentication';
+      }
+
+      try {
+        // Request user authentication
+        const {success} = await rnBiometrics.simplePrompt({
+          promptMessage: `Authenticate using ${biometricTypeMessage}`,
+        });
+
+        if (success) {
+          // Resolve promise with success
+          return resolve('Authentication successful');
+        } else {
+          // Reject promise with failure reason
+          return reject('Authentication failed: User canceled');
+        }
+      } catch (error) {
+        console.error('Biometric authentication error:', error);
+        // Reject promise with error message
+        return reject(`Authentication error: ${error.message}`);
+      }
+    });
+  };
+  const toggleBiometricsLogin = () => {
+    handleBiometricVerification()
+      .then(() => {
+        dispatch(toggleBiometricLogin(previousState => !previousState));
+        Alert.alert(
+          settings.faceIdEnabled
+            ? 'Biometric Login Disabled'
+            : 'Biometric Login Enabled',
+        );
+      })
+      .catch(error => {
+        Alert.alert(error);
+      });
   };
 
   const togglePushNotifications = () => {
@@ -157,11 +206,6 @@ const ProfileScreen = ({navigation}) => {
     });
   };
 
-  const handleSelectAvatar = avatar => {
-    setProfileImage({uri: avatar});
-    setIsAvatarPickerVisible(false);
-  };
-
   const handleReset = () => {
     setProfileImage(defaultImage);
     setIsAvatarPickerVisible(false);
@@ -247,12 +291,34 @@ const ProfileScreen = ({navigation}) => {
       {cancelable: false},
     );
   };
+
+  useEffect(() => {
+    const biometricAvailability = async () => {
+      const response = await checkBiometricAvailability();
+      setBiometricAvailable(response.available);
+      setBiometricType(response.biometryType);
+    };
+    biometricAvailability();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.profileHeader}>
-        <TouchableOpacity onPress={() => setIsAvatarPickerVisible(true)}>
-          <Image source={profileImage} style={styles.profileImage} />
-        </TouchableOpacity>
+        <TouchableWithoutFeedback
+          onPress={() => setIsAvatarPickerVisible(true)}>
+          <View style={styles.profileImageWrapper}>
+            <Image source={profileImage} style={styles.profileImage} />
+            <View style={styles.editIconWrapper}>
+              <View style={styles.iconCircle}>
+                <Icon
+                  name="pencil-outline"
+                  size={14}
+                  color={theme.colors.primary}
+                />
+              </View>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
         <View style={styles.profileInfo}>
           <Text style={styles.name}>{user?.name || 'Ahmad Al Nsour'}</Text>
           <TouchableOpacity
@@ -351,17 +417,19 @@ const ProfileScreen = ({navigation}) => {
             <Text style={styles.settingText}>Update Password</Text>
             <Icon name="pencil" size={20} color={theme.colors.primary} />
           </TouchableOpacity>
-          <View style={styles.settingItem}>
-            <Text style={styles.settingText}>Face ID</Text>
-            <Switch
-              value={settings.faceIdEnabled}
-              onValueChange={toggleFaceID}
-              trackColor={{
-                false: theme.colors.darkGrayishViolet,
-                true: theme.colors.primary,
-              }}
-            />
-          </View>
+          {biometricAvailable && (
+            <View style={styles.settingItem}>
+              <Text style={styles.settingText}>Biometric Login</Text>
+              <Switch
+                value={settings.biometricLoginEnabled}
+                onValueChange={toggleBiometricsLogin}
+                trackColor={{
+                  false: theme.colors.darkGrayishViolet,
+                  true: theme.colors.primary,
+                }}
+              />
+            </View>
+          )}
           <View style={styles.settingItem}>
             <Text style={styles.settingText}>Push Notifications</Text>
             <Switch
@@ -391,7 +459,6 @@ const ProfileScreen = ({navigation}) => {
       <AvatarPicker
         visible={isAvatarPickerVisible}
         onClose={() => setIsAvatarPickerVisible(false)}
-        onSelect={handleSelectAvatar}
         onReset={handleReset}
         onImageSelect={handleChoosePhoto}
         onTakePhoto={handleTakenPicture}
@@ -472,12 +539,30 @@ const createStyles = theme =>
       alignItems: 'center',
       marginBottom: 20,
     },
-    profileImage: {
-      width: 100,
-      height: 100,
-      borderRadius: 50,
-      backgroundColor: theme.colors.background,
+    profileImageWrapper: {
+      alignSelf: 'center',
+      position: 'relative',
       marginRight: 20,
+    },
+    profileImage: {
+      width: 120,
+      height: 120,
+      borderRadius: 60,
+      borderWidth: 4,
+      borderColor: theme.colors.primary,
+    },
+    editIconWrapper: {
+      position: 'absolute',
+      bottom: 4,
+      right: 4,
+    },
+    iconCircle: {
+      width: 28,
+      height: 28,
+      borderRadius: 14,
+      backgroundColor: theme.colors.white,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     profileInfo: {
       flex: 1,

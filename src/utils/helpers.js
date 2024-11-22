@@ -1,6 +1,6 @@
 import {Dimensions, Linking, Platform} from 'react-native';
 import {check, PERMISSIONS} from 'react-native-permissions';
-
+import ReactNativeBiometrics from 'react-native-biometrics';
 export const hasPhotosAccess = () => {
   if (Platform.OS === 'android') {
     check(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE).then(data => {
@@ -120,5 +120,24 @@ export const maskFirstDigitsNumber = value => {
     return '**********';
   } else {
     return '******' + value.slice(0, 4);
+  }
+};
+
+export const checkBiometricAvailability = async () => {
+  const rnBiometrics = new ReactNativeBiometrics();
+  const Response = {
+    available: false,
+    biometryType: '',
+    error: {},
+  };
+
+  try {
+    const {available, biometryType} = await rnBiometrics.isSensorAvailable();
+    Response.available = available;
+    Response.biometryType = biometryType;
+    return Response;
+  } catch (error) {
+    Response.error = error;
+    return Response;
   }
 };
