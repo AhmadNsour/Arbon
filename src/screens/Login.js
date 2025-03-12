@@ -22,13 +22,15 @@ const LoginScreen = ({navigation}) => {
   const {theme} = useTheme();
   const styles = createStyles(theme);
   const insets = useSafeAreaInsets();
-  const [nationalId, setNationalId] = useState('');
-  const [NationalIdErrorMessage, setNationalIdErrorMessage] = useState('');
+  const [username, setUsername] = useState('');
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState('');
   const [password, setPassword] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
-  const faceIdEnabled = useSelector(state => state.settings.faceIdEnabled);
+  const faceIdEnabled = useSelector(
+    state => state.settings.biometricLoginEnabled,
+  );
 
   const handleCancel = () => {
     setPopupVisible(false);
@@ -41,23 +43,23 @@ const LoginScreen = ({navigation}) => {
     alert('Face ID login initiated');
   };
 
-  const handleNationalIdOnChange = value => {
-    if (regexPatterns.digits.test(value) || value === '') {
-      setNationalId(value);
-      setNationalIdErrorMessage('');
+  const handleusernameOnChange = value => {
+    if (regexPatterns.alphanumeric.test(value) || value === '') {
+      setUsername(value);
+      setUsernameErrorMessage('');
     } else {
-      setNationalIdErrorMessage('National ID can only contain digits.');
+      setUsernameErrorMessage('Username can only contain digits.');
     }
   };
 
-  const handleNationalIdBlur = () => {
-    if (nationalId.length === 0) {
+  const handleusernameBlur = () => {
+    if (username.length === 0) {
       return;
     }
-    if (nationalId.length < 10) {
-      setNationalIdErrorMessage('National ID must be 10 digits long.');
+    if (username.length < 4) {
+      setUsernameErrorMessage('username must be 4 characters long.');
     } else {
-      setNationalIdErrorMessage('');
+      setUsernameErrorMessage('');
     }
   };
 
@@ -71,7 +73,7 @@ const LoginScreen = ({navigation}) => {
       return;
     }
     if (password.length < 8) {
-      setPasswordErrorMessage('Password must be at least 8 digits long.');
+      setPasswordErrorMessage('Password must be at least 8 characters long.');
     } else {
       setPasswordErrorMessage('');
     }
@@ -84,17 +86,17 @@ const LoginScreen = ({navigation}) => {
   };
 
   const clearValuesAndNavigate = route => {
-    setNationalId('');
+    setUsername('');
     setPassword('');
     setPasswordErrorMessage('');
-    setNationalIdErrorMessage('');
+    setUsernameErrorMessage('');
     navigation.navigate(route);
   };
 
   const handleLogin = async () => {
     if (
-      nationalId === '' ||
-      nationalId.length < 10 ||
+      username === '' ||
+      username.length < 4 ||
       password === '' ||
       password.length < 8
     ) {
@@ -124,21 +126,22 @@ const LoginScreen = ({navigation}) => {
         <Text style={styles.title}>Login</Text>
         <Text style={styles.subtitle}>Please sign in to continue.</Text>
         <View style={styles.inputWrapper}>
-          <Text style={styles.inputLabel}>National ID</Text>
+          <Text style={styles.inputLabel}>Username</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter your national Identity"
-            keyboardType="numeric"
-            maxLength={10}
-            value={nationalId}
+            placeholder="Enter your Username"
+            keyboardType="text"
+            //maxLength={10}
+            placeholderTextColor={theme.colors.text}
+            value={username}
             onChangeText={value => {
-              handleNationalIdOnChange(value);
+              handleusernameOnChange(value);
             }}
-            onBlur={handleNationalIdBlur}
+            onBlur={handleusernameBlur}
           />
 
-          {NationalIdErrorMessage && (
-            <Text style={styles.errorText}>{NationalIdErrorMessage}</Text>
+          {usernameErrorMessage && (
+            <Text style={styles.errorText}>{usernameErrorMessage}</Text>
           )}
         </View>
 
@@ -149,6 +152,7 @@ const LoginScreen = ({navigation}) => {
               style={styles.input}
               placeholder="Enter your password"
               secureTextEntry={!passwordVisible}
+              placeholderTextColor={theme.colors.text}
               value={password}
               autoComplete="password"
               contextMenuHidden={true}
@@ -182,14 +186,14 @@ const LoginScreen = ({navigation}) => {
 
         <TouchableOpacity
           disabled={
-            nationalId === '' ||
-            nationalId.length < 10 ||
+            username === '' ||
+            username.length < 4 ||
             password === '' ||
             password.length < 8
           }
           style={
-            nationalId === '' ||
-            nationalId.length < 10 ||
+            username === '' ||
+            username.length < 4 ||
             password === '' ||
             password.length < 8
               ? styles.loginButtonDisabled
@@ -279,6 +283,7 @@ const createStyles = theme =>
       shadowOpacity: 0.1,
       shadowOffset: {width: 0, height: 2},
       shadowRadius: 4,
+      color: theme.colors.text,
     },
     hintText: {
       marginTop: 5,
@@ -373,7 +378,7 @@ const createStyles = theme =>
     },
     logo: {
       width: 200,
-      height: 150,
+      height: 120,
       resizeMode: 'contain',
     },
   });

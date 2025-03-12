@@ -130,7 +130,6 @@ const ConnectionsScreen = ({navigation}) => {
     if (!isCustomerLazyLoading) {
       return;
     }
-    console.log('Loading customers', customers.length);
     setIsCustomerLazyLoading(true);
     setTimeout(() => {
       const moreCustomers = Array.from({length: 1}, (_, index) => ({

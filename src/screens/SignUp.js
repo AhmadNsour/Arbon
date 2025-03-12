@@ -130,7 +130,7 @@ const SignUpScreen = ({navigation}) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           <View style={styles.inputWrapper}>
             <View style={styles.nationalIdView}>
-              <Text style={styles.inputLabel}>National Id</Text>
+              <Text style={styles.inputLabel}>Mobile Number</Text>
               <TouchableOpacity
                 onPress={() => setSanadPopupVisible(!sanadPopupVisible)}>
                 <Icon

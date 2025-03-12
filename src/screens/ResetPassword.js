@@ -56,7 +56,7 @@ const ResetPasswordScreen = ({navigation}) => {
             your self.
           </Text>
           <View style={styles.inputWrapper}>
-            <Text style={styles.inputLabel}>National Id</Text>
+            <Text style={styles.inputLabel}>Email</Text>
             <TextInput
               style={styles.input}
               placeholder="Enter your national Identity"
@@ -136,7 +136,6 @@ const createStyles = theme =>
     buttonContainer: {
       flex: 1,
       justifyContent: 'flex-end',
-      marginBottom: 20,
     },
     resetButton: {
       width: '100%',

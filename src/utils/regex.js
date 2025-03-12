@@ -9,6 +9,7 @@ export const regexPatterns = {
   otpDigits: /^\d$/,
   digits: /^\d*$/,
   noWhiteSpaces: /^\S*$/,
+  alphanumeric: /^[a-zA-Z0-9]*$/,
 };
 
 export const validateInput = (type, value) => {

@@ -1,11 +1,1370 @@
 {
-  "about_us": "About Us",
-  "contact_us": "Contact Us",
-  "privacy_policy": "Privacy Policy",
-  "terms_and_conditions": "Terms and Conditions",
-  "help": "Help",
-  "call_us": "Call us",
-  "message_us": "Message us",
-  "report_issue": "Report an issue",
-  "cancel": "Cancel"
+  "IsWhitelisted": false,
+  "OutStandingAmount": 0.0,
+  "Bills": [
+    {
+      "BillDetail": {
+        "ID": "00100122661032",
+        "SubscriptionNumber": "00122661032",
+        "ShortName": "STC 122661032",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "022301304031012",
+        "SubscriptionNumber": "301304031012",
+        "ShortName": "امنه",
+        "BillerCode": "022",
+        "BillerNameAr": "الخطوط الجوية العربية السعودية",
+        "BillerName": "Saudi Arabian Airlines",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": false,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "022230631312913",
+        "SubscriptionNumber": "230631312913",
+        "ShortName": "أمنه",
+        "BillerCode": "022",
+        "BillerNameAr": "الخطوط الجوية العربية السعودية",
+        "BillerName": "Saudi Arabian Airlines",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": false,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00105169990257",
+        "SubscriptionNumber": "05169990257",
+        "ShortName": "عز",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "020620240580342",
+        "SubscriptionNumber": "620240580342",
+        "ShortName": "ضريبة عقار 2",
+        "BillerCode": "020",
+        "BillerNameAr": "هيئة الزكاة والضريبة والجمارك",
+        "BillerName": "Zakat Tax and Customs Authority",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": false,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "020620240580352",
+        "SubscriptionNumber": "620240580352",
+        "ShortName": "ضريبة عقار",
+        "BillerCode": "020",
+        "BillerNameAr": "هيئة الزكاة والضريبة والجمارك",
+        "BillerName": "Zakat Tax and Customs Authority",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": false,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00230002941935",
+        "SubscriptionNumber": "30002941935",
+        "ShortName": "Aliz",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "1382332510492",
+        "SubscriptionNumber": "2332510492",
+        "ShortName": "Malaga Mother house",
+        "BillerCode": "138",
+        "BillerNameAr": "شركة المياه الوطنية",
+        "BillerName": "National Water Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "1385036460642",
+        "SubscriptionNumber": "5036460642",
+        "ShortName": "الملقا الأساسي",
+        "BillerCode": "138",
+        "BillerNameAr": "شركة المياه الوطنية",
+        "BillerName": "National Water Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00105221045558",
+        "SubscriptionNumber": "05221045558",
+        "ShortName": "ملقا انترنت",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00230046645402",
+        "SubscriptionNumber": "30046645402",
+        "ShortName": "بيت الملقا",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "138503772176064",
+        "SubscriptionNumber": "503772176064",
+        "ShortName": "عبيد ملقا",
+        "BillerCode": "138",
+        "BillerNameAr": "شركة المياه الوطنية",
+        "BillerName": "National Water Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210029656984",
+        "SubscriptionNumber": "10029656984",
+        "ShortName": "مزرعة حائل",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": true,
+        "SchedulePaymentDay": "01",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210031990630",
+        "SubscriptionNumber": "10031990630",
+        "ShortName": "Bandar",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": true,
+        "SchedulePaymentDay": "01",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210031990783",
+        "SubscriptionNumber": "10031990783",
+        "ShortName": "Nahar",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": true,
+        "SchedulePaymentDay": "01",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210029657248",
+        "SubscriptionNumber": "10029657248",
+        "ShortName": "عبدالله العبيد",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": true,
+        "SchedulePaymentDay": "01",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00230022886652",
+        "SubscriptionNumber": "30022886652",
+        "ShortName": "Obaid3",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": true,
+        "SchedulePaymentDay": "01",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "0027719102654804",
+        "SubscriptionNumber": "7719102654804",
+        "ShortName": "Obaid 3",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210085481578",
+        "SubscriptionNumber": "10085481578",
+        "ShortName": "obaid Hail 2",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210085481587",
+        "SubscriptionNumber": "10085481587",
+        "ShortName": "obaid Hail 1",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210099433376",
+        "SubscriptionNumber": "10099433376",
+        "ShortName": "obaid1",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210097020715",
+        "SubscriptionNumber": "10097020715",
+        "ShortName": "obaid A Alrasheed",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "0185838924008",
+        "SubscriptionNumber": "5838924008",
+        "ShortName": "5838924008",
+        "BillerCode": "018",
+        "BillerNameAr": "أمريكان اكسبريس",
+        "BillerName": "American Express",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": false,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "0189869993179",
+        "SubscriptionNumber": "9869993179",
+        "ShortName": "9869993179",
+        "BillerCode": "018",
+        "BillerNameAr": "أمريكان اكسبريس",
+        "BillerName": "American Express",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": false,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "1386564420000",
+        "SubscriptionNumber": "6564420000",
+        "ShortName": "obaid",
+        "BillerCode": "138",
+        "BillerNameAr": "شركة المياه الوطنية",
+        "BillerName": "National Water Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210040446482",
+        "SubscriptionNumber": "10040446482",
+        "ShortName": "obaid Abdullah",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210027330006",
+        "SubscriptionNumber": "10027330006",
+        "ShortName": "Abdullah Alrasheed",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210023586434",
+        "SubscriptionNumber": "10023586434",
+        "ShortName": "Mohammad Alrasheed",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00210023586579",
+        "SubscriptionNumber": "10023586579",
+        "ShortName": "obaid Alrasheed",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "1384924010000",
+        "SubscriptionNumber": "4924010000",
+        "ShortName": "NWC",
+        "BillerCode": "138",
+        "BillerNameAr": "شركة المياه الوطنية",
+        "BillerName": "National Water Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00105001271719",
+        "SubscriptionNumber": "05001271719",
+        "ShortName": "STC-5001271719",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00105001271913",
+        "SubscriptionNumber": "05001271913",
+        "ShortName": "STC-5001271913",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00100662565792",
+        "SubscriptionNumber": "00662565792",
+        "ShortName": "STC-0662565792",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00100174886431",
+        "SubscriptionNumber": "00174886431",
+        "ShortName": "STC-174886431",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00100528805590",
+        "SubscriptionNumber": "00528805590",
+        "ShortName": "STC-528805590",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00100486057769",
+        "SubscriptionNumber": "00486057769",
+        "ShortName": "STC 0486057769",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00100161939722",
+        "SubscriptionNumber": "00161939722",
+        "ShortName": "STC 0161939722",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00100121213222",
+        "SubscriptionNumber": "00121213222",
+        "ShortName": "STC 0121213222",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00100101811433",
+        "SubscriptionNumber": "00101811433",
+        "ShortName": "STC 0101811433",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00100623820157",
+        "SubscriptionNumber": "00623820157",
+        "ShortName": "STC 623820157",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00100183846647",
+        "SubscriptionNumber": "00183846647",
+        "ShortName": "STC 183846647",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00100183826611",
+        "SubscriptionNumber": "00183826611",
+        "ShortName": "انترنت الورود",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00100183814257",
+        "SubscriptionNumber": "00183814257",
+        "ShortName": "STC 183814257",
+        "BillerCode": "001",
+        "BillerNameAr": "الإتصالات السعودية",
+        "BillerName": "STC",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    },
+    {
+      "BillDetail": {
+        "ID": "00230039026834",
+        "SubscriptionNumber": "30039026834",
+        "ShortName": "بيت الوالدة الملقا",
+        "BillerCode": "002",
+        "BillerNameAr": "الشركة السعودية للكهرباء",
+        "BillerName": "Saudi Electricity Company",
+        "BillStatus": "A",
+        "BillType": "Postpaid"
+      },
+      "PaymentInfo": {
+        "DueAmount": 0.0,
+        "BillDueDate": "1900-01-01",
+        "BillPaymentStatus": "0",
+        "IsUnderPaymentAllowed": false,
+        "IsOverPaymentAllowed": false,
+        "IsExactPaymentRequired": false,
+        "RangeMinimum": 0.0,
+        "RangeMaximum": 0.0,
+        "Flagged": false,
+        "AllowedDenominations": [],
+        "IsPaymentCallBackRequired": false
+      },
+      "ScheduleInfo": {
+        "SchedulePaymentAllowed": true,
+        "IsSchedulePaymentExist": false,
+        "SchedulePaymentDay": "",
+        "ScheuldePaymentAmount": 0.0
+      }
+    }
+  ]
 }

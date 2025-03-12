@@ -27,18 +27,18 @@ const WalletScreen = ({navigation}) => {
       id: '2',
       number: '4363910293745832',
       cardType: 'VISA',
-      name: 'Bank A',
+      name: 'Credit Card A',
     },
     {
       id: '3',
       number: '1234567890123456',
       cardType: 'MASTER',
-      name: 'Bank B',
+      name: 'Master Card B',
     },
   ]);
 
   const handleDelete = item => {
-    Alert.alert(`Delete ${item.Name}`, 'Are you sure you want to delete ?', [
+    Alert.alert(`Delete ${item.name}`, 'Are you sure you want to delete ?', [
       {text: 'Cancel', style: 'cancel'},
       {
         text: 'Delete',

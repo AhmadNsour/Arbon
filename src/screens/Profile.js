@@ -312,7 +312,7 @@ const ProfileScreen = ({navigation}) => {
               <View style={styles.iconCircle}>
                 <Icon
                   name="pencil-outline"
-                  size={14}
+                  size={20}
                   color={theme.colors.primary}
                 />
               </View>
@@ -485,7 +485,7 @@ const ProfileScreen = ({navigation}) => {
       <Modal
         visible={isRateModalVisible}
         transparent={true}
-        animationType="slide"
+        animationType="fade"
         onRequestClose={() => setIsRateModalVisible(false)}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -553,8 +553,8 @@ const createStyles = theme =>
     },
     editIconWrapper: {
       position: 'absolute',
-      bottom: 4,
-      right: 4,
+      bottom: 3,
+      right: 3,
     },
     iconCircle: {
       width: 28,
