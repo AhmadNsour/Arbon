@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ArbonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ArbonTests.m */; };
+		0D48D5ED428942C5949D1B9A /* libPods-Arbon-ArbonTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5745A1E63ED63DDA19BF035 /* libPods-Arbon-ArbonTests.a */; };
+		138D317A8C698D6FD03E1D38 /* libPods-Arbon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE6DB40D29CFAE7C3CB44B3 /* libPods-Arbon.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1731BA54E7F767F38E01B758 /* libPods-Arbon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66D2B6EE3BB7F89F568CAB6A /* libPods-Arbon.a */; };
-		1CE5D24763C3BDAC5E9474B4 /* libPods-Arbon-ArbonTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87EF231DCA5E480362D11F27 /* libPods-Arbon-ArbonTests.a */; };
 		514A918FADB63A8598AFA737 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 3BE6C8FE5D398E1BF1D20486 /* PrivacyInfo.xcprivacy */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -38,14 +38,14 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Arbon/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Arbon/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = Arbon/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-Arbon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arbon.debug.xcconfig"; path = "Target Support Files/Pods-Arbon/Pods-Arbon.debug.xcconfig"; sourceTree = "<group>"; };
 		3BE6C8FE5D398E1BF1D20486 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = Arbon/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-Arbon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arbon.release.xcconfig"; path = "Target Support Files/Pods-Arbon/Pods-Arbon.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-Arbon-ArbonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arbon-ArbonTests.debug.xcconfig"; path = "Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests.debug.xcconfig"; sourceTree = "<group>"; };
-		66D2B6EE3BB7F89F568CAB6A /* libPods-Arbon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Arbon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AF2A43EA3FEF6A5DD4CA253 /* Pods-Arbon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arbon.debug.xcconfig"; path = "Target Support Files/Pods-Arbon/Pods-Arbon.debug.xcconfig"; sourceTree = "<group>"; };
+		4BE6DB40D29CFAE7C3CB44B3 /* libPods-Arbon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Arbon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A582FD52B1EB6AF4D2AFEF1 /* Pods-Arbon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arbon.release.xcconfig"; path = "Target Support Files/Pods-Arbon/Pods-Arbon.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Arbon/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		87EF231DCA5E480362D11F27 /* libPods-Arbon-ArbonTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Arbon-ArbonTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-Arbon-ArbonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arbon-ArbonTests.release.xcconfig"; path = "Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests.release.xcconfig"; sourceTree = "<group>"; };
+		89FC36309E11EB4D78E65E99 /* Pods-Arbon-ArbonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arbon-ArbonTests.debug.xcconfig"; path = "Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8EBE3F37FC03190EEF87EABF /* Pods-Arbon-ArbonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arbon-ArbonTests.release.xcconfig"; path = "Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests.release.xcconfig"; sourceTree = "<group>"; };
+		B5745A1E63ED63DDA19BF035 /* libPods-Arbon-ArbonTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Arbon-ArbonTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -54,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CE5D24763C3BDAC5E9474B4 /* libPods-Arbon-ArbonTests.a in Frameworks */,
+				0D48D5ED428942C5949D1B9A /* libPods-Arbon-ArbonTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1731BA54E7F767F38E01B758 /* libPods-Arbon.a in Frameworks */,
+				138D317A8C698D6FD03E1D38 /* libPods-Arbon.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,8 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				66D2B6EE3BB7F89F568CAB6A /* libPods-Arbon.a */,
-				87EF231DCA5E480362D11F27 /* libPods-Arbon-ArbonTests.a */,
+				4BE6DB40D29CFAE7C3CB44B3 /* libPods-Arbon.a */,
+				B5745A1E63ED63DDA19BF035 /* libPods-Arbon-ArbonTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -145,10 +145,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-Arbon.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-Arbon.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-Arbon-ArbonTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-Arbon-ArbonTests.release.xcconfig */,
+				4AF2A43EA3FEF6A5DD4CA253 /* Pods-Arbon.debug.xcconfig */,
+				7A582FD52B1EB6AF4D2AFEF1 /* Pods-Arbon.release.xcconfig */,
+				89FC36309E11EB4D78E65E99 /* Pods-Arbon-ArbonTests.debug.xcconfig */,
+				8EBE3F37FC03190EEF87EABF /* Pods-Arbon-ArbonTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -160,12 +160,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "ArbonTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				23E8763176EF3C7EA980B193 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				8F5B6165A3D2EC65CC0F14CB /* [CP] Embed Pods Frameworks */,
+				16A6D2537CC4AB5834C9453D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -181,13 +181,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Arbon" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				9840AEC607E602021785AD4F /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				CA8CC99DBD695BC7724A745B /* [CP] Embed Pods Frameworks */,
+				E16834111EEAA966A730B742 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -271,24 +271,24 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
+		16A6D2537CC4AB5834C9453D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Arbon/Pods-Arbon-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Arbon/Pods-Arbon-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Arbon/Pods-Arbon-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
+		23E8763176EF3C7EA980B193 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -310,7 +310,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		8F5B6165A3D2EC65CC0F14CB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9840AEC607E602021785AD4F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -332,24 +349,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
+		CA8CC99DBD695BC7724A745B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Arbon/Pods-Arbon-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Arbon/Pods-Arbon-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Arbon/Pods-Arbon-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		E16834111EEAA966A730B742 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -364,23 +381,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Arbon/Pods-Arbon-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Arbon-ArbonTests/Pods-Arbon-ArbonTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -416,7 +416,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-Arbon-ArbonTests.debug.xcconfig */;
+			baseConfigurationReference = 89FC36309E11EB4D78E65E99 /* Pods-Arbon-ArbonTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -443,7 +443,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-Arbon-ArbonTests.release.xcconfig */;
+			baseConfigurationReference = 8EBE3F37FC03190EEF87EABF /* Pods-Arbon-ArbonTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -467,7 +467,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Arbon.debug.xcconfig */;
+			baseConfigurationReference = 4AF2A43EA3FEF6A5DD4CA253 /* Pods-Arbon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -494,7 +494,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Arbon.release.xcconfig */;
+			baseConfigurationReference = 7A582FD52B1EB6AF4D2AFEF1 /* Pods-Arbon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

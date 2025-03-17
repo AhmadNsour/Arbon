@@ -69,7 +69,7 @@ const NotificationScreen = ({navigation}) => {
       description: 'Your transaction of $234 was successful.',
       category: '2',
       type: 'page',
-      page: 'Transactions',
+      page: 'Connections',
       read: false,
       date: new Date('2024-07-14T18:00:00Z'),
     },

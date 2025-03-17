@@ -11,6 +11,9 @@ import i18n from './src/locales/i18n';
 import {LoadingProvider} from './src/context/LoadingContext';
 import LoadingOverlay from './src/components/LoadingOverlay';
 import {store, persistor} from './src/store/store';
+import codePush from 'react-native-code-push';
+
+// Code Push configuration
 
 const App = () => {
   const [isRTL, setIsRTL] = useState(I18nManager.isRTL);
@@ -29,6 +32,16 @@ const App = () => {
     return () => {
       i18n.off('languageChanged', handleLanguageChange);
     };
+  }, []);
+  useEffect(() => {
+    codePush.sync({
+      updateDialog: {
+        title: 'Update Available',
+        optionalUpdateMessage: 'An update is available. Install?',
+        optionalInstallButtonLabel: 'Yes',
+      },
+      installMode: codePush.InstallMode.IMMEDIATE,
+    });
   }, []);
 
   useEffect(() => {
@@ -89,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default codePush(App);
